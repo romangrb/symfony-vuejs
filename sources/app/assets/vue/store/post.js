@@ -3,6 +3,9 @@ import PostAPI from "../api/post";
 const CREATING_POST = "CREATING_POST",
   CREATING_POST_SUCCESS = "CREATING_POST_SUCCESS",
   CREATING_POST_ERROR = "CREATING_POST_ERROR",
+  DELETING_POST = "DELETING_POST",
+  DELETING_POST_SUCCESS = "DELETING_POST_SUCCESS",
+  DELETING_POST_ERROR = "DELETING_POST_ERROR",
   FETCHING_POSTS = "FETCHING_POSTS",
   FETCHING_POSTS_SUCCESS = "FETCHING_POSTS_SUCCESS",
   FETCHING_POSTS_ERROR = "FETCHING_POSTS_ERROR";
@@ -36,12 +39,25 @@ export default {
       state.isLoading = true;
       state.error = null;
     },
+    [DELETING_POST](state) {
+      state.isLoading = true;
+      state.error = null;
+    },
     [CREATING_POST_SUCCESS](state, post) {
       state.isLoading = false;
       state.error = null;
       state.posts.unshift(post);
     },
+    [DELETING_POST_SUCCESS](state) {
+      state.isLoading = false;
+      state.error = null;
+    },
     [CREATING_POST_ERROR](state, error) {
+      state.isLoading = false;
+      state.error = error;
+      state.posts = [];
+    },
+    [DELETING_POST_ERROR](state, error) {
       state.isLoading = false;
       state.error = error;
       state.posts = [];
@@ -73,6 +89,17 @@ export default {
         commit(CREATING_POST_ERROR, error);
         return null;
       }
+    },
+    async delete({ dispatch, commit }, id) {
+      commit(DELETING_POST);
+
+      try {
+        await PostAPI.delete(id).then();
+        commit(DELETING_POST_SUCCESS);
+      } catch (error) {
+        commit(DELETING_POST_ERROR, error);
+      }
+      return dispatch('findAll');
     },
     async findAll({ commit }) {
       commit(FETCHING_POSTS);

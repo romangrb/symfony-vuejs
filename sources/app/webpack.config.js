@@ -60,7 +60,7 @@ Encore
     .enableVueLoader()
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    // .enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -69,7 +69,9 @@ Encore
     // requires WebpackEncoreBundle 1.4 or higher
     .enableIntegrityHashes()
 
-    // enable ESLint
+/*
+// uncoment this for ESLint validator
+    enable ESLint
     .addLoader({
         enforce: 'pre',
         test: /\.(js|vue)$/,
@@ -81,6 +83,7 @@ Encore
             emitWarning: true,
         },
     })
+*/
 
 // uncomment if you're having problems with a jQuery plugin
 //.autoProvidejQuery()
@@ -89,5 +92,10 @@ Encore
 //.enableReactPreset()
 //.addEntry('admin', './assets/js/admin.js')
 ;
+// for watch command
+const config = Encore.getWebpackConfig();
+config.watchOptions = {
+    poll: true,
+};
 
-module.exports = Encore.getWebpackConfig();
+module.exports = config;

@@ -59,6 +59,13 @@
       class="row col"
     >
       <post :message="post.message" />
+      <button
+        type="button"
+        class="btn btn-danger"
+        @click="deletePost(post.id)"
+      >
+        Delete
+      </button>
     </div>
   </div>
 </template>
@@ -107,7 +114,14 @@ export default {
       if (result !== null) {
         this.$data.message = "";
       }
-    }
+    },
+    async deletePost(id) {
+      const result = await this.$store.dispatch("post/delete", id);
+      if (result !== null) {
+        this.$data.message = "";
+      }
+
+    },
   }
 };
 </script>

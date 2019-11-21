@@ -8,5 +8,8 @@ export default {
   },
   findAll() {
     return axios.get("/api/posts");
-  }
+  },
+  delete(id) {
+    return axios.delete(`/api/post/${id}`);
+  },
 };
