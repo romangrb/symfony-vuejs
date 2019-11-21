@@ -35,10 +35,10 @@ final class PostController extends AbstractController
     }
 
     /**
-     * @throws BadRequestHttpException
-     *
      * @Rest\Post("/posts", name="createPost")
+     * @param Request $request
      * @IsGranted("ROLE_FOO")
+     * @return JsonResponse
      */
     public function createAction(Request $request): JsonResponse
     {
@@ -50,6 +50,30 @@ final class PostController extends AbstractController
         $post->setMessage($message);
         $this->em->persist($post);
         $this->em->flush();
+        $data = $this->serializer->serialize($post, JsonEncoder::FORMAT);
+
+        return new JsonResponse($data, Response::HTTP_CREATED, [], true);
+    }
+
+    /**
+     * @Rest\Put("/post/{id}", name="createPost")
+     * @param Request $request
+     * @IsGranted("ROLE_FOO")
+     * @return JsonResponse
+     */
+    public function updateAction(Request $request): JsonResponse
+    {
+        $message = $request->request->get('message');
+        $post_id = $request->get('id');
+        if (empty($message) || empty($post_id)) {
+            throw new BadRequestHttpException('message or id cannot be empty');
+        }
+
+        $post = $this->em->getRepository(Post::class)->find($post_id);
+        $post->setMessage($message);
+        $this->em->persist($post);
+        $this->em->flush();
+
         $data = $this->serializer->serialize($post, JsonEncoder::FORMAT);
 
         return new JsonResponse($data, Response::HTTP_CREATED, [], true);
@@ -68,9 +92,8 @@ final class PostController extends AbstractController
 
     /**
      * @Rest\Delete("/post/{id}", name="deletePost")
-     *
      * @param Request $request
-     *
+     * @IsGranted("ROLE_FOO")
      * @return JsonResponse
      */
     public function deleteAction(Request $request): JsonResponse

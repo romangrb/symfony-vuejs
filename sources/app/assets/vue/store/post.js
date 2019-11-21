@@ -1,8 +1,12 @@
 import PostAPI from "../api/post";
 
-const CREATING_POST = "CREATING_POST",
+const
+  CREATING_POST = "CREATING_POST",
   CREATING_POST_SUCCESS = "CREATING_POST_SUCCESS",
   CREATING_POST_ERROR = "CREATING_POST_ERROR",
+  UPDATING_POST = "UPDATING_POST",
+  UPDATING_POST_SUCCESS = "UPDATING_POST_SUCCESS",
+  UPDATING_POST_ERROR = "UPDATING_POST_ERROR",
   DELETING_POST = "DELETING_POST",
   DELETING_POST_SUCCESS = "DELETING_POST_SUCCESS",
   DELETING_POST_ERROR = "DELETING_POST_ERROR",
@@ -39,6 +43,10 @@ export default {
       state.isLoading = true;
       state.error = null;
     },
+    [UPDATING_POST](state) {
+      state.isLoading = true;
+      state.error = null;
+    },
     [DELETING_POST](state) {
       state.isLoading = true;
       state.error = null;
@@ -48,11 +56,20 @@ export default {
       state.error = null;
       state.posts.unshift(post);
     },
+    [UPDATING_POST_SUCCESS](state) {
+      state.isLoading = false;
+      state.error = null;
+    },
     [DELETING_POST_SUCCESS](state) {
       state.isLoading = false;
       state.error = null;
     },
     [CREATING_POST_ERROR](state, error) {
+      state.isLoading = false;
+      state.error = error;
+      state.posts = [];
+    },
+    [UPDATING_POST_ERROR](state, error) {
       state.isLoading = false;
       state.error = error;
       state.posts = [];
@@ -89,6 +106,16 @@ export default {
         commit(CREATING_POST_ERROR, error);
         return null;
       }
+    },
+    async update({ dispatch, commit }, payload) {
+      commit(UPDATING_POST);
+      try {
+        let response = await PostAPI.update(payload);
+        commit(UPDATING_POST_SUCCESS, response.data);
+      } catch (error) {
+        commit(UPDATING_POST_ERROR, error);
+      }
+      return dispatch('findAll');
     },
     async delete({ dispatch, commit }, id) {
       commit(DELETING_POST);

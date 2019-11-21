@@ -66,6 +66,21 @@
       >
         Delete
       </button>
+
+      <div class="col-8">
+        <input
+                v-model="message"
+                type="text"
+                class="form-control"
+        >
+        <button
+                type="button"
+                class="btn btn-danger"
+                @click="updatePost(post.id)"
+        >
+          Update
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -111,6 +126,16 @@ export default {
   methods: {
     async createPost() {
       const result = await this.$store.dispatch("post/create", this.$data.message);
+      if (result !== null) {
+        this.$data.message = "";
+      }
+    },
+    async updatePost(id) {
+      const result = await this.$store.dispatch("post/update", {
+        'id':id,
+        'message':this.$data.message
+      });
+
       if (result !== null) {
         this.$data.message = "";
       }
