@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Exception;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -19,6 +20,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Files", mappedBy="id")
+     * @JoinColumn(name="avatar_id", referencedColumnName="id")
+     */
+    private $avatar;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
@@ -99,26 +106,41 @@ class User implements UserInterface
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getLogin(): string
     {
         return $this->login;
     }
 
+    /**
+     * @param string $login
+     */
     public function setLogin(string $login): void
     {
         $this->login = $login;
     }
 
+    /**
+     * @return string
+     */
     public function getUsername(): string
     {
         return $this->login;
     }
 
+    /**
+     * @return DateTime|null
+     */
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
 
+    /**
+     * @return void
+     */
     public function setPlainPassword(string $password): void
     {
         $this->plainPassword = $password;
@@ -128,11 +150,17 @@ class User implements UserInterface
         $this->password = null;
     }
 
+    /**
+     * @return DateTime|null
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    /**
+     * @return void
+     */
     public function setPassword(string $password): void
     {
         $this->password = $password;
@@ -163,18 +191,39 @@ class User implements UserInterface
         $this->roles = $roles;
     }
 
+    /**
+     * @return void
+     */
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
     }
 
+    /**
+     * @return DateTime
+     */
     public function getCreated(): DateTime
     {
         return $this->created;
     }
 
+    /**
+     * @return DateTime|null
+     */
     public function getUpdated(): ?DateTime
     {
         return $this->updated;
+    }
+
+    public function getAvatarFileById()
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatarFileById(Files $files): self
+    {
+        $this->avatar = $files;
+
+        return $this;
     }
 }

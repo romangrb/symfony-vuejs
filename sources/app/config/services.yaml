@@ -40,3 +40,7 @@ services:
             - !service { class: PDO, factory: 'database_connection:getWrappedConnection' }
             # If you get transaction issues (e.g. after login) uncomment the line below
             - { lock_mode: 1 }
+
+    App\Services\FileUploader:
+        arguments:
+            $targetDirectory: '%kernel.project_dir%/public/uploads'

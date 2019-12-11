@@ -43,9 +43,11 @@ final class PostController extends AbstractController
     public function createAction(Request $request): JsonResponse
     {
         $message = $request->request->get('message');
+
         if (empty($message)) {
             throw new BadRequestHttpException('message cannot be empty');
         }
+        
         $post = new Post();
         $post->setMessage($message);
         $this->em->persist($post);
@@ -65,6 +67,7 @@ final class PostController extends AbstractController
     {
         $message = $request->request->get('message');
         $post_id = $request->get('id');
+
         if (empty($message) || empty($post_id)) {
             throw new BadRequestHttpException('message or id cannot be empty');
         }
@@ -92,6 +95,7 @@ final class PostController extends AbstractController
 
     /**
      * @Rest\Delete("/post/{id}", name="deletePost")
+     *
      * @param Request $request
      * @IsGranted("ROLE_FOO")
      * @return JsonResponse

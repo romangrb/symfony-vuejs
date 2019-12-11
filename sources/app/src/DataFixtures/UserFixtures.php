@@ -25,6 +25,11 @@ final class UserFixtures extends Fixture
     }
 
     /**
+     * Create user fixtures
+     *
+     * @param ObjectManager $manager
+     * @param string $login
+     * @param string $password
      * @param string[] $roles
      */
     private function createUser(ObjectManager $manager, string $login, string $password, array $roles): void
