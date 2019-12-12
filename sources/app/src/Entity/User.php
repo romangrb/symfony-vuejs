@@ -226,4 +226,15 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getAttributes(): array
+    {
+        $attr = [
+            'id' => $this->getId(),
+            'login' => $this->getLogin(),
+            'avatar_path' => $this->getAvatarFile()->getPath(),
+        ];
+
+        return $attr;
+    }
 }

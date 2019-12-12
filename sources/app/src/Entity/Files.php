@@ -85,7 +85,7 @@ class Files
 
     public function getPath(): ?string
     {
-        return $this->path;
+        return $this->path ? 'uploads/' . $this->path : null;
     }
 
     public function setPath(string $path): self

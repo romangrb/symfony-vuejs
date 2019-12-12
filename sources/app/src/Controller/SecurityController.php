@@ -144,6 +144,26 @@ final class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/user/info", name="user-info", methods={"GET"})
+     * @return JsonResponse
+     */
+    public function getInfo(): JsonResponse
+    {
+        try {
+            $user = $this->repository->find('08701b95-5c4d-4841-aabd-43767ff4fd19');
+        } catch (\Exception $e) {
+            $exceptionData = ErrorExceptionTransformer::transform($e);
+            $this->logger->info(print_r($exceptionData, true));
+            return new JsonResponse($e->getMessage(),
+                Response::HTTP_BAD_REQUEST);
+        }
+
+        $response = $user->getAttributes();
+
+        return new JsonResponse($response,  Response::HTTP_OK);
+    }
+
+    /**
      * @throws RuntimeException
      *
      * @Route("/security/logout", name="logout")

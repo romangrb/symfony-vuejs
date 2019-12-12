@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Requests;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use JsonSchema\Validator;
 
 /**
