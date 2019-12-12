@@ -83,7 +83,7 @@ final class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/security/avatar", name="avatar")
+     * @Route("/security/avatar", name="avatar", methods={"POST"})
      * @param EntityManagerInterface $em
      * @param Request $request
      * @param FileUploader $fileUploader
@@ -94,10 +94,16 @@ final class SecurityController extends AbstractController
         EntityManagerInterface $em,
         FileUploader $fileUploader): JsonResponse
     {
-
         $file = $request->files->get('file');
 
-        $user = $this->repository->find('08701b95-5c4d-4841-aabd-43767ff4fd19');
+        try {
+            $user = $this->repository->find('08701b95-5c4d-4841-aabd-43767ff4fd19');
+        } catch (\Exception $e){
+            $exceptionData = ErrorExceptionTransformer::transform($e);
+            $this->logger->info(print_r($exceptionData, true));
+            return new JsonResponse($e->getMessage(),
+                Response::HTTP_BAD_REQUEST);
+        }
 
         if (empty($file)) {
             $translated = $this->translator->trans('no_file');
@@ -116,6 +122,13 @@ final class SecurityController extends AbstractController
                 Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
+        $file_exists = $user->getAvatarFile();
+
+        if ($file_exists) {
+            $em->remove($file_exists);
+            $em->flush();
+        }
+
         $fileEntity = new Files();
         $fileEntity
             ->setName($file->getClientOriginalName())
@@ -124,7 +137,7 @@ final class SecurityController extends AbstractController
 
         $em->persist($fileEntity);
 
-        $user->setAvatarFileById($fileEntity);
+        $user->setAvatarFile($fileEntity);
         $em->flush();
 
         return new JsonResponse($this->translator->trans($this->translator->trans('success')),  Response::HTTP_OK);

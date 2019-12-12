@@ -215,12 +215,12 @@ class User implements UserInterface
         return $this->updated;
     }
 
-    public function getAvatarFileById()
+    public function getAvatarFile(): ?Files
     {
         return $this->avatar;
     }
 
-    public function setAvatarFileById(Files $files): self
+    public function setAvatarFile(Files $files): self
     {
         $this->avatar = $files;
 
