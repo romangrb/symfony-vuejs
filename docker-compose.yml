@@ -23,6 +23,9 @@ services:
       # Symfony
       APP_ENV: "dev"
       APP_SECRET: "8d2a5c935d8ef1c0e2b751147382bc75"
+      JWT_SECRET_KEY: "$JWT_SECRET_KEY"
+      JWT_PUBLIC_KEY: "$JWT_PUBLIC_KEY"
+      JWT_PASSPHRASE: "$JWT_PASSPHRASE"
       DATABASE_URL: "mysql://$MYSQL_USER:$MYSQL_PASSWORD@mysql:3306/$MYSQL_DATABASE"
     volumes:
       - ./sources/app:/var/www/html:rw

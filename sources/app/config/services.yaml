@@ -26,21 +26,29 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Exception\HTTPExceptionListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception }
-
-    app.security.hash.password.listener:
-        class: App\Security\HashPasswordListener
-        tags:
-            - { name: doctrine.event_subscriber }
-
-    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
-        arguments:
-            - !service { class: PDO, factory: 'database_connection:getWrappedConnection' }
-            # If you get transaction issues (e.g. after login) uncomment the line below
-            - { lock_mode: 1 }
-
     App\Services\FileUploader:
         arguments:
             $targetDirectory: '%kernel.project_dir%/public/uploads'
+
+# FOS user config
+fos_user:
+    db_driver:      orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name:  main
+    user_class:     App\Entity\User
+    from_email:
+        address: "no-reply@joeymasip.com"
+        sender_name: "Joey"
+    registration:
+        #        form:
+        #            type: AppBundle\Form\UserRegisterType
+        confirmation:
+            enabled: true
+            template:   FOSUserBundle:Registration:email.txt.twig
+            from_email:
+                address:        "no-reply@joeymasip.com"
+                sender_name:    "No Reply Registration"
+    service:
+        mailer: fos_user.mailer.twig_swift
+    resetting:
+        email:
+            template:   FOSUserBundle:Resetting:email.txt.twig
