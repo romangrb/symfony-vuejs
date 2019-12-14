@@ -55,7 +55,7 @@ class User extends BaseUser
         $attr = [
             'id' => $this->getId(),
             'email' => $this->getUsername(),
-            'avatar_path' => $this->getAvatarFile()->getPath(),
+//            'avatar_path' => $this->getAvatarFile()->getPath(),
         ];
 
         return $attr;
