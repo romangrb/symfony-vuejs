@@ -23,6 +23,7 @@ class ApiUserController extends AbstractController
         $this->denyAccessUnlessGranted('view', $user);
         return new JsonResponse($this->serialize($user), 200);
     }
+
     protected function serialize(User $user)
     {
         $encoders = [new XmlEncoder(), new JsonEncoder()];
