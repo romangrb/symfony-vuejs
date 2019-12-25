@@ -76,11 +76,17 @@ class AddDescriptionToEventCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $output->writeln([
-            'Check Event Valiance Manually',
-            '=============================',
-            '',
+            '*************************************',
+            '*    Check Event Valiance Manually  *',
+            '*************************************'
         ]);
         $output->writeln('Event Id: ' . $input->getArgument('event_id'));
+
+        $output->writeln([
+            '*************************************',
+            '*Run command event-violation-command*',
+            '*************************************'
+        ]);
 
 //        $this->producer->sendEvent('command-name', 'Something has happened');
 
@@ -88,8 +94,8 @@ class AddDescriptionToEventCommand extends Command
             'priority' => $input->getArgument('priority')
         ];
         $message = new Message($input->getArgument('event_id'), $properties);
-//        $this->producer->sendEvent('aBarTopic', $message);
 
+//        $this->producer->sendEvent('aBarTopic', $message);
         $this->producer->sendCommand('event-violation-command', $message);
     }
 }
