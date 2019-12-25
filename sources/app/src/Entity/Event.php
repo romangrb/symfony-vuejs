@@ -53,6 +53,11 @@ class Event
      */
     private $event_participants;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $is_review_failed;
+
     public function __construct()
     {
         $this->event_participants = new ArrayCollection();
@@ -152,6 +157,18 @@ class Event
                 $eventParticipant->setEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsReviewFailed(): ?bool
+    {
+        return $this->is_review_failed;
+    }
+
+    public function setIsReviewFailed(?bool $is_review_failed): self
+    {
+        $this->is_review_failed = $is_review_failed;
 
         return $this;
     }

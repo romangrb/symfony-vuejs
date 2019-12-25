@@ -28,7 +28,7 @@ class ApiEventController extends AbstractController
     /** @var EventRepository */
     private $repository;
 
-    /** @var EventPparticipantsRepository */
+    /** @var EventParticipantRepository */
     private $event_participants_repository;
 
     /** @var $translator */
@@ -40,7 +40,7 @@ class ApiEventController extends AbstractController
     /** @var LoggerInterface */
     private $logger;
 
-    /** @var $em EntityManager */
+    /** @var $em EntityManagerInterface */
     private $em;
 
     /** @const MaxPages */
