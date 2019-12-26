@@ -30,14 +30,6 @@ services:
         arguments:
             $targetDirectory: '%kernel.project_dir%/public/uploads'
 
-    foo_message_processor:
-        class: 'App\Processors\EventViolationProcessor'
-        tags:
-            - { name: 'event-violation' }
-            # Use the variant below to attach to a specific client
-            # Also note that if you don't disable autoconfigure, above tag will be applied automatically for default client
-            # - { name: 'enqueue.topic_subsciber', client: 'some_other_transport' }
-
 # FOS user config
 fos_user:
     db_driver:      orm # other valid values are 'mongodb', 'couchdb' and 'propel'
