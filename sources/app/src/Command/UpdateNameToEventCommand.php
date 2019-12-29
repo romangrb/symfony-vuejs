@@ -69,6 +69,7 @@ class UpdateNameToEventCommand extends Command
 
     /**
      * Execute Command
+     *
      * @param InputInterface $input
      * @param OutputInterface $output
      */
