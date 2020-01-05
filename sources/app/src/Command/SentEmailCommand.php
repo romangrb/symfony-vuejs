@@ -17,7 +17,11 @@ use Symfony\Component\Mime\Email;
 
 class SentEmailCommand extends Command
 {
-
+    /**
+     * Mailer interface
+     *
+     * @var $mailerInterface
+     */
     protected $mailerInterface;
 
     /**

@@ -10,6 +10,7 @@ framework:
 #            App\Message\Signup: 'command'
 #            App\Message\SignupCompleted: 'event'
             App\Message\CreateEventMessage: 'async'
+            App\Message\TestMessage: 'async'
 
         serializer: ~
 
