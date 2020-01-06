@@ -79,6 +79,8 @@ class ApiEventController extends AbstractController
     }
 
     /**
+     * Index Event
+     *
      * @Route("/event", name="event-index", methods={"GET"})
      * @param Request $request
      * @param PaginationFactory $paginationFactory
@@ -96,7 +98,7 @@ class ApiEventController extends AbstractController
             ->createCollection($qb, $request, 'event-index');
         ;
 
-        $jsonResponse = PaginationTransformer::transform($paginatedCollection, $serializer, $pagination_serializer, JsonEncoder::FORMAT);
+        $jsonResponse = PaginationTransformer::normalizeTransform($paginatedCollection, $serializer, $pagination_serializer, JsonEncoder::FORMAT);
 
         return new JsonResponse($jsonResponse, Response::HTTP_OK);
     }

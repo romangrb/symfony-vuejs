@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
+
 /**
  * Created by PhpStorm.
  * User: RomanHrb
  * Date: 28.12.2019
  * Time: 18:23
  */
-
 namespace App\MessageHandler;
 
 use App\Message\TestMessage;
