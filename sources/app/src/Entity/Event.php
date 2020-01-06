@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -128,6 +128,11 @@ class Event
         $this->end_time = $end_time;
 
         return $this;
+    }
+
+    public function getTimeRemain(): ?\DateInterval
+    {
+        return $this->start_time->diff($this->end_time);
     }
 
     /**

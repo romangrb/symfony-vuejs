@@ -15,6 +15,11 @@ use Symfony\Component\Routing\RouterInterface;
 
 class PaginationFactory
 {
+    /**
+     * Max per page
+     */
+    const MAX_PER_PAGE = 10;
+
     /** @var $router */
     private $router;
 
@@ -31,16 +36,17 @@ class PaginationFactory
      * Create collection
      * @param QueryBuilder $qb
      * @param Request $request
+     * @param int $max_page
      * @param $route
      * @param array $routeParams
      * @return PaginatedCollection
      */
-    public function createCollection(QueryBuilder $qb, Request $request, $route, array $routeParams = array()): PaginatedCollection
+    public function createCollection(QueryBuilder $qb, Request $request, $route, array $routeParams = array(), int $max_page = self::MAX_PER_PAGE): PaginatedCollection
     {
         $page = $request->query->get('page', 1);
         $adapter = new DoctrineORMAdapter($qb);
         $pagerfanta = new Pagerfanta($adapter);
-        $pagerfanta->setMaxPerPage(10);
+        $pagerfanta->setMaxPerPage($max_page);
         $pagerfanta->setCurrentPage($page);
         $programmers = [];
         foreach ($pagerfanta->getCurrentPageResults() as $result) {
@@ -53,7 +59,7 @@ class PaginationFactory
                 array('page' => $targetPage)
             ));
         };
-        $paginatedCollection->addLink('self', $createLinkUrl($page));
+        $paginatedCollection->addLink('current', $createLinkUrl($page));
         $paginatedCollection->addLink('first', $createLinkUrl(1));
         $paginatedCollection->addLink('last', $createLinkUrl($pagerfanta->getNbPages()));
         if ($pagerfanta->hasNextPage()) {

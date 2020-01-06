@@ -1,13 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controller\Api;
 
 use App\Entity\Event;
 use App\Entity\EventParticipant;
 use App\Repository\EventParticipantRepository;
+use App\Serializer\Normalizer\EventNormalizer;
+use App\Serializer\Normalizer\PaginationNormalizer;
 use App\Services\Pagination\PaginationFactory;
 use App\Transformers\ErrorExceptionTransformer;
-use Doctrine\ORM\EntityManager;
+use App\Transformers\PaginationTransformer;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Serializer\Serializer;
 
 class ApiEventController extends AbstractController
 {
@@ -80,18 +83,22 @@ class ApiEventController extends AbstractController
      * @param Request $request
      * @param PaginationFactory $paginationFactory
      * @return JsonResponse
-     * @throws \Exception
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
     public function index(Request $request, PaginationFactory $paginationFactory): JsonResponse
     {
         $qb = $this->repository->getAllEventsWithSearchBuilder($request->get('name'));
 
+        $serializer = new Serializer([new EventNormalizer()]);
+        $pagination_serializer = new Serializer([new PaginationNormalizer()]);
+
         $paginatedCollection = $paginationFactory
             ->createCollection($qb, $request, 'event-index');
+        ;
 
-        $json = $this->serializer->serialize($paginatedCollection, JsonEncoder::FORMAT,[]);
+        $jsonResponse = PaginationTransformer::transform($paginatedCollection, $serializer, $pagination_serializer, JsonEncoder::FORMAT);
 
-        return new JsonResponse($json, Response::HTTP_OK);
+        return new JsonResponse($jsonResponse, Response::HTTP_OK);
     }
 
     /**
@@ -99,8 +106,6 @@ class ApiEventController extends AbstractController
      * @param Request $request
      * @param ValidatorInterface $validator
      * @return JsonResponse
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function add(Request $request, ValidatorInterface $validator): JsonResponse
     {
@@ -154,8 +159,6 @@ class ApiEventController extends AbstractController
      * @param Request $request
      * @param ValidatorInterface $validator
      * @return JsonResponse
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function connect(Request $request, ValidatorInterface $validator): JsonResponse
     {
@@ -215,8 +218,6 @@ class ApiEventController extends AbstractController
      * @param Request $request
      * @param ValidatorInterface $validator
      * @return JsonResponse
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function disconnect(Request $request, ValidatorInterface $validator): JsonResponse
     {

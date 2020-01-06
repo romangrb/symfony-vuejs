@@ -196,6 +196,9 @@
     "lcobucci/jwt": {
         "version": "3.3.1"
     },
+    "league/fractal": {
+        "version": "0.18.0"
+    },
     "lexik/jwt-authentication-bundle": {
         "version": "2.5",
         "recipe": {
@@ -241,6 +244,9 @@
         "files": [
             "config/packages/nelmio_cors.yaml"
         ]
+    },
+    "nesbot/carbon": {
+        "version": "2.28.0"
     },
     "nette/bootstrap": {
         "version": "v3.0.0"

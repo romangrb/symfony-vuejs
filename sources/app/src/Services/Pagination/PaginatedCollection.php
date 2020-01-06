@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: RomanHrb
@@ -35,6 +35,7 @@ class PaginatedCollection
 
     /**
      * Add link prop
+     *
      * @param $ref
      * @param $url
      */
@@ -51,5 +52,46 @@ class PaginatedCollection
     public function getItems(): array
     {
         return (array) $this->items;
+    }
+
+    /**
+     * Get items as array
+     *
+     * @param $items
+     * @return void
+     */
+    public function setItems($items): void
+    {
+        $this->items = $items;
+    }
+
+    /**
+     * Get Integer
+     *
+     * @return int
+     */
+    public function getTotal(): int
+    {
+        return (int) $this->items;
+    }
+
+    /**
+     * Get Count
+     *
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return (int) $this->count;
+    }
+
+    /**
+     * Get Links
+     *
+     * @return array
+     */
+    public function getLinks(): array
+    {
+        return (array) $this->_links;
     }
 }
