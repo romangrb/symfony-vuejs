@@ -7,6 +7,8 @@ use App\Entity\EventParticipant;
 use App\Repository\EventParticipantRepository;
 use App\Serializer\Normalizer\EventNormalizer;
 use App\Serializer\Normalizer\PaginationNormalizer;
+use App\Serializer\Normalizer\ParticipantNormalizer;
+use App\Serializer\Normalizer\UserNormalizer;
 use App\Services\Pagination\PaginationFactory;
 use App\Transformers\ErrorExceptionTransformer;
 use App\Transformers\PaginationTransformer;
@@ -91,14 +93,26 @@ class ApiEventController extends AbstractController
     {
         $qb = $this->repository->getAllEventsWithSearchBuilder($request->get('name'));
 
-        $serializer = new Serializer([new EventNormalizer()]);
-        $pagination_serializer = new Serializer([new PaginationNormalizer()]);
+        $serializer = new Serializer([new EventNormalizer]);
+
+        $context = [
+            'ParticipantNormalizer' => new ParticipantNormalizer,
+            'UserNormalizer' => new UserNormalizer
+        ];
+
+        $pagination_serializer = new Serializer([new PaginationNormalizer]);
 
         $paginatedCollection = $paginationFactory
             ->createCollection($qb, $request, 'event-index');
         ;
 
-        $jsonResponse = PaginationTransformer::normalizeTransform($paginatedCollection, $serializer, $pagination_serializer, JsonEncoder::FORMAT);
+        $jsonResponse = PaginationTransformer::normalizeTransform(
+            $paginatedCollection,
+            $serializer,
+            $pagination_serializer,
+            JsonEncoder::FORMAT,
+            $context
+        );
 
         return new JsonResponse($jsonResponse, Response::HTTP_OK);
     }

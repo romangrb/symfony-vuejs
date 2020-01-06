@@ -18,14 +18,21 @@ class PaginationTransformer
      *
      * @param PaginatedCollection $paginatedCollection
      * @param Serializer $serializer
-     * @param string $format
      * @param Serializer $paginationNormalizer
+     * @param string $format
+     * @param array $context
      * @return array
      * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
-    public static function normalizeTransform(PaginatedCollection $paginatedCollection, Serializer $serializer, Serializer $paginationNormalizer, string $format): array
+    public static function normalizeTransform(
+        PaginatedCollection $paginatedCollection,
+        Serializer $serializer,
+        Serializer $paginationNormalizer,
+        string $format,
+        array $context
+    ): array
     {
-        $deserialize_items = $serializer->normalize($paginatedCollection->getItems(), $format);
+        $deserialize_items = $serializer->normalize($paginatedCollection->getItems(), $format, $context);
         $paginatedCollection->setItems($deserialize_items);
         $transformed = $paginationNormalizer->normalize($paginatedCollection);
 

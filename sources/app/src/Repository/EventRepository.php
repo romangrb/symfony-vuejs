@@ -30,6 +30,10 @@ class EventRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('e');
 
+        $qb->select('e, e_p')
+            ->leftJoin('e.event_participants', 'e_p')
+        ;
+
         if ($name) {
             $qb->andWhere('e.name LIKE :name')
                 ->setParameter('name', '%'.$name.'%')
