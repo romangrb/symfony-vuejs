@@ -1,90 +1,51 @@
 <template>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <router-link
-        class="navbar-brand"
-        to="/home"
-      >
-        App
-      </router-link>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon" />
-      </button>
-      <div
-        id="navbarNav"
-        class="collapse navbar-collapse"
-      >
-        <ul class="navbar-nav">
-          <router-link
-            class="nav-item"
-            tag="li"
-            to="/home"
-            active-class="active"
-          >
-            <a class="nav-link">Home</a>
-          </router-link>
-          <router-link
-            class="nav-item"
-            tag="li"
-            to="/posts"
-            active-class="active"
-          >
-            <a class="nav-link">Posts</a>
-          </router-link>
-          <li
-            v-if="isAuthenticated"
-            class="nav-item"
-          >
-            <a
-              class="nav-link"
-              href="/api/security/logout"
-            >Logout</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <router-view />
+  <div id="app">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+      <span v-if="isLoggedIn"> | <a @click="logout">Logout</a></span>
+      <span v-else> |
+        <router-link to="/login">Login</router-link>
+      </span>
+    </div>
+    <router-view/>
   </div>
 </template>
 
+
 <script>
-import axios from "axios";
-  
-export default {
-  name: "App",
-  computed: {
-    isAuthenticated() {
-      return this.$store.getters["security/isAuthenticated"]
-    },
-  },
-  created() {
-    let isAuthenticated = JSON.parse(this.$parent.$el.attributes["data-is-authenticated"].value),
-      user = JSON.parse(this.$parent.$el.attributes["data-user"].value);
-
-    let payload = { isAuthenticated: isAuthenticated, user: user };
-    this.$store.dispatch("security/onRefresh", payload);
-
-    axios.interceptors.response.use(undefined, (err) => {
-      return new Promise(() => {
-        if (err.response.status === 401) {
-          this.$router.push({path: "/login"})
-        } else if (err.response.status === 500) {
-          document.open();
-          document.write(err.response.data);
-          document.close();
+    export default {
+        computed: {
+            isLoggedIn: function() {
+                return this.$store.getters.isLoggedIn;
+            }
+        },
+        methods: {
+            logout: function() {
+                this.$store.dispatch("logout").then(() => {
+                    this.$router.push("/login");
+                });
+            }
         }
-        throw err;
-      });
-    });
-  },
-}
+    };
 </script>
+
+<style>
+    #app {
+        font-family: "Avenir", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+    }
+    #nav {
+        padding: 30px;
+    }
+    #nav a {
+        font-weight: bold;
+        color: #2c3e50;
+    }
+    #nav a.router-link-exact-active {
+        color: #42b983;
+    }
+</style>

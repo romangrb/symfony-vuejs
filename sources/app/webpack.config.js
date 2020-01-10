@@ -24,8 +24,6 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('app', './assets/vue/index.js')
-    //.addEntry('page1', './assets/js/page1.js')
-    //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -59,38 +57,7 @@ Encore
     // enables Vue.js support
     .enableVueLoader()
 
-    // enables Sass/SCSS support
-    // .enableSassLoader()
-
-    // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
-
-    // uncomment to get integrity="..." attributes on your script & link tags
-    // requires WebpackEncoreBundle 1.4 or higher
     .enableIntegrityHashes()
-
-/*
-// uncoment this for ESLint validator
-    enable ESLint
-    .addLoader({
-        enforce: 'pre',
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-        options: {
-            fix: true,
-            emitError: true,
-            emitWarning: true,
-        },
-    })
-*/
-
-// uncomment if you're having problems with a jQuery plugin
-//.autoProvidejQuery()
-
-// uncomment if you use API Platform Admin (composer req api-admin)
-//.enableReactPreset()
-//.addEntry('admin', './assets/js/admin.js')
 ;
 // for watch command
 const config = Encore.getWebpackConfig();
