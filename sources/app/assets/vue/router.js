@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import store from './store.js'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
+import Events from './views/Events.vue'
 import Login from './components/auth/Login.vue'
 import Register from './components/auth/Register.vue'
 import Resource from './components/resources/Resources.vue'
@@ -26,6 +27,11 @@ let router = new Router({
       path: '/register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/events',
+      name: 'events',
+      component: Events,
     },
     {
       path: '/resources',
