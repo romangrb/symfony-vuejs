@@ -17,6 +17,14 @@ Vue.config.productionTip = false
 
 Vue.component('paginate', VuePaginate);
 
+export const eventBus = new Vue({
+  methods: {
+    changeAge(age) {
+      this.$emit('ageWasEdited', age);
+    }
+  }
+});
+
 new Vue({
   router,
   store,
