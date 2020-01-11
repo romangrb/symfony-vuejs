@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import Axios from 'axios'
+import VuePaginate from 'vuejs-paginate'
 
 Vue.prototype.$http = Axios;
 
@@ -13,6 +14,8 @@ if (token) {
 }
 
 Vue.config.productionTip = false
+
+Vue.component('paginate', VuePaginate);
 
 new Vue({
   router,
