@@ -20,6 +20,7 @@ Vue.component('paginate', VuePaginate);
 export const eventBus = new Vue({
   methods: {
     changeAge(age) {
+      console.log('listen in global function', age);
       this.$emit('ageWasEdited', age);
     }
   }

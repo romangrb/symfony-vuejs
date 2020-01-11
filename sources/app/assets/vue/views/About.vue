@@ -9,16 +9,16 @@
     <div class="row">
       <div class="col-xs-12 col-sm-6">
         <app-user-detail
-          :myName="name"
+          :_name="name"
           :resetFn="resetName"
           @nameWasReset="name = $event"
-          :userAge="age"
+          :_age="age"
         >
         </app-user-detail>
       </div>
       <div class="col-xs-12 col-sm-6">
         <app-user-edit
-          :userAge="age"
+          :_age="age"
           @ageWasEdited="age = $event"
         >
         </app-user-edit>
@@ -30,6 +30,7 @@
 <script>
   import UserDetail from './user/UserDetail.vue';
   import UserEdit from './user/UserEdit.vue';
+  import {eventBus} from '../index';
 
   export default {
     data: function () {
@@ -50,6 +51,12 @@
     components: {
       appUserDetail: UserDetail,
       appUserEdit: UserEdit
+    },
+    created() {
+      // using bus listener (global)
+      eventBus.$on('ageWasEdited', (age) => {
+        this.age = age;
+      });
     }
   }
 </script>
