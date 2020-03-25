@@ -12,16 +12,13 @@ final class UserFixtures extends Fixture
 {
     public const DEFAULT_USER_LOGIN = 'foo';
 
+    public const DEFAULT_USER_EMAIL = 'foo@example.com';
+
     public const DEFAULT_USER_PASSWORD = 'bar';
-
-    public const USER_LOGIN_ROLE_BAR = 'bar';
-
-    public const USER_PASSWORD_ROLE_BAR = 'foo';
 
     public function load(ObjectManager $manager): void
     {
-        $this->createUser($manager, self::DEFAULT_USER_LOGIN, self::DEFAULT_USER_PASSWORD, ['ROLE_FOO']);
-        $this->createUser($manager, self::USER_LOGIN_ROLE_BAR, self::USER_PASSWORD_ROLE_BAR, ['ROLE_BAR']);
+        $this->createUser($manager, self::DEFAULT_USER_LOGIN, self::DEFAULT_USER_EMAIL ,self::DEFAULT_USER_PASSWORD, ['ROLE_FOO']);
     }
 
     /**
@@ -29,15 +26,19 @@ final class UserFixtures extends Fixture
      *
      * @param ObjectManager $manager
      * @param string $login
+     * @param string $email
      * @param string $password
      * @param string[] $roles
      */
-    private function createUser(ObjectManager $manager, string $login, string $password, array $roles): void
+    private function createUser(ObjectManager $manager, string $login, string $email, string $password, array $roles): void
     {
         $userEntity = new User();
-        $userEntity->setLogin($login);
+        $userEntity->setUsername($login);
+        $userEntity->setEmail($email);
+        $userEntity->setEmail($login);
         $userEntity->setPlainPassword($password);
         $userEntity->setRoles($roles);
+        $userEntity->setEnabled(true);
         $manager->persist($userEntity);
         $manager->flush();
     }
