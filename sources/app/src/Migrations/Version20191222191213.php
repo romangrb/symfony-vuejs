@@ -27,9 +27,6 @@ final class Version20191222191213 extends AbstractMigration
         $this->addSql('ALTER TABLE events ADD CONSTRAINT FK_5387574AC93D69EA FOREIGN KEY (background_id) REFERENCES files (id)');
         $this->addSql('ALTER TABLE event_participants ADD CONSTRAINT FK_9C7A7A6171F7E88B FOREIGN KEY (event_id) REFERENCES events (id)');
         $this->addSql('ALTER TABLE event_participants ADD CONSTRAINT FK_9C7A7A61A76ED395 FOREIGN KEY (user_id) REFERENCES users (id)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_1483A5E992FC23A8 ON users (username_canonical)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_1483A5E9A0D96FBF ON users (email_canonical)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_1483A5E9C05FB297 ON users (confirmation_token)');
     }
 
     public function down(Schema $schema) : void
