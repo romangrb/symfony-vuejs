@@ -12,6 +12,7 @@ use App\Serializer\Normalizer\UserNormalizer;
 use App\Services\Pagination\PaginationFactory;
 use App\Transformers\ErrorExceptionTransformer;
 use App\Transformers\PaginationTransformer;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -280,5 +281,27 @@ class ApiEventController extends AbstractController
         $this->em->flush();
 
         return new JsonResponse(null, Response::HTTP_OK);
+    }
+
+    /**
+     * @Route("/send-data", name="send-data", methods={"POST"})
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+     */
+    public function sentData(Request $request): JsonResponse
+    {
+        $client = HttpClient::create();
+
+        $content = $request->getContent();
+
+        $response = $client->request('POST', 'http://192.168.3.72/api/store-data', [
+            'body' => $content,
+            'headers' => [
+                'Content-Type' => 'application/json'
+            ]
+        ]);
+
+        return new JsonResponse($response, Response::HTTP_OK);
     }
 }
