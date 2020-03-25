@@ -65,6 +65,17 @@ services:
       PMA_USER: "$MYSQL_USER"
       PMA_PASSWORD: "$MYSQL_PASSWORD"
 
+  adminer:
+    image: adminer
+    labels:
+      - traefik.enable=true
+      - traefik.backend=adminer
+      - traefik.frontend.rule=Host:adminer.app.localhost
+    environment:
+      PMA_HOST: "mysql"
+      PMA_USER: "$MYSQL_USER"
+      PMA_PASSWORD: "$MYSQL_PASSWORD"
+
 volumes:
 
   mysql_data:
