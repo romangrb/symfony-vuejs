@@ -13,7 +13,28 @@ use Doctrine\ORM\Mapping\JoinColumn;
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
- */
+ *
+ *
+ * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="email",
+ *          column=@ORM\Column(
+ *              type =  "string",
+ *              name     = "email",
+ *              nullable = true,
+ *              unique   = true
+ *          )
+ *      ),
+ *      @ORM\AttributeOverride(name="emailCanonical",
+ *          column=@ORM\Column(
+ *              type = "string",
+ *              name     = "email_canonical",
+ *              nullable = true,
+ *              unique   = true
+ *          )
+ *      )
+ * })
+ *
+*/
 class User extends BaseUser
 {
     /**
@@ -22,12 +43,6 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Files", mappedBy="id")
-     * @JoinColumn(name="avatar_id", referencedColumnName="id")
-     */
-    protected $avatar;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\EventParticipant", mappedBy="user", orphanRemoval=true)
@@ -46,24 +61,11 @@ class User extends BaseUser
         return $this->id;
     }
 
-    public function getAvatarFile(): ?Files
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatarFile(Files $files): self
-    {
-        $this->avatar = $files;
-
-        return $this;
-    }
-
     public function getAttributes(): array
     {
         $attr = [
             'id' => $this->getId(),
             'email' => $this->getUsername(),
-//            'avatar_path' => $this->getAvatarFile()->getPath(),
         ];
 
         return $attr;
