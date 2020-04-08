@@ -22,6 +22,7 @@ On MacOS, also update your `/etc/hosts` file with:
 ```
 127.0.0.1   app.localhost
 127.0.0.1   phpmyadmin.app.localhost
+127.0.0.1   adminer.app.localhost
 ```
 
 You may now go to [http://app.localhost/](http://app.localhost/) and
