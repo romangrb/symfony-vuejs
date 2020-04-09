@@ -140,4 +140,17 @@ final class PlaceContentController extends AbstractController
 
         return new JsonResponse($data, Response::HTTP_CREATED, [], true);
     }
+
+    /**
+     * Get all place-contents
+     *
+     * @Rest\Get("/place-contents", name="getAllPlaceContents")
+     */
+    public function getAllPlaceContents(): JsonResponse
+    {
+        $places = $this->em->getRepository(PlaceContent::class)->findBy([], ['id' => 'DESC']);
+        $data = $this->serializer->serialize($places, JsonEncoder::FORMAT);
+
+        return new JsonResponse($data, Response::HTTP_OK, [], true);
+    }
 }

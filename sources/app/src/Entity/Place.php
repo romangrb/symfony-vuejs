@@ -34,8 +34,14 @@ class Place
 
     private $placeAttachment;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\PlaceContent", mappedBy="place", cascade={"persist", "remove"})
+     */
     private $placeContent;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\PlaceLocation", mappedBy="place", cascade={"persist", "remove"})
+     */
     private $placeLocation;
 
     public function __construct()
@@ -110,12 +116,13 @@ class Place
         return $this->placeContent;
     }
 
-    public function setPlaceContent(PlaceContent $placeContent): self
+    public function setPlaceContent(?PlaceContent $placeContent): self
     {
         $this->placeContent = $placeContent;
 
         // set the owning side of the relation if necessary
-        if ($this !== $placeContent->getPlace()) {
+        $newPlaceContent = $placeContent === null ? null : $this;
+        if ($newPlaceContent !== $placeContent->getPlace()) {
             $placeContent->setPlace($this);
         }
 
@@ -127,12 +134,13 @@ class Place
         return $this->placeLocation;
     }
 
-    public function setPlaceLocations(PlaceLocation $placeLocation): self
+    public function setPlaceLocation(?PlaceLocation $placeLocation): self
     {
         $this->placeLocation = $placeLocation;
 
         // set the owning side of the relation if necessary
-        if ($this !== $placeLocation->getPlace()) {
+        $newPlaceLocation = $placeLocation === null ? null : $this;
+        if ($newPlaceLocation !== $placeLocation->getPlace()) {
             $placeLocation->setPlace($this);
         }
 

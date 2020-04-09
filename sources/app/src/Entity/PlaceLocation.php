@@ -18,7 +18,7 @@ class PlaceLocation
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Place", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Place", inversedBy="placeLocation", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $place;

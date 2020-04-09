@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Place;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Place|null find($id, $lockMode = null, $lockVersion = null)

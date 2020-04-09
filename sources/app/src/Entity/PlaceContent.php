@@ -21,7 +21,7 @@ class PlaceContent
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Place", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Place", inversedBy="placeContent", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $place;
