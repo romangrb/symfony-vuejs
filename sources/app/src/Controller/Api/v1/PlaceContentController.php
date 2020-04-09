@@ -22,7 +22,10 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Twig\Environment;
 use App\Services\FileUploader;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 final class PlaceContentController extends AbstractController
 {
@@ -44,6 +47,9 @@ final class PlaceContentController extends AbstractController
     /** @var TranslatorInterface */
     private $translator;
 
+    /** @var Twig */
+    private $twig;
+
     /**
      * Initiate class properties
      *
@@ -52,13 +58,15 @@ final class PlaceContentController extends AbstractController
      * @param PlaceContentRepository $repository
      * @param PlaceRepository $place_repository
      * @param TranslatorInterface $translator
+     * @param Environment $twig
      */
     public function __construct(
         EntityManagerInterface $em,
         SerializerInterface $serializer,
         PlaceContentRepository $repository,
         PlaceRepository $place_repository,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        Environment $twig
     )
     {
         $this->em = $em;
@@ -66,6 +74,7 @@ final class PlaceContentController extends AbstractController
         $this->repository =  $repository;
         $this->translator = $translator;
         $this->place_repository = $place_repository;
+        $this->twig = $twig;
     }
 
     /**
@@ -109,17 +118,6 @@ final class PlaceContentController extends AbstractController
             return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-//        $file = 'people.html';
-//
-//        try {
-//            $html_content = (new FileUploader('/contents'))->upload($file);
-//        } catch (FileException $e){
-//            $exceptionData = ErrorExceptionTransformer::transform($e);
-//            $translated = $this->translator->trans('file_error ' . $e->getMessage());
-//            $this->logger->info(print_r($exceptionData, true));
-//            return new JsonResponse($translated,
-//                Response::HTTP_UNPROCESSABLE_ENTITY);
-//        }
         try {
             $place = $this->place_repository->find($place_id);
         } catch (\Exception $e) {
@@ -128,11 +126,115 @@ final class PlaceContentController extends AbstractController
             return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
         }
 
+        $filesystem = new Filesystem();
+        $file_origin_name = (string) sprintf('%s_%s.html', 'content', $place_id);
+
+        try {
+            $filesystem->dumpFile($file_origin_name, $content);
+        } catch (IOExceptionInterface $e) {
+            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+        }
+
         $placeContent = new PlaceContent();
         $placeContent->setDescription($description);
         $placeContent->setIsPublished(false);
         $placeContent->setPlace($place);
-        $placeContent->setFilePath('');
+        $placeContent->setFilePath($file_origin_name);
+
+        $this->em->persist($placeContent);
+        $this->em->flush();
+        $data = $this->serializer->serialize($placeContent, JsonEncoder::FORMAT);
+
+        return new JsonResponse($data, Response::HTTP_CREATED, [], true);
+    }
+
+    /**
+     * Update content
+     *
+     * @Rest\Patch("/place-content", name="createPlaceContent")
+     * @param Request $request
+     * @param ValidatorInterface $validator
+     * @param FileUploader $fileUploader
+     * @return JsonResponse
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function updatePlaceContent(
+        Request $request,
+        ValidatorInterface $validator,
+        FileUploader $fileUploader): JsonResponse
+    {
+        $place_id = $request->request->get('place_id');
+
+        $content = $request->request->get('content');
+        $description = $request->request->get('description');
+        $is_published = $request->request->get('is_published');
+
+        $input = [
+            'content' => $content,
+            'description' => $description,
+            'place_id' => $place_id
+        ];
+
+        $constraints = new Assert\Collection([
+            'content' => [new Assert\Length(['min' => 1])],
+            'place_id' => [new Assert\NotBlank],
+            'description' => [new Assert\Length(['min' => 0, 'max' => 255])]
+        ]);
+
+        $violations = $validator->validate($input, $constraints);
+
+        if (count($violations) > 0) {
+            $accessor = PropertyAccess::createPropertyAccessor();
+            $errorMessages = [];
+            foreach ($violations as $violation) {
+                $accessor->setValue($errorMessages,
+                    $violation->getPropertyPath(),
+                    $violation->getMessage());
+            }
+            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        try {
+            $place = $this->place_repository->find($place_id);
+        } catch (\Exception $e) {
+            $message = ErrorExceptionTransformer::transform($e);
+            $this->logger->error(print_r($message, true));
+            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+        }
+
+        $filesystem = new Filesystem();
+        $file_origin_name = (string) sprintf('%s_%s.html.twig', 'content', $place_id);
+//        $projectDir = $this->getParameter('kernel.project_dir') . '/public/uploads/' . $file_origin_name;
+//
+////dd($projectDir);
+////        $loader = $this->twig->getLoader();
+////dd($projectDir);
+////        if ($loader->exists($projectDir)) {
+////            dd(1);
+////        }else{
+////            dd(2);
+////        }
+//
+//        $htmlContents = $this->twig->render($projectDir, [
+//            'category' => 11,
+//            'promotion' => 22,
+//        ]);
+//
+//        return new JsonResponse($htmlContents, Response::HTTP_CREATED, [], true);
+
+        try {
+            $filesystem->dumpFile($file_origin_name, $content);
+        } catch (IOExceptionInterface $e) {
+            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+        }
+
+        $placeContent = $place->getPlaceContent();
+        $placeContent->setDescription($description);
+        $placeContent->setIsPublished(false);
+        $placeContent->setPlace($place);
+        $placeContent->setFilePath($file_origin_name);
 
         $this->em->persist($placeContent);
         $this->em->flush();

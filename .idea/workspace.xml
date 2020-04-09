@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ab3b0ce2-2efe-4f8b-a9d0-0acfa934f504" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/config/packages/framework.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/config/packages/framework.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Entity/Place.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Entity/Place.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Entity/PlaceContent.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Entity/PlaceContent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Entity/PlaceLocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Entity/PlaceLocation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,82 +28,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/EventController.php">
+        <entry file="file://$PROJECT_DIR$/docker-compose.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="30" selection-start-column="6" selection-end-column="30" />
-              <folding>
-                <element signature="e#66#87#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/PlaceContent.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="111" />
-              <folding>
-                <element signature="e#30#62#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/PlaceLocation.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="20" column="79" selection-start-line="20" selection-start-column="79" selection-end-line="20" selection-end-column="79" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/Place.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="41" column="7" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="7" />
-              <folding>
-                <element signature="e#30#78#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/EventRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="800">
-              <caret line="59" column="25" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="25" />
-              <folding>
-                <element signature="e#34#55#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="21" selection-start-line="21" selection-end-line="21" />
-              <folding>
-                <element signature="e#34#55#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
-              <caret line="150" column="48" selection-start-line="150" selection-start-column="48" selection-end-line="150" selection-end-column="48" />
-              <folding>
-                <element signature="e#66#94#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="462">
+              <caret line="67" column="10" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -116,8 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="151" column="29" selection-start-line="151" selection-start-column="29" selection-end-line="151" selection-end-column="29" />
+            <state relative-caret-position="714">
+              <caret line="79" column="23" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
               <folding>
                 <element signature="e#66#87#0#PHP" expanded="true" />
               </folding>
@@ -125,20 +48,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/config/packages/framework.yaml">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
+            <state relative-caret-position="149">
+              <caret line="208" column="25" selection-start-line="208" selection-start-column="8" selection-end-line="208" selection-end-column="25" />
+              <folding>
+                <element signature="e#67#95#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Utils/CircularReferenceHandler.php">
+        <entry file="file://$PROJECT_DIR$/sources/app/config/services.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+            <state relative-caret-position="579">
+              <caret line="30" column="51" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/app/public/uploads/content_4.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -147,10 +82,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$validator</find>
-      <find>Assert</find>
-      <find>ValidatorInterface</find>
-      <find>PlaceContent</find>
       <find>PlaceContent</find>
       <find>files</find>
       <find>file</find>
@@ -177,6 +108,10 @@
       <find>event_participants</find>
       <find>place_id</find>
       <find>circular_reference_handler</find>
+      <find>UploadedFile</find>
+      <find>asse</find>
+      <find>project_dir</find>
+      <find>finder</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -223,15 +158,17 @@
         <option value="$PROJECT_DIR$/sources/app/src/Entity/PlaceContents.php" />
         <option value="$PROJECT_DIR$/sources/app/src/DataFixtures/UserFixtures.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PostController.php" />
-        <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Repository/PlaceContentRepository.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php" />
-        <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Entity/Place.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Entity/PlaceContent.php" />
         <option value="$PROJECT_DIR$/sources/app/config/packages/framework.yaml" />
         <option value="$PROJECT_DIR$/sources/app/src/Utils/CircularReferenceHandler.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Entity/PlaceLocation.php" />
+        <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php" />
+        <option value="$PROJECT_DIR$/sources/app/src/Services/FileUploader.php" />
+        <option value="$PROJECT_DIR$/sources/app/public/content_4.html" />
+        <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" />
       </list>
     </option>
   </component>
@@ -269,15 +206,22 @@
               <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
               <item name="sources" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
               <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
               <item name="sources" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="uploads" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
+              <item name="sources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -298,14 +242,17 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\public\uploads" />
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Controller\Api\v1" />
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Controller\Api" />
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Services" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Controller\Api\v1" />
-      <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Controller" />
+      <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\templates" />
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app" />
+      <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources" />
+      <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app" />
+      <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Controller\Api\v1" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -351,12 +298,12 @@
       <option name="presentableId" value="Default" />
       <updated>1585160628239</updated>
       <workItem from="1585160629620" duration="11339000" />
-      <workItem from="1586339442535" duration="35225000" />
+      <workItem from="1586339442535" duration="51231000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46564000" />
+    <option name="totallyTimeSpent" value="62570000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -371,7 +318,7 @@
     <frame x="450" y="-1058" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19437653" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16320294" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -406,70 +353,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Command/AddDescriptionToEventCommand.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1080" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/vendor/symfony/messenger/Command/FailedMessagesShowCommand.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="739">
-          <caret line="87" column="23" selection-start-line="87" selection-start-column="23" selection-end-line="87" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/MyCanonicalizer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Services/UserCanonicalizer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="67" column="10" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/var/cache/prod/UrlMatcher.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/ApiAuthController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/PlaceSeconds.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="22" column="22" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Migrations/Version20200408192727.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/PlaseContents.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="999">
-          <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/UserRepository.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -503,13 +386,6 @@
           <folding>
             <element signature="e#60#81#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/config/services.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -625,13 +501,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Services/FileUploader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="34" column="32" lean-forward="true" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/vendor/symfony/http-foundation/File/UploadedFile.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -676,16 +545,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-          <folding>
-            <element signature="e#34#55#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/Event.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -724,40 +583,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="150" column="48" selection-start-line="150" selection-start-column="48" selection-end-line="150" selection-end-column="48" />
-          <folding>
-            <element signature="e#66#94#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="151" column="29" selection-start-line="151" selection-start-column="29" selection-end-line="151" selection-end-column="29" />
-          <folding>
-            <element signature="e#66#87#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/config/packages/framework.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Utils/CircularReferenceHandler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/EventController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -775,6 +600,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/PlaceLocation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="30" column="7" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/PlaceContent.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -785,10 +617,106 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/PlaceLocation.php">
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="20" column="79" selection-start-line="20" selection-start-column="79" selection-end-line="20" selection-end-column="79" />
+        <state relative-caret-position="210">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="e#34#55#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="67" column="10" selection-start-line="67" selection-start-column="10" selection-end-line="67" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Utils/CircularReferenceHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="79" column="23" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
+          <folding>
+            <element signature="e#66#87#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Services/ContextValidation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-126" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/public/file.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/public/uploads/fb3416e8550ccbd053c6f55981383a4d.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Services/FileUploader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1071">
+          <caret line="56" column="20" selection-start-line="56" selection-start-column="20" selection-end-line="56" selection-end-column="20" />
+          <folding>
+            <element signature="e#115#181#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/public/uploads/content_4.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/config/packages/security.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/config/packages/twig.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/config/packages/framework.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/config/packages/assets.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/config/services.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="579">
+          <caret line="30" column="51" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/public/index.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/public/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-658" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="208" column="25" selection-start-line="208" selection-start-column="8" selection-end-line="208" selection-end-column="25" />
+          <folding>
+            <element signature="e#67#95#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
