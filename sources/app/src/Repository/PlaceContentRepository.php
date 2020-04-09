@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\PlaceContents;
+use App\Entity\PlaceContent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method PlaceContents|null find($id, $lockMode = null, $lockVersion = null)
- * @method PlaceContents|null findOneBy(array $criteria, array $orderBy = null)
- * @method PlaceContents[]    findAll()
- * @method PlaceContents[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PlaceContent|null find($id, $lockMode = null, $lockVersion = null)
+ * @method PlaceContent|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PlaceContent[]    findAll()
+ * @method PlaceContent[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PlaceContentsRepository extends ServiceEntityRepository
+class PlaceContentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PlaceContents::class);
+        parent::__construct($registry, PlaceContent::class);
     }
 
     // /**

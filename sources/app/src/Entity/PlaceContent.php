@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PlaceContentsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PlaceContentRepository")
+ * @ORM\Table(name="place_contents")
  */
-class PlaceContents
+class PlaceContent
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -17,7 +21,7 @@ class PlaceContents
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Places", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Place", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $place;
@@ -37,14 +41,11 @@ class PlaceContents
      */
     private $is_published;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $created_at;
 
     public function __construct()
     {
         $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
     }
 
     public function getId(): ?int
@@ -52,12 +53,12 @@ class PlaceContents
         return $this->id;
     }
 
-    public function getPlaceId(): ?Places
+    public function getPlace(): ?Place
     {
         return $this->place;
     }
 
-    public function setPlace(Places $place): self
+    public function setPlace(Place $place): self
     {
         $this->place = $place;
 
@@ -96,18 +97,6 @@ class PlaceContents
     public function setIsPublished(bool $is_published): self
     {
         $this->is_published = $is_published;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
 
         return $this;
     }

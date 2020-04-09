@@ -5,9 +5,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PlaceLocationsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PlaceLocationRepository")
+ * @ORM\Table(name="place_locations")
  */
-class PlaceLocations
+class PlaceLocation
 {
     /**
      * @ORM\Id()
@@ -17,7 +18,7 @@ class PlaceLocations
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Places", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Place", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $place;
@@ -37,12 +38,12 @@ class PlaceLocations
         return $this->id;
     }
 
-    public function getPlace(): ?Places
+    public function getPlace(): ?Place
     {
         return $this->place;
     }
 
-    public function setPlace(Places $place): self
+    public function setPlace(Place $place): self
     {
         $this->place = $place;
 

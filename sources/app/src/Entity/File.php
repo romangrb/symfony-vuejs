@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
- * Entity\Files
+ * Entity\File
  *
  * @ORM\Entity
  * @ORM\Table(name="files")
  */
-class Files
+class File
 {
     use TimestampableEntity;
 

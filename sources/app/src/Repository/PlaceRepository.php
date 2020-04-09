@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\PlaceLocations;
+use App\Entity\Place;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method PlaceLocations|null find($id, $lockMode = null, $lockVersion = null)
- * @method PlaceLocations|null findOneBy(array $criteria, array $orderBy = null)
- * @method PlaceLocations[]    findAll()
- * @method PlaceLocations[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Place|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Place|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Place[]    findAll()
+ * @method Place[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PlaceLocationsRepository extends ServiceEntityRepository
+class PlaceRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PlaceLocations::class);
+        parent::__construct($registry, Place::class);
     }
 
     // /**
-    //  * @return PlaceLocations[] Returns an array of PlaceLocations objects
+    //  * @return Places[] Returns an array of Places objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class PlaceLocationsRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?PlaceLocations
+    public function findOneBySomeField($value): ?Places
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

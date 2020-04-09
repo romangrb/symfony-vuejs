@@ -1,5 +1,6 @@
 <?php
-namespace App\Controller\Api;
+namespace App\Controller\Api\v1;
+
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,7 +12,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 /**
  * @Route("/user")
  */
-class ApiUserController extends AbstractController
+class UserController extends AbstractController
 {
     /**
      * @Route("/{id}", name="api_user_detail", methods={"GET"})

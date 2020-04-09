@@ -8,8 +8,6 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Requests\RequestValidator;
 use App\Transformers\ErrorExceptionTransformer;
-use App\Services\FileUploader;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,8 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
 use Psr\Log\LoggerInterface;
-use App\Entity\Files;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 /**
  * @Route("/api")
@@ -80,67 +76,6 @@ final class SecurityController extends AbstractController
         }
 
         return new JsonResponse(null, Response::HTTP_OK, [], true);
-    }
-
-    /**
-     * @Route("/security/avatar", name="avatar", methods={"POST"})
-     * @param EntityManagerInterface $em
-     * @param Request $request
-     * @param FileUploader $fileUploader
-     * @return JsonResponse
-     */
-    public function avatar(
-        Request $request,
-        EntityManagerInterface $em,
-        FileUploader $fileUploader): JsonResponse
-    {
-        $file = $request->files->get('file');
-
-        try {
-            $user = $this->repository->find('08701b95-5c4d-4841-aabd-43767ff4fd19');
-        } catch (\Exception $e){
-            $exceptionData = ErrorExceptionTransformer::transform($e);
-            $this->logger->info(print_r($exceptionData, true));
-            return new JsonResponse($e->getMessage(),
-                Response::HTTP_BAD_REQUEST);
-        }
-
-        if (empty($file)) {
-            $translated = $this->translator->trans('no_file');
-            $this->logger->info($translated);
-            return new JsonResponse($translated,
-                Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        try {
-            $file_path = $fileUploader->upload($file);
-        } catch (FileException $e){
-            $exceptionData = ErrorExceptionTransformer::transform($e);
-            $translated = $this->translator->trans('file_error ' . $e->getMessage());
-            $this->logger->info(print_r($exceptionData, true));
-            return new JsonResponse($translated,
-                Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        $file_exists = $user->getAvatarFile();
-
-        if ($file_exists) {
-            $em->remove($file_exists);
-            $em->flush();
-        }
-
-        $fileEntity = new Files();
-        $fileEntity
-            ->setName($file->getClientOriginalName())
-            ->setPath($file_path)
-        ;
-
-        $em->persist($fileEntity);
-
-        $user->setAvatarFile($fileEntity);
-        $em->flush();
-
-        return new JsonResponse($this->translator->trans($this->translator->trans('success')),  Response::HTTP_OK);
     }
 
     /**

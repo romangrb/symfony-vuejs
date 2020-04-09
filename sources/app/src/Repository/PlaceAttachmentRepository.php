@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\PlaceAttachments;
+use App\Entity\PlaceAttachment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method PlaceAttachments|null find($id, $lockMode = null, $lockVersion = null)
- * @method PlaceAttachments|null findOneBy(array $criteria, array $orderBy = null)
- * @method PlaceAttachments[]    findAll()
- * @method PlaceAttachments[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PlaceAttachment|null find($id, $lockMode = null, $lockVersion = null)
+ * @method PlaceAttachment|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PlaceAttachment[]    findAll()
+ * @method PlaceAttachment[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PlaceAttachmentsRepository extends ServiceEntityRepository
+class PlaceAttachmentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PlaceAttachments::class);
+        parent::__construct($registry, PlaceAttachment::class);
     }
 
     // /**

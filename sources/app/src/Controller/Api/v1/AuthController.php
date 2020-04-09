@@ -6,7 +6,7 @@
  * Time: 21:26
  */
 
-namespace App\Controller\Api;
+namespace App\Controller\Api\v1;
 
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @Route("/auth")
  */
-class ApiAuthController extends AbstractController
+class AuthController extends AbstractController
 {
     /**
      * @Route("/register", name="api_auth_register",  methods={"POST"})

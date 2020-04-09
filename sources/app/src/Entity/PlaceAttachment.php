@@ -5,9 +5,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PlaceAttachmentsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PlaceAttachmentRepository")
+ * @ORM\Table(name="place_attachments")
  */
-class PlaceAttachments
+class PlaceAttachment
 {
     /**
      * @ORM\Id()
@@ -17,7 +18,7 @@ class PlaceAttachments
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Places", inversedBy="placeAttachments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Place", inversedBy="placeAttachment")
      * @ORM\JoinColumn(nullable=false)
      */
     private $place;
@@ -32,12 +33,12 @@ class PlaceAttachments
         return $this->id;
     }
 
-    public function getPlace(): ?Places
+    public function getPlace(): ?Place
     {
         return $this->place;
     }
 
-    public function setPlace(?Places $place): self
+    public function setPlace(?Place $place): self
     {
         $this->place = $place;
 
