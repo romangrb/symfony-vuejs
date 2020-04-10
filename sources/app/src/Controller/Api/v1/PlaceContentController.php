@@ -8,7 +8,8 @@ use App\Repository\PlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Transformers\ErrorExceptionTransformer;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,12 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Twig\Environment;
-use App\Services\FileUploader;
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
-use Symfony\Component\Filesystem\Filesystem;
 
 final class PlaceContentController extends AbstractController
 {
@@ -59,6 +55,7 @@ final class PlaceContentController extends AbstractController
      * @param PlaceRepository $place_repository
      * @param TranslatorInterface $translator
      * @param Environment $twig
+     * @param LoggerInterface $logger
      */
     public function __construct(
         EntityManagerInterface $em,
@@ -66,7 +63,8 @@ final class PlaceContentController extends AbstractController
         PlaceContentRepository $repository,
         PlaceRepository $place_repository,
         TranslatorInterface $translator,
-        Environment $twig
+        Environment $twig,
+        LoggerInterface $logger
     )
     {
         $this->em = $em;
@@ -75,112 +73,27 @@ final class PlaceContentController extends AbstractController
         $this->translator = $translator;
         $this->place_repository = $place_repository;
         $this->twig = $twig;
+        $this->logger = $logger;
     }
 
     /**
-     * Create content
+     * Show place content
      *
-     * @Rest\Post("/place-content", name="createPlaceContent")
+     * @Rest\Get("/place/{id}/template", name="showTemplateContent")
      * @param Request $request
      * @param ValidatorInterface $validator
-     * @param FileUploader $fileUploader
      * @return JsonResponse
      */
-    public function createPlaceContent(Request $request, ValidatorInterface $validator, FileUploader $fileUploader): JsonResponse
-    {
-        $place_id = $request->request->get('place_id');
-
-        $content = $request->request->get('content');
-        $description = $request->request->get('description');
-
-        $input = [
-            'content' => $content,
-            'description' => $description,
-            'place_id' => $place_id
-        ];
-
-        $constraints = new Assert\Collection([
-            'content' => [new Assert\Length(['min' => 1]), new Assert\NotBlank],
-            'place_id' => [new Assert\NotBlank],
-            'description' => [new Assert\Length(['min' => 0, 'max' => 255])]
-        ]);
-
-        $violations = $validator->validate($input, $constraints);
-
-        if (count($violations) > 0) {
-            $accessor = PropertyAccess::createPropertyAccessor();
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $accessor->setValue($errorMessages,
-                    $violation->getPropertyPath(),
-                    $violation->getMessage());
-            }
-            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        try {
-            $place = $this->place_repository->find($place_id);
-        } catch (\Exception $e) {
-            $message = ErrorExceptionTransformer::transform($e);
-            $this->logger->error(print_r($message, true));
-            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
-        }
-
-        $filesystem = new Filesystem();
-        $file_origin_name = (string) sprintf('%s_%s.html', 'content', $place_id);
-
-        try {
-            $filesystem->dumpFile($file_origin_name, $content);
-        } catch (IOExceptionInterface $e) {
-            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
-        }
-
-        $placeContent = new PlaceContent();
-        $placeContent->setDescription($description);
-        $placeContent->setIsPublished(false);
-        $placeContent->setPlace($place);
-        $placeContent->setFilePath($file_origin_name);
-
-        $this->em->persist($placeContent);
-        $this->em->flush();
-        $data = $this->serializer->serialize($placeContent, JsonEncoder::FORMAT);
-
-        return new JsonResponse($data, Response::HTTP_CREATED, [], true);
-    }
-
-    /**
-     * Update content
-     *
-     * @Rest\Patch("/place-content", name="createPlaceContent")
-     * @param Request $request
-     * @param ValidatorInterface $validator
-     * @param FileUploader $fileUploader
-     * @return JsonResponse
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
-     */
-    public function updatePlaceContent(
+    public function showTemplateContent(
         Request $request,
-        ValidatorInterface $validator,
-        FileUploader $fileUploader): JsonResponse
+        ValidatorInterface $validator): JsonResponse
     {
-        $place_id = $request->request->get('place_id');
+        $place_id = $request->get('id');
 
-        $content = $request->request->get('content');
-        $description = $request->request->get('description');
-        $is_published = $request->request->get('is_published');
-
-        $input = [
-            'content' => $content,
-            'description' => $description,
-            'place_id' => $place_id
-        ];
+        $input = ['place_id' => $place_id];
 
         $constraints = new Assert\Collection([
-            'content' => [new Assert\Length(['min' => 1])],
-            'place_id' => [new Assert\NotBlank],
-            'description' => [new Assert\Length(['min' => 0, 'max' => 255])]
+            'place_id' => [new Assert\NotBlank]
         ]);
 
         $violations = $validator->validate($input, $constraints);
@@ -204,73 +117,27 @@ final class PlaceContentController extends AbstractController
             return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
         }
 
-        $filesystem = new Filesystem();
-        $file_origin_name = (string) sprintf('%s_%s.html.twig', 'content', $place_id);
-
-
-//        dd($filesystem->exists('/var/www/html/public/uploads/content_4.html.twig'));
-
-        $file_path = $this->getParameter('kernel.project_dir') . '/public/uploads/' . $file_origin_name;
-
-
-        $template = $this->twig->createTemplate('Hello {{ name }}');
-
-        $result = $template->render(array('name'=>'World'));
-
-        return new JsonResponse($result, Response::HTTP_OK, [], true);
-
-
-        $loader = $this->twig->getLoader();
-
-        if ($loader->exists('/var/www/html/public/uploads/content_4.html.twig')) {
-            dd(1);
-        }else{
-            dd(2);
-        }
-
-        $htmlContents = $this->twig->render($file_path, [
-            'category' => 11,
-            'promotion' => 22,
-        ]);
-
-        return new JsonResponse($htmlContents, Response::HTTP_CREATED, [], true);
+        $file_path = $place->getPlaceContent()->getFilePath();
 
         try {
-            $filesystem->dumpFile($file_origin_name, $content);
-        } catch (IOExceptionInterface $e) {
+            $htmlContents = $this->twig->render($file_path, [
+                'category' => 11,
+                'promotion'=> 22,
+            ]);
+        } catch (\Exception $e) {
+            $message = ErrorExceptionTransformer::transform($e);
+            $this->logger->error(print_r($message, true));
             return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
         }
 
-        $placeContent = $place->getPlaceContent();
-        $placeContent->setDescription($description);
-        $placeContent->setIsPublished(false);
-        $placeContent->setPlace($place);
-        $placeContent->setFilePath($file_origin_name);
 
-        $this->em->persist($placeContent);
-        $this->em->flush();
-        $data = $this->serializer->serialize($placeContent, JsonEncoder::FORMAT);
-
-        return new JsonResponse($data, Response::HTTP_CREATED, [], true);
+        return new JsonResponse($htmlContents, Response::HTTP_OK, [], true);
     }
 
     /**
-     * Get all place-contents
+     * Render template
      *
-     * @Rest\Get("/place-contents", name="getAllPlaceContents")
-     */
-    public function getAllPlaceContents(): JsonResponse
-    {
-        $places = $this->em->getRepository(PlaceContent::class)->findBy([], ['id' => 'DESC']);
-        $data = $this->serializer->serialize($places, JsonEncoder::FORMAT);
-
-        return new JsonResponse($data, Response::HTTP_OK, [], true);
-    }
-
-    /**
-     * Show template
-     *
-     * @Rest\POST("/place-content/render", name="renderPlaceContentTemplateFromString")
+     * @Rest\Get("/place/{id}/template/render", name="renderPlaceContentTemplateFromString")
      * @param Request $request
      * @param ValidatorInterface $validator
      * @return JsonResponse
@@ -279,14 +146,17 @@ final class PlaceContentController extends AbstractController
         Request $request,
         ValidatorInterface $validator): JsonResponse
     {
-        $content = $request->request->get('content');
+        $place_id = $request->get('id');
+        $content = $request->get('content');
 
         $input = [
+            'place_id'=> $place_id,
             'content' => $content
         ];
 
         $constraints = new Assert\Collection([
-            'content' => [new Assert\Length(['min' => 1])]
+            'place_id' => [new Assert\NotBlank, new Assert\Length(['min' => 1])],
+            'content' => [new Assert\NotBlank]
         ]);
 
         $violations = $validator->validate($input, $constraints);
@@ -303,15 +173,105 @@ final class PlaceContentController extends AbstractController
         }
 
         try {
-            $template = $this->twig->createTemplate($content);
+            $place = $this->place_repository->find($place_id);
         } catch (\Exception $e) {
             $message = ErrorExceptionTransformer::transform($e);
             $this->logger->error(print_r($message, true));
             return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
         }
 
-        $result = $template->render(array('name'=>'World'));
+//        TODO get variables from templates
+//        $place->getPlaceContentVariable;
+
+        try {
+            $template = $this->twig->createTemplate($content);
+        } catch (\Exception $e) {
+            $message = ErrorExceptionTransformer::transform($e);
+            $this->logger->error(print_r($message, true));
+            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+        }
+        // TODO get from db variables
+        $result = $template->render(array('name' => 'World'));
 
         return new JsonResponse($result, Response::HTTP_OK, [], true);
+    }
+
+    /**
+     * Create/Update template content
+     *
+     * @Rest\Patch("/place/{id}/content", name="attachPlaceContentTemplate")
+     * @param Request $request
+     * @param ValidatorInterface $validator
+     * @return JsonResponse
+     */
+    public function attachPlaceContentTemplate(Request $request, ValidatorInterface $validator): JsonResponse
+    {
+        $place_id = $request->get('id');
+        $content  = $request->get('content');
+        $description  = $request->get('description');
+        $is_published = $request->get('is_published');
+
+        $input = [
+            'content' => $content,
+            'description' => $description,
+            'place_id' => $place_id,
+            'is_published' => $is_published
+        ];
+
+        $constraints = new Assert\Collection([
+            'content' => [new Assert\Length(['min' => 1]), new Assert\NotBlank],
+            'place_id' => [new Assert\NotBlank],
+            'description' => [new Assert\Length(['min' => 0, 'max' => 255])],
+            'is_published' => [new Assert\Length(['min' => 0, 'max' => 1])]
+        ]);
+
+        $violations = $validator->validate($input, $constraints);
+
+        if (count($violations) > 0) {
+            $accessor = PropertyAccess::createPropertyAccessor();
+            $errorMessages = [];
+            foreach ($violations as $violation) {
+                $accessor->setValue($errorMessages,
+                    $violation->getPropertyPath(),
+                    $violation->getMessage());
+            }
+            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        try {
+            $place = $this->place_repository->find($place_id);
+        } catch (\Exception $e) {
+            $message = ErrorExceptionTransformer::transform($e);
+            $this->logger->error(print_r($message, true));
+            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+        }
+
+        $template_dir = $this->getParameter('public_template_path');
+        $file_path = (string) sprintf('%s_%s.html', 'content', $place_id);
+        $filesystem = new Filesystem();
+        $file_root_path = (string) sprintf('%s/%s', $template_dir, $file_path);
+
+        try {
+            $filesystem->dumpFile($file_root_path, $content);
+        } catch (IOExceptionInterface $e) {
+            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+        }
+
+        if ($placeContent = $place->getPlaceContent()) {
+        } else {
+            $placeContent = new PlaceContent();
+            $placeContent->setPlace($place);
+        };
+
+        if (! is_null($description)) $placeContent->setDescription($description);
+        if (! is_null($is_published)) $placeContent->setIsPublished((boolean) $is_published);
+        if (! is_null($file_path)) $placeContent->setFilePath($file_path);
+
+        $this->em->persist($placeContent);
+        $this->em->flush();
+
+        $data = $this->serializer->serialize($placeContent, JsonEncoder::FORMAT);
+
+        return new JsonResponse($data, Response::HTTP_CREATED, [], true);
     }
 }
