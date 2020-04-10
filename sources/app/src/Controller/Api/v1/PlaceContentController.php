@@ -247,7 +247,7 @@ final class PlaceContentController extends AbstractController
         }
 
         $template_dir = $this->getParameter('public_template_path');
-        $file_path = (string) sprintf('%s_%s.html', 'content', $place_id);
+        $file_path = (string) sprintf('%s_%s.html.twig', 'content', $place_id);
         $filesystem = new Filesystem();
         $file_root_path = (string) sprintf('%s/%s', $template_dir, $file_path);
 
