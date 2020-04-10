@@ -206,23 +206,34 @@ final class PlaceContentController extends AbstractController
 
         $filesystem = new Filesystem();
         $file_origin_name = (string) sprintf('%s_%s.html.twig', 'content', $place_id);
-//        $projectDir = $this->getParameter('kernel.project_dir') . '/public/uploads/' . $file_origin_name;
-//
-////dd($projectDir);
-////        $loader = $this->twig->getLoader();
-////dd($projectDir);
-////        if ($loader->exists($projectDir)) {
-////            dd(1);
-////        }else{
-////            dd(2);
-////        }
-//
-//        $htmlContents = $this->twig->render($projectDir, [
-//            'category' => 11,
-//            'promotion' => 22,
-//        ]);
-//
-//        return new JsonResponse($htmlContents, Response::HTTP_CREATED, [], true);
+
+
+//        dd($filesystem->exists('/var/www/html/public/uploads/content_4.html.twig'));
+
+        $file_path = $this->getParameter('kernel.project_dir') . '/public/uploads/' . $file_origin_name;
+
+
+        $template = $this->twig->createTemplate('Hello {{ name }}');
+
+        $result = $template->render(array('name'=>'World'));
+
+        return new JsonResponse($result, Response::HTTP_OK, [], true);
+
+
+        $loader = $this->twig->getLoader();
+
+        if ($loader->exists('/var/www/html/public/uploads/content_4.html.twig')) {
+            dd(1);
+        }else{
+            dd(2);
+        }
+
+        $htmlContents = $this->twig->render($file_path, [
+            'category' => 11,
+            'promotion' => 22,
+        ]);
+
+        return new JsonResponse($htmlContents, Response::HTTP_CREATED, [], true);
 
         try {
             $filesystem->dumpFile($file_origin_name, $content);
@@ -254,5 +265,53 @@ final class PlaceContentController extends AbstractController
         $data = $this->serializer->serialize($places, JsonEncoder::FORMAT);
 
         return new JsonResponse($data, Response::HTTP_OK, [], true);
+    }
+
+    /**
+     * Show template
+     *
+     * @Rest\POST("/place-content/render", name="renderPlaceContentTemplateFromString")
+     * @param Request $request
+     * @param ValidatorInterface $validator
+     * @return JsonResponse
+     */
+    public function renderPlaceContentTemplateFromString(
+        Request $request,
+        ValidatorInterface $validator): JsonResponse
+    {
+        $content = $request->request->get('content');
+
+        $input = [
+            'content' => $content
+        ];
+
+        $constraints = new Assert\Collection([
+            'content' => [new Assert\Length(['min' => 1])]
+        ]);
+
+        $violations = $validator->validate($input, $constraints);
+
+        if (count($violations) > 0) {
+            $accessor = PropertyAccess::createPropertyAccessor();
+            $errorMessages = [];
+            foreach ($violations as $violation) {
+                $accessor->setValue($errorMessages,
+                    $violation->getPropertyPath(),
+                    $violation->getMessage());
+            }
+            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        try {
+            $template = $this->twig->createTemplate($content);
+        } catch (\Exception $e) {
+            $message = ErrorExceptionTransformer::transform($e);
+            $this->logger->error(print_r($message, true));
+            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+        }
+
+        $result = $template->render(array('name'=>'World'));
+
+        return new JsonResponse($result, Response::HTTP_OK, [], true);
     }
 }
