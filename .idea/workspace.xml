@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab3b0ce2-2efe-4f8b-a9d0-0acfa934f504" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/sources/app/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/config/services.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,8 +38,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="79" column="23" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
+            <state relative-caret-position="117">
+              <caret line="137" column="7" lean-forward="true" selection-start-line="137" selection-start-column="7" selection-end-line="137" selection-end-column="7" />
               <folding>
                 <element signature="e#66#87#0#PHP" expanded="true" />
               </folding>
@@ -52,8 +50,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="256" column="51" selection-start-line="256" selection-start-column="51" selection-end-line="256" selection-end-column="51" />
+            <state relative-caret-position="506">
+              <caret line="328" column="64" selection-start-line="328" selection-start-column="60" selection-end-line="328" selection-end-column="64" />
               <folding>
                 <element signature="e#66#94#0#PHP" expanded="true" />
               </folding>
@@ -120,8 +118,8 @@
       <find>appbundle</find>
       <find>logger</find>
       <find>kernel</find>
-      <find>LoggerInterface</find>
       <find>parameters</find>
+      <find>LoggerInterface</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -332,12 +330,12 @@
       <option name="presentableId" value="Default" />
       <updated>1585160628239</updated>
       <workItem from="1585160629620" duration="11339000" />
-      <workItem from="1586339442535" duration="66416000" />
+      <workItem from="1586339442535" duration="68611000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77755000" />
+    <option name="totallyTimeSpent" value="79950000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -352,7 +350,7 @@
     <frame x="450" y="-1058" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15403423" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15403423" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -365,7 +363,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.79044515" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.7687296" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.43213898" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -710,16 +708,6 @@
     <entry file="file://$PROJECT_DIR$/sources/app/templates/content_5.html.twig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="79" column="23" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
-          <folding>
-            <element signature="e#66#87#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/public/templates/content_4.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -741,10 +729,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="137" column="7" lean-forward="true" selection-start-line="137" selection-start-column="7" selection-end-line="137" selection-end-column="7" />
+          <folding>
+            <element signature="e#66#87#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="256" column="51" selection-start-line="256" selection-start-column="51" selection-end-line="256" selection-end-column="51" />
+        <state relative-caret-position="506">
+          <caret line="328" column="64" selection-start-line="328" selection-start-column="60" selection-end-line="328" selection-end-column="64" />
           <folding>
             <element signature="e#66#94#0#PHP" expanded="true" />
           </folding>

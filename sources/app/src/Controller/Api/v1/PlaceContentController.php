@@ -274,4 +274,63 @@ final class PlaceContentController extends AbstractController
 
         return new JsonResponse($data, Response::HTTP_CREATED, [], true);
     }
+
+    /**
+     * Detach template content
+     *
+     * @Rest\Delete("/place/{id}/content", name="attachPlaceContentTemplate")
+     * @param Request $request
+     * @param ValidatorInterface $validator
+     * @return JsonResponse
+     */
+    public function detachPlaceContentTemplate(Request $request, ValidatorInterface $validator): JsonResponse
+    {
+        $place_id = $request->get('id');
+
+        $input = ['place_id' => $place_id];
+
+        $constraints = new Assert\Collection(['place_id' => [new Assert\NotBlank]]);
+
+        $violations = $validator->validate($input, $constraints);
+
+        if (count($violations) > 0) {
+            $accessor = PropertyAccess::createPropertyAccessor();
+            $errorMessages = [];
+            foreach ($violations as $violation) {
+                $accessor->setValue($errorMessages,
+                    $violation->getPropertyPath(),
+                    $violation->getMessage());
+            }
+            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        try {
+            $place = $this->place_repository->find($place_id);
+        } catch (\Exception $e) {
+            $message = ErrorExceptionTransformer::transform($e);
+            $this->logger->error(print_r($message, true));
+            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+        }
+
+        $placeContent = $place->getPlaceContent();
+
+        if (! $placeContent) return new JsonResponse([], Response::HTTP_OK, [], true);
+
+        $file_path = (string) $placeContent->getFilePath();
+        $template_dir = $this->getParameter('public_template_path');
+        $file_root_path = (string) sprintf('%s/%s', $template_dir, $file_path);
+
+        $filesystem = new Filesystem();
+
+        if ($filesystem->exists($file_root_path)) $filesystem->remove($file_root_path);
+
+        $placeContent->setFilePath('');
+
+        $this->em->persist($placeContent);
+        $this->em->flush();
+
+        $data = $this->serializer->serialize($placeContent, JsonEncoder::FORMAT);
+
+        return new JsonResponse($data, Response::HTTP_CREATED, [], true);
+    }
 }
