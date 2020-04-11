@@ -277,7 +277,7 @@ final class PlaceContentController extends AbstractController
     /**
      * Detach template content
      *
-     * @Rest\Delete("/place/{id}/content", name="attachPlaceContentTemplate")
+     * @Rest\Delete("/place/{id}/content", name="detachPlaceContentTemplate")
      * @param Request $request
      * @param ValidatorInterface $validator
      * @return JsonResponse
