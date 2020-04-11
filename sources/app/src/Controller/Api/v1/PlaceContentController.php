@@ -22,6 +22,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
+use Symfony\Component\Security\Core\Security;
 
 final class PlaceContentController extends AbstractController
 {
@@ -81,11 +82,13 @@ final class PlaceContentController extends AbstractController
      *
      * @Rest\Get("/place/{id}/template", name="showTemplateContent")
      * @param Request $request
+     * @param Security $security
      * @param ValidatorInterface $validator
      * @return JsonResponse
      */
     public function showTemplateContent(
         Request $request,
+        Security $security,
         ValidatorInterface $validator): JsonResponse
     {
         $place_id = $request->get('id');
@@ -118,18 +121,15 @@ final class PlaceContentController extends AbstractController
         }
 
         $file_path = $place->getPlaceContent()->getFilePath();
+        $templateVariablesHash = $security->getUser()->getTemplateVariablesHash();
 
         try {
-            $htmlContents = $this->twig->render($file_path, [
-                'category' => 11,
-                'promotion'=> 22,
-            ]);
-        } catch (\Exception $e) {
+            $htmlContents = $this->twig->render($file_path, $templateVariablesHash);
+        } catch (\Twig\Error\Error $e) {
             $message = ErrorExceptionTransformer::transform($e);
             $this->logger->error(print_r($message, true));
             return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
         }
-
 
         return new JsonResponse($htmlContents, Response::HTTP_OK, [], true);
     }
@@ -137,13 +137,15 @@ final class PlaceContentController extends AbstractController
     /**
      * Render template
      *
-     * @Rest\Get("/place/{id}/template/render", name="renderPlaceContentTemplateFromString")
+     * @Rest\Post("/place/{id}/template/render", name="renderPlaceContentTemplateFromString")
      * @param Request $request
+     * @param Security $security
      * @param ValidatorInterface $validator
      * @return JsonResponse
      */
     public function renderPlaceContentTemplateFromString(
         Request $request,
+        Security $security,
         ValidatorInterface $validator): JsonResponse
     {
         $place_id = $request->get('id');
@@ -172,16 +174,7 @@ final class PlaceContentController extends AbstractController
             return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        try {
-            $place = $this->place_repository->find($place_id);
-        } catch (\Exception $e) {
-            $message = ErrorExceptionTransformer::transform($e);
-            $this->logger->error(print_r($message, true));
-            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
-        }
-
-//        TODO get variables from templates
-//        $place->getPlaceContentVariable;
+        $templateVariablesHash = $security->getUser()->getTemplateVariablesHash();
 
         try {
             $template = $this->twig->createTemplate($content);
@@ -190,8 +183,14 @@ final class PlaceContentController extends AbstractController
             $this->logger->error(print_r($message, true));
             return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
         }
-        // TODO get from db variables
-        $result = $template->render(array('name' => 'World'));
+
+        try {
+            $result = $template->render($templateVariablesHash);
+        } catch (\Twig\Error\Error $e) {
+            $message = ErrorExceptionTransformer::transform($e);
+            $this->logger->error(print_r($message, true));
+            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+        }
 
         return new JsonResponse($result, Response::HTTP_OK, [], true);
     }

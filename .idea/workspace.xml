@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab3b0ce2-2efe-4f8b-a9d0-0acfa934f504" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sources/app/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,11 +30,32 @@
       <content type="file-editors">
         <state>
           <leaf>
-            <file pinned="false" current-in-tab="true">
+            <file pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/EventController.php">
                 <provider selected="true" editor-type-id="text-editor">
                   <state relative-caret-position="-353">
                     <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="34" selection-end-column="24" />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/TemplateVariable.php">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="567">
+                    <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/User.php">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="179">
+                    <caret line="119" selection-start-line="119" selection-end-line="119" />
+                    <folding>
+                      <element signature="e#56#104#0#PHP" expanded="true" />
+                    </folding>
                   </state>
                 </provider>
               </entry>
@@ -51,78 +71,30 @@
         <entry file="file://$PROJECT_DIR$/.env">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="231">
-              <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docker-compose.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="30" column="17" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/TemplateVariable.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+              <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="401">
+              <caret line="188" column="8" lean-forward="true" selection-start-line="188" selection-start-column="8" selection-end-line="188" selection-end-column="8" />
+              <folding>
+                <element signature="e#66#94#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/UserTemplateVariableController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="441">
-              <caret line="66" column="10" lean-forward="true" selection-start-line="66" selection-start-column="10" selection-end-line="66" selection-end-column="10" />
+              <caret line="102" column="8" selection-start-line="102" selection-start-column="8" selection-end-line="102" selection-end-column="85" />
               <folding>
                 <element signature="e#67#99#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/User.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="44" column="25" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/TemplateVariableRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
-              <folding>
-                <element signature="e#34#66#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/EventRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="28" column="63" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="63" />
-              <folding>
-                <element signature="e#34#55#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -132,9 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>placeContent</find>
-      <find>get</find>
-      <find>$tes</find>
       <find>serializer</find>
       <find>Builder</find>
       <find>QueryBuilder</find>
@@ -155,13 +124,16 @@
       <find>parameters</find>
       <find>JWT_SECRET_KEY</find>
       <find>$MYSQL_PASSWORD</find>
-      <find>ENQUE</find>
       <find>unique</find>
       <find>$request-&gt;request</find>
       <find>ssert\</find>
       <find>tra</find>
       <find>create</find>
       <find>this-&gt;repository</find>
+      <find>ENQUE</find>
+      <find>Collection</find>
+      <find>getTemplateVariables</find>
+      <find>Security</find>
     </findStrings>
     <dirStrings>
       <dir>C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Entity</dir>
@@ -174,12 +146,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/docker-compose.yml" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue/App.vue" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue/views/Events.vue" />
         <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/ApiEventController.php" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/sources/app/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/sources/app/MyCanonicalizer.php" />
         <option value="$PROJECT_DIR$/sources/app/UserCanonicalizer.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Services/UserCanonicalizer.php" />
@@ -218,13 +188,15 @@
         <option value="$PROJECT_DIR$/sources/app/public/content_4.html" />
         <option value="$PROJECT_DIR$/sources/app/config/packages/twig.yaml" />
         <option value="$PROJECT_DIR$/sources/app/config/services.yaml" />
-        <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" />
         <option value="$PROJECT_DIR$/sources/app/.gitignore" />
-        <option value="$PROJECT_DIR$/sources/app/src/Entity/TemplateVariable.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PostController.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Repository/TemplateVariableRepository.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/UserTemplateVariableController.php" />
+        <option value="$PROJECT_DIR$/sources/app/src/Services/CollectionHelper.php" />
+        <option value="$PROJECT_DIR$/sources/app/src/Entity/TemplateVariable.php" />
+        <option value="$PROJECT_DIR$/sources/app/src/Entity/User.php" />
+        <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" />
       </list>
     </option>
   </component>
@@ -278,25 +250,6 @@
               <item name="sources" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
-              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Api" type="462c0819:PsiDirectoryNode" />
-              <item name="v1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
-              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Entity" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -305,15 +258,7 @@
               <item name="sources" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
-              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
+              <item name="Services" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -330,6 +275,7 @@
     <property name="node.js.selected.package.eslint" value="C:\data\vs_new\OSPanel\domains\symfony-crud-app\symfony-vuejs\sources\app\node_modules\eslint" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
   <component name="RecentsManager">
@@ -341,11 +287,11 @@
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Services" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Services" />
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Controller\Api\v1" />
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\templates" />
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app" />
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources" />
-      <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -391,12 +337,12 @@
       <option name="presentableId" value="Default" />
       <updated>1585160628239</updated>
       <workItem from="1585160629620" duration="11339000" />
-      <workItem from="1586339442535" duration="82547000" />
+      <workItem from="1586339442535" duration="88202000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93886000" />
+    <option name="totallyTimeSpent" value="99541000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -424,7 +370,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.79044515" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.43213898" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.5222584" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -446,13 +392,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Migrations/Version20200408171827.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Migrations/Version20200409081437.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="492">
@@ -665,27 +604,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="737">
-          <caret line="292" selection-start-line="292" selection-end-line="292" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="30" column="17" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/assets/vue/router.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-189">
@@ -729,22 +647,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/EventParticipantRepository.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/TemplateVariableRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+          <folding>
+            <element signature="e#34#66#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/EventRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
+        <state relative-caret-position="210">
           <caret line="28" column="63" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="63" />
           <folding>
             <element signature="e#34#55#0#PHP" expanded="true" />
@@ -752,10 +673,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/User.php">
+    <entry file="file://$PROJECT_DIR$/sources/app/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="44" column="25" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="25" />
+        <state relative-caret-position="441">
+          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Services/CollectionHelper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="19" column="65" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="65" />
         </state>
       </provider>
     </entry>
@@ -768,27 +710,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/TemplateVariable.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/TemplateVariableRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
-          <folding>
-            <element signature="e#34#66#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="567">
+          <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/UserTemplateVariableController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="441">
-          <caret line="66" column="10" lean-forward="true" selection-start-line="66" selection-start-column="10" selection-end-line="66" selection-end-column="10" />
+          <caret line="102" column="8" selection-start-line="102" selection-start-column="8" selection-end-line="102" selection-end-column="85" />
           <folding>
             <element signature="e#67#99#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="119" selection-start-line="119" selection-end-line="119" />
+          <folding>
+            <element signature="e#56#104#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="188" column="8" lean-forward="true" selection-start-line="188" selection-start-column="8" selection-end-line="188" selection-end-column="8" />
+          <folding>
+            <element signature="e#66#94#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

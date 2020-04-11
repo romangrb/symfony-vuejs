@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity
@@ -117,5 +116,25 @@ class User extends BaseUser
         }
 
         return $this;
+    }
+
+    /**
+     * Get hash of templates values
+     *
+     * @return array
+     */
+    public function getTemplateVariablesHash(): array
+    {
+        $collection = $this->getTemplateVariables();
+
+        $array = $collection->map(function(TemplateVariable $tv) {
+            return [$tv->getTag() => $tv->getValue()];
+        })->toArray();
+
+        if (count($array) >! 0) return [];
+
+        $data = call_user_func_array('array_merge', $array);
+
+        return $data;
     }
 }
