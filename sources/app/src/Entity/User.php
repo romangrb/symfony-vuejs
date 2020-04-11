@@ -29,10 +29,16 @@ class User extends BaseUser
      */
     private $event_participants;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\TemplateVariable", mappedBy="user", orphanRemoval=true)
+     */
+    private $templateVariables;
+
     public function __construct()
     {
         parent::__construct();
         $this->event_participants = new ArrayCollection();
+        $this->templateVariables = new ArrayCollection();
 
     }
 
@@ -76,6 +82,37 @@ class User extends BaseUser
             // set the owning side to null (unless already changed)
             if ($eventParticipant->getUser() === $this) {
                 $eventParticipant->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TemplateVariable[]
+     */
+    public function getTemplateVariables(): Collection
+    {
+        return $this->templateVariables;
+    }
+
+    public function addTemplateVariable(TemplateVariable $templateVariable): self
+    {
+        if (!$this->templateVariables->contains($templateVariable)) {
+            $this->templateVariables[] = $templateVariable;
+            $templateVariable->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTemplateVariable(TemplateVariable $templateVariable): self
+    {
+        if ($this->templateVariables->contains($templateVariable)) {
+            $this->templateVariables->removeElement($templateVariable);
+            // set the owning side to null (unless already changed)
+            if ($templateVariable->getUser() === $this) {
+                $templateVariable->setUser(null);
             }
         }
 

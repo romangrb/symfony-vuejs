@@ -45,7 +45,7 @@ final class PostController extends AbstractController
      */
     public function createAction(Request $request): JsonResponse
     {
-        $message = $request->request->get('message');
+        $message = $request->get('message');
 
         if (empty($message)) {
             throw new BadRequestHttpException('message cannot be empty');
@@ -68,7 +68,7 @@ final class PostController extends AbstractController
      */
     public function updateAction(Request $request): JsonResponse
     {
-        $message = $request->request->get('message');
+        $message = $request->get('message');
         $post_id = $request->get('id');
 
         if (empty($message) || empty($post_id)) {

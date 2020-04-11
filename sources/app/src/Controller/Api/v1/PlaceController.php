@@ -46,8 +46,8 @@ final class PlaceController extends AbstractController
      */
     public function createPlace(Request $request, ValidatorInterface $validator): JsonResponse
     {
-        $name = $request->request->get('name');
-        $description = $request->request->get('description');
+        $name = $request->get('name');
+        $description = $request->get('description');
 
         $input = [
             'name' => $name,
@@ -93,8 +93,8 @@ final class PlaceController extends AbstractController
      */
     public function updatePlace(Request $request, ValidatorInterface $validator): JsonResponse
     {
-        $name = $request->request->get('name');
-        $description = $request->request->get('description');
+        $name = $request->get('name');
+        $description = $request->get('description');
         $place_id = $request->get('id');
 
         $input = [
