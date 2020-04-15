@@ -23,7 +23,7 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
-    .addEntry('app', './assets/vue/index.js')
+    .addEntry('app', './assets/vue-argon-dashboard/src/main.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -58,6 +58,8 @@ Encore
     .enableVueLoader()
 
     .enableIntegrityHashes()
+
+    .enableSassLoader()
 ;
 // for watch command
 const config = Encore.getWebpackConfig();
