@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab3b0ce2-2efe-4f8b-a9d0-0acfa934f504" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceAttachmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceAttachmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,11 +29,11 @@
       <content type="file-editors">
         <state>
           <leaf>
-            <file pinned="false" current-in-tab="false">
+            <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="285">
-                    <caret line="319" column="79" selection-start-line="317" selection-start-column="8" selection-end-line="319" selection-end-column="79" />
+                  <state relative-caret-position="336">
+                    <caret line="250" column="8" selection-start-line="250" selection-start-column="8" selection-end-line="250" selection-end-column="8" />
                     <folding>
                       <element signature="e#66#94#0#PHP" expanded="true" />
                     </folding>
@@ -41,7 +41,7 @@
                 </provider>
               </entry>
             </file>
-            <file pinned="false" current-in-tab="true">
+            <file pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceAttachmentController.php">
                 <provider selected="true" editor-type-id="text-editor">
                   <state relative-caret-position="109">
@@ -72,8 +72,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceAttachmentController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="231" column="8" selection-start-line="231" selection-start-column="8" selection-end-line="231" selection-end-column="8" />
+            <state relative-caret-position="-989">
+              <caret line="230" column="8" selection-start-line="230" selection-start-column="8" selection-end-line="230" selection-end-column="86" />
               <folding>
                 <element signature="e#66#97#0#PHP" expanded="true" />
               </folding>
@@ -227,7 +227,6 @@
         <option value="$PROJECT_DIR$/sources/app/src/Services/CollectionHelper.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Entity/TemplateVariable.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Entity/User.php" />
-        <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" />
         <option value="$PROJECT_DIR$/sources/app/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/sources/app/public/templates/content_4.html.twig" />
         <option value="$PROJECT_DIR$/sources/app/src/Entity/PlaceAttachment.php" />
@@ -238,6 +237,7 @@
         <option value="$PROJECT_DIR$/sources/app/config/services.yaml" />
         <option value="$PROJECT_DIR$/sources/app/config/packages/twig.yaml" />
         <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceAttachmentController.php" />
+        <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" />
       </list>
     </option>
   </component>
@@ -291,6 +291,15 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
               <item name="storage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
+              <item name="sources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="storage" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
@@ -411,12 +420,12 @@
       <option name="presentableId" value="Default" />
       <updated>1585160628239</updated>
       <workItem from="1585160629620" duration="11339000" />
-      <workItem from="1586339442535" duration="108806000" />
+      <workItem from="1586339442535" duration="109378000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120145000" />
+    <option name="totallyTimeSpent" value="120717000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -731,16 +740,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="319" column="79" selection-start-line="317" selection-start-column="8" selection-end-line="319" selection-end-column="79" />
-          <folding>
-            <element signature="e#66#94#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/Place.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="401">
@@ -795,10 +794,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceAttachmentController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="231" column="8" selection-start-line="231" selection-start-column="8" selection-end-line="231" selection-end-column="8" />
+        <state relative-caret-position="109">
+          <caret line="172" column="5" selection-start-line="172" selection-start-column="5" selection-end-line="172" selection-end-column="73" />
           <folding>
             <element signature="e#66#97#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="250" column="8" selection-start-line="250" selection-start-column="8" selection-end-line="250" selection-end-column="8" />
+          <folding>
+            <element signature="e#66#94#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

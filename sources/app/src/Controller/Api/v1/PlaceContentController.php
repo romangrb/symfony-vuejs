@@ -120,6 +120,8 @@ final class PlaceContentController extends AbstractController
             return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
         }
 
+        if (! $place) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+
         $file_path = $place->getPlaceContent()->getFilePath();
         $templateVariablesHash = $security->getUser()->getTemplateVariablesHash();
 
@@ -245,6 +247,8 @@ final class PlaceContentController extends AbstractController
             return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
         }
 
+        if (! $place) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+
         $template_dir = $this->getParameter('public_template_path');
         $file_path = (string) sprintf('%s_%s.html.twig', 'content', $place_id);
         $filesystem = new Filesystem();
@@ -310,6 +314,8 @@ final class PlaceContentController extends AbstractController
             $this->logger->error(print_r($message, true));
             return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
         }
+
+        if (! $place) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
 
         $placeContent = $place->getPlaceContent();
 

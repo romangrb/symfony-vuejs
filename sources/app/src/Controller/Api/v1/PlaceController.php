@@ -121,6 +121,9 @@ final class PlaceController extends AbstractController
         }
 
         $place = $this->em->getRepository(Place::class)->find($place_id);
+
+        if (! $place) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+
         $place->setName($name);
         $place->setDescription($description);
         $this->em->persist($place);
@@ -156,6 +159,8 @@ final class PlaceController extends AbstractController
     {
         $pace_id = $request->get('id');
         $place = $this->em->getRepository(Place::class)->find($pace_id);
+
+        if (! $place) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
 
         $data = $this->serializer->serialize($place, JsonEncoder::FORMAT);
 
