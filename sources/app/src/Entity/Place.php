@@ -32,6 +32,9 @@ class Place
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PlaceAttachment", mappedBy="place", cascade={"persist", "remove"})
+     */
     private $placeAttachment;
 
     /**
