@@ -33,4 +33,4 @@ yarn-error.log
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
 
-/sources/app/public/templates/
+/public/storage/
