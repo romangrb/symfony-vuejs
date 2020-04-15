@@ -3,7 +3,6 @@
 namespace App\Controller\Api\v1;
 
 use App\Entity\PlaceAttachment;
-use App\Entity\PlaceContent;
 use App\Repository\PlaceAttachmentRepository;
 use App\Repository\PlaceContentRepository;
 use App\Repository\PlaceRepository;
@@ -11,7 +10,6 @@ use App\Services\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,8 +23,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Twig\Environment;
-use Symfony\Component\Security\Core\Security;
 
 final class PlaceAttachmentController extends AbstractController
 {
@@ -193,7 +189,15 @@ final class PlaceAttachmentController extends AbstractController
 
         $validation_params = [
             'place_id' => [new Assert\NotBlank],
-            'attachment' => [new Assert\NotBlank, new Assert\File(['maxSize' => '10M'])],
+            'attachment' => [new Assert\NotBlank, new Assert\File([
+                'maxSize' => '10M',
+                'mimeTypes' => [
+                    'image/gif',
+                    'image/jpg',
+                    'image/jpeg',
+                ],
+                'mimeTypesMessage' => 'Please upload a valid image format gif, jpg, jpeg',
+            ])],
         ];
 
         if ($attachment_name) {
@@ -223,6 +227,8 @@ final class PlaceAttachmentController extends AbstractController
             $this->logger->error(print_r($message, true));
             return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
         }
+
+        if (! $place) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
 
         $file_name = $attachment_name ?? $attachment->getClientOriginalName();
 
@@ -289,6 +295,8 @@ final class PlaceAttachmentController extends AbstractController
             $this->logger->error(print_r($message, true));
             return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
         }
+
+        if (! $placeAttachment) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
 
         $file_root_path = (string) $placeAttachment->getFilePath();
 
