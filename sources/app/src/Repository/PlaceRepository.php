@@ -6,6 +6,7 @@ use App\Entity\Place;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method Place|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,32 +21,32 @@ class PlaceRepository extends ServiceEntityRepository
         parent::__construct($registry, Place::class);
     }
 
-    // /**
-    //  * @return Places[] Returns an array of Places objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Get events with files, search by name, or tag
+     *
+     * @param Request $request
+     * @return QueryBuilder
+     */
+    public function getPlacesWithSearchBuilder(Request $request): QueryBuilder
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $name = $request->get('name');
+        $description = $request->get('description');
+        $order = $request->get('order') ? 'ASC' : 'DESC';
 
-    /*
-    public function findOneBySomeField($value): ?Places
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        $val = $name ?? $description;
+
+        $qb = $this->createQueryBuilder('p');
+
+        $qb->where(
+            $qb->expr()->like('p.name', ':value')
+        )->orWhere(
+            $qb->expr()->like('p.description', ':value')
+        )
+        ->setParameter('value',"%$val%")
         ;
+
+        return $qb
+            ->orderBy('p.id', $order)
+            ;
     }
-    */
 }

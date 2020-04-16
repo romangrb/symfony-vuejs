@@ -3,8 +3,13 @@
 namespace App\Controller\Api\v1;
 
 use App\Entity\Place;
+use App\Repository\PlaceRepository;
 use App\Requests\CreatePlaceRequestValidator;
 use App\Requests\UpdatePlaceRequestValidator;
+use App\Serializer\Normalizer\PaginationNormalizer;
+use App\Serializer\Normalizer\PlaceNormalizer;
+use App\Services\Pagination\PaginationFactory;
+use App\Transformers\PaginationTransformer;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -14,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Serializer;
 
 final class PlaceController extends AbstractController
 {
@@ -23,16 +29,21 @@ final class PlaceController extends AbstractController
     /** @var SerializerInterface */
     private $serializer;
 
+    /** @var PlaceRepository */
+    private $repository;
+
     /**
      * Initiate class properties
      *
      * @param EntityManagerInterface $em
      * @param SerializerInterface $serializer
+     * @param PlaceRepository $repository
      */
-    public function __construct(EntityManagerInterface $em, SerializerInterface $serializer)
+    public function __construct(EntityManagerInterface $em, SerializerInterface $serializer, PlaceRepository $repository)
     {
         $this->em = $em;
         $this->serializer = $serializer;
+        $this->repository = $repository;
     }
 
     /**
@@ -110,14 +121,34 @@ final class PlaceController extends AbstractController
     /**
      * Get all places
      *
-     * @Rest\Get("/places", name="getAllPlaces")
+     * @Rest\Get("/places", name="all-places")
+     * @param Request $request
+     * @param PaginationFactory $paginationFactory
+     * @return JsonResponse
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
-    public function getAllPlaces(): JsonResponse
+    public function getAllPlaces(Request $request, PaginationFactory $paginationFactory): JsonResponse
     {
-        $places = $this->em->getRepository(Place::class)->findBy([], ['id' => 'DESC']);
-        $data = $this->serializer->serialize($places, JsonEncoder::FORMAT);
+        $qb = $this->repository->getPlacesWithSearchBuilder($request);
 
-        return new JsonResponse($data, Response::HTTP_OK, [], true);
+        $serializer = new Serializer([new PlaceNormalizer]);
+
+
+        $pagination_serializer = new Serializer([new PaginationNormalizer]);
+
+        $paginatedCollection = $paginationFactory
+            ->createCollection($qb, $request, 'all-places');
+        ;
+
+        $jsonResponse = PaginationTransformer::normalizeTransform(
+            $paginatedCollection,
+            $serializer,
+            $pagination_serializer,
+            JsonEncoder::FORMAT,
+            []
+        );
+
+        return new JsonResponse($jsonResponse, Response::HTTP_OK);
     }
 
     /**
