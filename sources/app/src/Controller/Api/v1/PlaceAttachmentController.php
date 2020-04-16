@@ -6,6 +6,10 @@ use App\Entity\PlaceAttachment;
 use App\Repository\PlaceAttachmentRepository;
 use App\Repository\PlaceContentRepository;
 use App\Repository\PlaceRepository;
+use App\Requests\CreatePlaceAttachmentRequestValidator;
+use App\Requests\DeletePlaceAttachmentRequestValidator;
+use App\Requests\ListPlaceAttachmentRequestValidator;
+use App\Requests\ShowPlaceAttachmentRequestValidator;
 use App\Services\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -19,9 +23,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class PlaceAttachmentController extends AbstractController
@@ -76,33 +77,20 @@ final class PlaceAttachmentController extends AbstractController
      *
      * @Rest\Get("/place/{id}/attachments", name="listPlaceAttachments")
      * @param Request $request
-     * @param ValidatorInterface $validator
+     * @param ListPlaceAttachmentRequestValidator $validatorRequest
      * @return JsonResponse
      */
     public function listPlaceAttachments(
         Request $request,
-        ValidatorInterface $validator): JsonResponse
+        ListPlaceAttachmentRequestValidator $validatorRequest): JsonResponse
     {
         $place_id = $request->get('id');
 
         $input = ['place_id' => $place_id];
 
-        $constraints = new Assert\Collection([
-            'place_id' => [new Assert\NotBlank]
-        ]);
+        $validatedRequest = $validatorRequest->validate($input);
 
-        $violations = $validator->validate($input, $constraints);
-
-        if (count($violations) > 0) {
-            $accessor = PropertyAccess::createPropertyAccessor();
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $accessor->setValue($errorMessages,
-                    $violation->getPropertyPath(),
-                    $violation->getMessage());
-            }
-            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
+        if ($validatedRequest) return $validatedRequest;
 
         try {
             $place = $this->place_repository->find($place_id);
@@ -125,33 +113,20 @@ final class PlaceAttachmentController extends AbstractController
      *
      * @Rest\Get("/place/attachment/{id}", name="showPlaceAttachments")
      * @param Request $request
-     * @param ValidatorInterface $validator
+     * @param ShowPlaceAttachmentRequestValidator $validatorRequest
      * @return JsonResponse
      */
     public function showPlaceAttachments(
         Request $request,
-        ValidatorInterface $validator): JsonResponse
+        ShowPlaceAttachmentRequestValidator $validatorRequest): JsonResponse
     {
         $place_attachment_id = $request->get('id');
 
         $input = ['place_attachment_id' => $place_attachment_id];
 
-        $constraints = new Assert\Collection([
-            'place_attachment_id' => [new Assert\NotBlank]
-        ]);
+        $validatedRequest = $validatorRequest->validate($input);
 
-        $violations = $validator->validate($input, $constraints);
-
-        if (count($violations) > 0) {
-            $accessor = PropertyAccess::createPropertyAccessor();
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $accessor->setValue($errorMessages,
-                    $violation->getPropertyPath(),
-                    $violation->getMessage());
-            }
-            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
+        if ($validatedRequest) return $validatedRequest;
 
         try {
             $place_attachment = $this->repository->find($place_attachment_id);
@@ -172,11 +147,11 @@ final class PlaceAttachmentController extends AbstractController
      *
      * @Rest\Post("/place/{id}/attachment", name="createPlaceAttachment")
      * @param Request $request
-     * @param ValidatorInterface $validator
+     * @param CreatePlaceAttachmentRequestValidator $validatorRequest
      * @param FileUploader $fileUploader
      * @return JsonResponse
      */
-    public function createPlaceAttachment(Request $request, ValidatorInterface $validator, FileUploader $fileUploader): JsonResponse
+    public function createPlaceAttachment(Request $request, CreatePlaceAttachmentRequestValidator $validatorRequest, FileUploader $fileUploader): JsonResponse
     {
         $place_id = $request->get('id');
         $attachment_name = $request->get('name');
@@ -187,38 +162,13 @@ final class PlaceAttachmentController extends AbstractController
             'attachment' => $attachment,
         ];
 
-        $validation_params = [
-            'place_id' => [new Assert\NotBlank],
-            'attachment' => [new Assert\NotBlank, new Assert\File([
-                'maxSize' => '10M',
-                'mimeTypes' => [
-                    'image/gif',
-                    'image/jpg',
-                    'image/jpeg',
-                ],
-                'mimeTypesMessage' => 'Please upload a valid image format gif, jpg, jpeg',
-            ])],
-        ];
-
         if ($attachment_name) {
             $input['name'] = $attachment_name;
-            $validation_params['name'] = [new Assert\Length(['min' => 1, 'max' => 50]), new Assert\NotBlank];
         }
 
-        $constraints = new Assert\Collection($validation_params);
+        $validatedRequest = $validatorRequest->validate($input);
 
-        $violations = $validator->validate($input, $constraints);
-
-        if (count($violations) > 0) {
-            $accessor = PropertyAccess::createPropertyAccessor();
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $accessor->setValue($errorMessages,
-                    $violation->getPropertyPath(),
-                    $violation->getMessage());
-            }
-            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
+        if ($validatedRequest) return $validatedRequest;
 
         try {
             $place = $this->place_repository->find($place_id);
@@ -260,10 +210,10 @@ final class PlaceAttachmentController extends AbstractController
      *
      * @Rest\Delete("/place/attachment/{id}", name="deletePlaceAttachment")
      * @param Request $request
-     * @param ValidatorInterface $validator
+     * @param DeletePlaceAttachmentRequestValidator $validatorRequest
      * @return JsonResponse
      */
-    public function deletePlaceAttachment(Request $request, ValidatorInterface $validator): JsonResponse
+    public function deletePlaceAttachment(Request $request, DeletePlaceAttachmentRequestValidator $validatorRequest): JsonResponse
     {
         $attachment_id = $request->get('id');
 
@@ -271,22 +221,9 @@ final class PlaceAttachmentController extends AbstractController
             'attachment_id' => $attachment_id
         ];
 
-        $constraints = new Assert\Collection([
-            'attachment_id' => [new Assert\NotBlank]
-        ]);
+        $validatedRequest = $validatorRequest->validate($input);
 
-        $violations = $validator->validate($input, $constraints);
-
-        if (count($violations) > 0) {
-            $accessor = PropertyAccess::createPropertyAccessor();
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $accessor->setValue($errorMessages,
-                    $violation->getPropertyPath(),
-                    $violation->getMessage());
-            }
-            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
+        if ($validatedRequest) return $validatedRequest;
 
         try {
             $placeAttachment = $this->repository->find($attachment_id);

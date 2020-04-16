@@ -4,6 +4,8 @@ namespace App\Controller\Api\v1;
 
 use App\Entity\TemplateVariable;
 use App\Repository\TemplateVariableRepository;
+use App\Requests\CreateTemplateVariableRequestValidator;
+use App\Requests\UpdateTemplateVariableRequestValidator;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -13,9 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Security\Core\Security;
 
 final class UserTemplateVariableController extends AbstractController
@@ -49,10 +48,10 @@ final class UserTemplateVariableController extends AbstractController
      * @Rest\Post("/template/variable", name="createTemplateVariable")
      * @param Request $request
      * @param Security $security
-     * @param ValidatorInterface $validator
+     * @param CreateTemplateVariableRequestValidator $validatorRequest
      * @return JsonResponse
      */
-    public function createTemplateVariable(Request $request, Security $security, ValidatorInterface $validator): JsonResponse
+    public function createTemplateVariable(Request $request, Security $security, CreateTemplateVariableRequestValidator $validatorRequest): JsonResponse
     {
         $name = $request->get('name');
         $description = $request->get('description');
@@ -66,31 +65,11 @@ final class UserTemplateVariableController extends AbstractController
             'tag' => $tag,
         ];
 
-        $constraints = new Assert\Collection([
-            'name' => [new Assert\Length(['min' => 3, 'max' => 50]), new Assert\NotBlank],
-            'description' => [new Assert\Length(['min' => 0, 'max' => 255])],
-            'value' => [new Assert\Length(['min' => 0, 'max' => 255]), new Assert\NotBlank],
-            'tag' => [
-                new Assert\Unique(['payload' => 'tag', 'groups' => 'string']),
-                new Assert\Regex(['pattern' => '/^\S+\w{2,32}$/', 'message' => 'The tag should not contain space or tab and contains alphanumeric character including _']),
-                new Assert\Length(['min' => 2, 'max' => 255])
-            ],
-        ]);
+        $validatedRequest = $validatorRequest->validate($input);
+
+        if ($validatedRequest) return $validatedRequest;
 
         $user = $security->getUser();
-
-        $violations = $validator->validate($input, $constraints);
-
-        if (count($violations) > 0) {
-            $accessor = PropertyAccess::createPropertyAccessor();
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $accessor->setValue($errorMessages,
-                    $violation->getPropertyPath(),
-                    $violation->getMessage());
-            }
-            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
 
         $templateVariable = new TemplateVariable();
         $templateVariable->setName($name);
@@ -111,12 +90,12 @@ final class UserTemplateVariableController extends AbstractController
      * @Rest\Patch("/template/variable/{id}", name="updateTemplateVariable")
      * @param Request $request
      * @param Security $security
-     * @param ValidatorInterface $validator
+     * @param UpdateTemplateVariableRequestValidator $validatorRequest
      * @return JsonResponse
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @IsGranted("ROLE_FOO")
      */
-    public function updateTemplateVariable(Request $request, Security $security, ValidatorInterface $validator): JsonResponse
+    public function updateTemplateVariable(Request $request, Security $security, UpdateTemplateVariableRequestValidator $validatorRequest): JsonResponse
     {
         $name = $request->get('name');
         $description = $request->get('description');
@@ -132,29 +111,9 @@ final class UserTemplateVariableController extends AbstractController
             'tag' => $tag,
         ];
 
-        $constraints = new Assert\Collection([
-            'name' => [new Assert\Length(['min' => 3, 'max' => 50]), new Assert\Optional()],
-            'description' => [new Assert\Length(['min' => 0, 'max' => 255])],
-            'value' => [new Assert\Length(['min' => 0, 'max' => 255]), new Assert\NotBlank],
-            'tag' => [
-                new Assert\Unique(['payload' => 'tag', 'groups' => 'string']),
-                new Assert\Regex(['pattern' => '/^\S+\w{2,32}$/', 'message' => 'The tag should not contain space or tab and contains alphanumeric character including _']),
-                new Assert\Length(['min' => 2, 'max' => 255])
-            ],
-        ]);
+        $validatedRequest = $validatorRequest->validate($input);
 
-        $violations = $validator->validate($input, $constraints);
-
-        if (count($violations) > 0) {
-            $accessor = PropertyAccess::createPropertyAccessor();
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $accessor->setValue($errorMessages,
-                    $violation->getPropertyPath(),
-                    $violation->getMessage());
-            }
-            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
+        if ($validatedRequest) return $validatedRequest;
 
         $templateVariable = $this->repository->findUserTemplateVariable($user->getId(), $template_variable_id);
 

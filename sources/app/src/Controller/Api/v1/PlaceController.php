@@ -3,6 +3,8 @@
 namespace App\Controller\Api\v1;
 
 use App\Entity\Place;
+use App\Requests\CreatePlaceRequestValidator;
+use App\Requests\UpdatePlaceRequestValidator;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -12,9 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 
 final class PlaceController extends AbstractController
 {
@@ -41,10 +40,10 @@ final class PlaceController extends AbstractController
      *
      * @Rest\Post("/place", name="createPlace")
      * @param Request $request
-     * @param ValidatorInterface $validator
+     * @param CreatePlaceRequestValidator $validatorRequest
      * @return JsonResponse
      */
-    public function createPlace(Request $request, ValidatorInterface $validator): JsonResponse
+    public function createPlace(Request $request, CreatePlaceRequestValidator $validatorRequest): JsonResponse
     {
         $name = $request->get('name');
         $description = $request->get('description');
@@ -54,23 +53,9 @@ final class PlaceController extends AbstractController
             'description' => $description,
         ];
 
-        $constraints = new Assert\Collection([
-            'name' => [new Assert\Length(['min' => 3, 'max' => 255]), new Assert\NotBlank],
-            'description' => [new Assert\Length(['min' => 0, 'max' => 255])]
-        ]);
+        $validatedRequest = $validatorRequest->validate($input);
 
-        $violations = $validator->validate($input, $constraints);
-
-        if (count($violations) > 0) {
-            $accessor = PropertyAccess::createPropertyAccessor();
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $accessor->setValue($errorMessages,
-                    $violation->getPropertyPath(),
-                    $violation->getMessage());
-            }
-            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
+        if ($validatedRequest) return $validatedRequest;
 
         $place = new Place();
         $place->setName($name);
@@ -87,11 +72,11 @@ final class PlaceController extends AbstractController
      *
      * @Rest\Patch("/place/{id}", name="updatePlace")
      * @param Request $request
-     * @param ValidatorInterface $validator
+     * @param UpdatePlaceRequestValidator $validatorRequest
      * @return JsonResponse
      * @IsGranted("ROLE_FOO")
      */
-    public function updatePlace(Request $request, ValidatorInterface $validator): JsonResponse
+    public function updatePlace(Request $request, UpdatePlaceRequestValidator $validatorRequest): JsonResponse
     {
         $name = $request->get('name');
         $description = $request->get('description');
@@ -100,25 +85,12 @@ final class PlaceController extends AbstractController
         $input = [
             'name' => $name,
             'description' => $description,
+            'place_id' => $place_id
         ];
 
-        $constraints = new Assert\Collection([
-            'name' => [new Assert\Length(['min' => 3, 'max' => 255])],
-            'description' => [new Assert\Length(['min' => 0, 'max' => 255])],
-        ]);
+        $validatedRequest = $validatorRequest->validate($input);
 
-        $violations = $validator->validate($input, $constraints);
-
-        if (count($violations) > 0) {
-            $accessor = PropertyAccess::createPropertyAccessor();
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $accessor->setValue($errorMessages,
-                    $violation->getPropertyPath(),
-                    $violation->getMessage());
-            }
-            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
+        if ($validatedRequest) return $validatedRequest;
 
         $place = $this->em->getRepository(Place::class)->find($place_id);
 

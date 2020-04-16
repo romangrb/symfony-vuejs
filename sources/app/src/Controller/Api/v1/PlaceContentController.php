@@ -5,6 +5,10 @@ namespace App\Controller\Api\v1;
 use App\Entity\PlaceContent;
 use App\Repository\PlaceContentRepository;
 use App\Repository\PlaceRepository;
+use App\Requests\AttachPlaceContentTemplateRequestValidator;
+use App\Requests\DetachPlaceContentTemplateRequestValidator;
+use App\Requests\RenderPlaceContentTemplateRequestValidator;
+use App\Requests\UpdatePlaceRequestValidator;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,9 +21,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 use Symfony\Component\Security\Core\Security;
@@ -83,34 +84,21 @@ final class PlaceContentController extends AbstractController
      * @Rest\Get("/place/{id}/template", name="showTemplateContent")
      * @param Request $request
      * @param Security $security
-     * @param ValidatorInterface $validator
+     * @param UpdatePlaceRequestValidator $validatorRequest
      * @return JsonResponse
      */
     public function showTemplateContent(
         Request $request,
         Security $security,
-        ValidatorInterface $validator): JsonResponse
+        UpdatePlaceRequestValidator $validatorRequest): JsonResponse
     {
         $place_id = $request->get('id');
 
         $input = ['place_id' => $place_id];
 
-        $constraints = new Assert\Collection([
-            'place_id' => [new Assert\NotBlank]
-        ]);
+        $validatedRequest = $validatorRequest->validate($input);
 
-        $violations = $validator->validate($input, $constraints);
-
-        if (count($violations) > 0) {
-            $accessor = PropertyAccess::createPropertyAccessor();
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $accessor->setValue($errorMessages,
-                    $violation->getPropertyPath(),
-                    $violation->getMessage());
-            }
-            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
+        if ($validatedRequest) return $validatedRequest;
 
         try {
             $place = $this->place_repository->find($place_id);
@@ -142,13 +130,13 @@ final class PlaceContentController extends AbstractController
      * @Rest\Post("/place/{id}/template/render", name="renderPlaceContentTemplateFromString")
      * @param Request $request
      * @param Security $security
-     * @param ValidatorInterface $validator
+     * @param RenderPlaceContentTemplateRequestValidator $validatorRequest
      * @return JsonResponse
      */
     public function renderPlaceContentTemplateFromString(
         Request $request,
         Security $security,
-        ValidatorInterface $validator): JsonResponse
+        RenderPlaceContentTemplateRequestValidator $validatorRequest): JsonResponse
     {
         $place_id = $request->get('id');
         $content = $request->get('content');
@@ -158,23 +146,9 @@ final class PlaceContentController extends AbstractController
             'content' => $content
         ];
 
-        $constraints = new Assert\Collection([
-            'place_id' => [new Assert\NotBlank, new Assert\Length(['min' => 1])],
-            'content' => [new Assert\NotBlank]
-        ]);
+        $validatedRequest = $validatorRequest->validate($input);
 
-        $violations = $validator->validate($input, $constraints);
-
-        if (count($violations) > 0) {
-            $accessor = PropertyAccess::createPropertyAccessor();
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $accessor->setValue($errorMessages,
-                    $violation->getPropertyPath(),
-                    $violation->getMessage());
-            }
-            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
+        if ($validatedRequest) return $validatedRequest;
 
         $templateVariablesHash = $security->getUser()->getTemplateVariablesHash();
 
@@ -202,10 +176,10 @@ final class PlaceContentController extends AbstractController
      *
      * @Rest\Patch("/place/{id}/content", name="attachPlaceContentTemplate")
      * @param Request $request
-     * @param ValidatorInterface $validator
+     * @param AttachPlaceContentTemplateRequestValidator $validatorRequest
      * @return JsonResponse
      */
-    public function attachPlaceContentTemplate(Request $request, ValidatorInterface $validator): JsonResponse
+    public function attachPlaceContentTemplate(Request $request, AttachPlaceContentTemplateRequestValidator $validatorRequest): JsonResponse
     {
         $place_id = $request->get('id');
         $content  = $request->get('content');
@@ -219,25 +193,9 @@ final class PlaceContentController extends AbstractController
             'is_published' => $is_published
         ];
 
-        $constraints = new Assert\Collection([
-            'content' => [new Assert\Length(['min' => 1]), new Assert\NotBlank],
-            'place_id' => [new Assert\NotBlank],
-            'description' => [new Assert\Length(['min' => 0, 'max' => 255])],
-            'is_published' => [new Assert\Length(['min' => 0, 'max' => 1])]
-        ]);
+        $validatedRequest = $validatorRequest->validate($input);
 
-        $violations = $validator->validate($input, $constraints);
-
-        if (count($violations) > 0) {
-            $accessor = PropertyAccess::createPropertyAccessor();
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $accessor->setValue($errorMessages,
-                    $violation->getPropertyPath(),
-                    $violation->getMessage());
-            }
-            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
+        if ($validatedRequest) return $validatedRequest;
 
         try {
             $place = $this->place_repository->find($place_id);
@@ -283,29 +241,18 @@ final class PlaceContentController extends AbstractController
      *
      * @Rest\Delete("/place/{id}/content", name="detachPlaceContentTemplate")
      * @param Request $request
-     * @param ValidatorInterface $validator
+     * @param DetachPlaceContentTemplateRequestValidator $validatorRequest
      * @return JsonResponse
      */
-    public function detachPlaceContentTemplate(Request $request, ValidatorInterface $validator): JsonResponse
+    public function detachPlaceContentTemplate(Request $request, DetachPlaceContentTemplateRequestValidator $validatorRequest): JsonResponse
     {
         $place_id = $request->get('id');
 
         $input = ['place_id' => $place_id];
 
-        $constraints = new Assert\Collection(['place_id' => [new Assert\NotBlank]]);
+        $validatedRequest = $validatorRequest->validate($input);
 
-        $violations = $validator->validate($input, $constraints);
-
-        if (count($violations) > 0) {
-            $accessor = PropertyAccess::createPropertyAccessor();
-            $errorMessages = [];
-            foreach ($violations as $violation) {
-                $accessor->setValue($errorMessages,
-                    $violation->getPropertyPath(),
-                    $violation->getMessage());
-            }
-            return new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
+        if ($validatedRequest) return $validatedRequest;
 
         try {
             $place = $this->place_repository->find($place_id);
