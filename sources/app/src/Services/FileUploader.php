@@ -30,23 +30,25 @@ class FileUploader
     }
 
     /**
-     * Upload file return filename
+     * Upload file return filepath
      *
      * @param UploadedFile $file
      * @return string
      */
     public function upload(UploadedFile $file): string
     {
-        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+        $fileName = sprintf('%s.%s', md5(uniqid()), $file->guessExtension());
+        $target_directory = $this->getTargetDirectory();
+        $file_path = sprintf('%s/%s', $target_directory, $fileName);
 
         try {
-            $file->move($this->getTargetDirectory(), $fileName);
+            $file->move($target_directory, $fileName);
         } catch (FileException $e) {
             // ... handle exception if something happens during file upload
             throw $e;
         }
 
-        return $fileName;
+        return $file_path;
     }
 
     /**

@@ -1,8 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
-declare(strict_types=1);
-
-namespace App\Controller;
+namespace App\Controller\Api\v1;
 
 use App\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,7 +15,6 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
- * @Rest\Route("/api")
  * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 final class PostController extends AbstractController
@@ -28,6 +25,12 @@ final class PostController extends AbstractController
     /** @var SerializerInterface */
     private $serializer;
 
+    /**
+     * Initiate class properties
+     *
+     * @param EntityManagerInterface $em
+     * @param SerializerInterface $serializer
+     */
     public function __construct(EntityManagerInterface $em, SerializerInterface $serializer)
     {
         $this->em = $em;
@@ -42,7 +45,7 @@ final class PostController extends AbstractController
      */
     public function createAction(Request $request): JsonResponse
     {
-        $message = $request->request->get('message');
+        $message = $request->get('message');
 
         if (empty($message)) {
             throw new BadRequestHttpException('message cannot be empty');
@@ -65,7 +68,7 @@ final class PostController extends AbstractController
      */
     public function updateAction(Request $request): JsonResponse
     {
-        $message = $request->request->get('message');
+        $message = $request->get('message');
         $post_id = $request->get('id');
 
         if (empty($message) || empty($post_id)) {

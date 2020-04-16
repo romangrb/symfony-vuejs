@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Controller\Api;
+namespace App\Controller\Api\v1;
 
 use App\Entity\Event;
 use App\Entity\EventParticipant;
@@ -29,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Serializer\Serializer;
 
-class ApiEventController extends AbstractController
+class EventController extends AbstractController
 {
     /** @var EventRepository */
     private $repository;

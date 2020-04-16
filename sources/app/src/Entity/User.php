@@ -8,12 +8,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
- */
+ *
+*/
 class User extends BaseUser
 {
     /**
@@ -24,20 +24,20 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Files", mappedBy="id")
-     * @JoinColumn(name="avatar_id", referencedColumnName="id")
-     */
-    protected $avatar;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\EventParticipant", mappedBy="user", orphanRemoval=true)
      */
     private $event_participants;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\TemplateVariable", mappedBy="user", orphanRemoval=true)
+     */
+    private $templateVariables;
 
     public function __construct()
     {
         parent::__construct();
         $this->event_participants = new ArrayCollection();
+        $this->templateVariables = new ArrayCollection();
 
     }
 
@@ -46,24 +46,11 @@ class User extends BaseUser
         return $this->id;
     }
 
-    public function getAvatarFile(): ?Files
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatarFile(Files $files): self
-    {
-        $this->avatar = $files;
-
-        return $this;
-    }
-
     public function getAttributes(): array
     {
         $attr = [
             'id' => $this->getId(),
             'email' => $this->getUsername(),
-//            'avatar_path' => $this->getAvatarFile()->getPath(),
         ];
 
         return $attr;
@@ -98,5 +85,56 @@ class User extends BaseUser
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|TemplateVariable[]
+     */
+    public function getTemplateVariables(): Collection
+    {
+        return $this->templateVariables;
+    }
+
+    public function addTemplateVariable(TemplateVariable $templateVariable): self
+    {
+        if (!$this->templateVariables->contains($templateVariable)) {
+            $this->templateVariables[] = $templateVariable;
+            $templateVariable->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTemplateVariable(TemplateVariable $templateVariable): self
+    {
+        if ($this->templateVariables->contains($templateVariable)) {
+            $this->templateVariables->removeElement($templateVariable);
+            // set the owning side to null (unless already changed)
+            if ($templateVariable->getUser() === $this) {
+                $templateVariable->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get hash of templates values
+     *
+     * @return array
+     */
+    public function getTemplateVariablesHash(): array
+    {
+        $collection = $this->getTemplateVariables();
+
+        $array = $collection->map(function(TemplateVariable $tv) {
+            return [$tv->getTag() => $tv->getValue()];
+        })->toArray();
+
+        if (count($array) >! 0) return [];
+
+        $data = call_user_func_array('array_merge', $array);
+
+        return $data;
     }
 }

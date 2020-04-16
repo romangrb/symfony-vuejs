@@ -35,7 +35,6 @@ final class UserFixtures extends Fixture
         $userEntity = new User();
         $userEntity->setUsername($login);
         $userEntity->setEmail($email);
-        $userEntity->setEmail($login);
         $userEntity->setPlainPassword($password);
         $userEntity->setRoles($roles);
         $userEntity->setEnabled(true);

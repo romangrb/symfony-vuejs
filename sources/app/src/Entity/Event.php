@@ -34,7 +34,7 @@ class Event
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Files", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\File", cascade={"persist", "remove"})
      */
     private $background;
 
@@ -94,12 +94,12 @@ class Event
         return $this;
     }
 
-    public function getBackground(): ?Files
+    public function getBackground(): ?File
     {
         return $this->background;
     }
 
-    public function setBackground(?Files $background): self
+    public function setBackground(?File $background): self
     {
         $this->background = $background;
 

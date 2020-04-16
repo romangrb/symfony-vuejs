@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    public_template_path: '%kernel.project_dir%/public/storage/templates'
+    public_attachment_path: '%kernel.project_dir%/public/storage/attachments'
 
 services:
     # default configuration for services in *this* file
@@ -28,7 +30,7 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Services\FileUploader:
         arguments:
-            $targetDirectory: '%kernel.project_dir%/public/uploads'
+            $targetDirectory: '%kernel.project_dir%/public/storage/attachments'
 
 # FOS user config
 fos_user:

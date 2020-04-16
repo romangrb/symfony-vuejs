@@ -2,6 +2,6 @@ api_auth_login:
   path: /api/auth/login
   methods:  [POST]
 
-api:
-  prefix: /api
-  resource: '../src/Controller/Api'
+api_v1:
+  prefix: /api/v1
+  resource: '../src/Controller/Api/v1'
