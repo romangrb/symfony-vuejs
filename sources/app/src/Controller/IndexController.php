@@ -31,14 +31,14 @@ final class IndexController extends AbstractController
     public function indexAction(): Response
     {
         /** @var User|null $user */
-        $user = $this->getUser();
+//        $user = $this->getUser();
         $data = null;
-        if (! empty($user)) {
-            $userClone = clone $user;
-            $userClone->setPassword('');
-            $data = $this->serializer->serialize($userClone, JsonEncoder::FORMAT);
-        }
-
+        $user = null;
+//        if (! empty($user)) {
+//            $userClone = clone $user;
+//            $userClone->setPassword('');
+//            $data = $this->serializer->serialize($userClone, JsonEncoder::FORMAT);
+//        }
         return $this->render('base.html.twig', [
             'isAuthenticated' => json_encode(! empty($user)),
             'user' => $data ?? json_encode($data),
