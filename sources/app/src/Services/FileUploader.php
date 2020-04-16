@@ -20,13 +20,22 @@ class FileUploader
     private $targetDirectory;
 
     /**
+     * Target public directory
+     *
+     * @prop $targetDirectory
+     */
+    private $targetPublicDirectoryPath;
+
+    /**
      * Initiate properties
      *
      * @param $targetDirectory
+     * @param $targetPublicDirectoryPath
      */
-    public function __construct($targetDirectory)
+    public function __construct($targetDirectory, $targetPublicDirectoryPath)
     {
         $this->targetDirectory = $targetDirectory;
+        $this->targetPublicDirectoryPath = $targetPublicDirectoryPath;
     }
 
     /**
@@ -39,7 +48,7 @@ class FileUploader
     {
         $fileName = sprintf('%s.%s', md5(uniqid()), $file->guessExtension());
         $target_directory = $this->getTargetDirectory();
-        $file_path = sprintf('%s/%s', $target_directory, $fileName);
+        $file_path = sprintf('%s/%s', $this->getTargetPublicDirectory(), $fileName);
 
         try {
             $file->move($target_directory, $fileName);
@@ -59,5 +68,15 @@ class FileUploader
     public function getTargetDirectory()
     {
         return $this->targetDirectory;
+    }
+
+    /**
+     * Get target directory
+     *
+     * @return string
+     */
+    public function getTargetPublicDirectory()
+    {
+        return $this->targetPublicDirectoryPath;
     }
 }

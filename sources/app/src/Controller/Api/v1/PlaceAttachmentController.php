@@ -244,6 +244,6 @@ final class PlaceAttachmentController extends AbstractController
         $this->em->remove($placeAttachment);
         $this->em->flush();
 
-        return new JsonResponse('', Response::HTTP_CREATED, [], true);
+        return new JsonResponse('', Response::HTTP_OK, [], true);
     }
 }
