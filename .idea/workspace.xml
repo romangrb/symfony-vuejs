@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab3b0ce2-2efe-4f8b-a9d0-0acfa934f504" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Controller/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Controller/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,43 +24,9 @@
     <expand />
     <select />
   </component>
-  <component name="DockManager">
-    <window id="9">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="252">
-                    <caret line="97" column="46" selection-start-line="97" selection-start-column="46" selection-end-line="97" selection-end-column="46" />
-                    <folding>
-                      <element signature="e#66#94#0#PHP" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceAttachmentController.php">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="109">
-                    <caret line="172" column="5" selection-start-line="172" selection-start-column="5" selection-end-line="172" selection-end-column="73" />
-                    <folding>
-                      <element signature="e#66#97#0#PHP" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/app/public/storage/templates/content_4.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="231">
@@ -74,11 +38,62 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="537">
+              <caret line="99" column="18" lean-forward="true" selection-start-line="99" selection-start-column="18" selection-end-line="99" selection-end-column="18" />
+              <folding>
+                <element signature="e#66#87#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/app/config/services.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="613">
+              <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceAttachmentController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="67">
+              <caret line="170" column="33" lean-forward="true" selection-start-line="170" selection-start-column="33" selection-end-line="170" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/app/translations/messages.en.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/app/webpack.config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
+            <state relative-caret-position="143">
               <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="315">
+                <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -101,49 +116,18 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/assets/vue/router.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/assets/vue/views/Home.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="4" column="31" selection-start-line="2" selection-start-column="4" selection-end-line="4" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getTemplateVariables</find>
-      <find>public_template_path</find>
-      <find>$file_path</find>
-      <find>file</find>
-      <find>Security</find>
-      <find>fileUploader</find>
-      <find>FileUploader</find>
-      <find>content</find>
       <find>project_dir%/public</find>
       <find>public</find>
       <find>translator</find>
       <find>trans</find>
       <find>Translator</find>
-      <find>$this-&gt;translator</find>
       <find>if (! $place)</find>
       <find>JsonResponse</find>
       <find>find</find>
-      <find>render</find>
       <find>intercom</find>
       <find>base.html.twig</find>
       <find>Symfony 4 with a Vue.js</find>
@@ -155,11 +139,22 @@
       <find>logo</find>
       <find>mfony/webpack-encor</find>
       <find>setPublicPath</find>
+      <find>render</find>
+      <find>messages</find>
+      <find>file_error</find>
+      <find>no_file</find>
+      <find>$translator-&gt;</find>
+      <find>$this-&gt;translator</find>
       <find>copyFiles</find>
+      <find>ValidatorInterface</find>
+      <find>ContextValidation</find>
+      <find>FileUploader</find>
+      <find>RequestValidator</find>
     </findStrings>
     <dirStrings>
       <dir>C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Entity</dir>
       <dir>C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Controller\Api\v1</dir>
+      <dir>C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -213,12 +208,12 @@
         <option value="$PROJECT_DIR$/sources/app/config/packages/twig.yaml" />
         <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceAttachmentController.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php" />
-        <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue/router.js" />
         <option value="$PROJECT_DIR$/sources/app/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/sources/app/public/storage/templates/content_4.html.twig" />
         <option value="$PROJECT_DIR$/sources/app/src/Controller/IndexController.php" />
         <option value="$PROJECT_DIR$/sources/app/webpack.config.js" />
+        <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php" />
       </list>
     </option>
   </component>
@@ -321,15 +316,6 @@
               <item name="sources" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="build" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
-              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
               <item name="storage" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -337,7 +323,29 @@
               <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
               <item name="sources" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
+              <item name="sources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Requests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
+              <item name="sources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
+              <item name="sources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="translations" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -416,12 +424,12 @@
       <option name="presentableId" value="Default" />
       <updated>1585160628239</updated>
       <workItem from="1585160629620" duration="11339000" />
-      <workItem from="1586339442535" duration="117425000" />
+      <workItem from="1586339442535" duration="121748000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="128764000" />
+    <option name="totallyTimeSpent" value="133087000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -449,7 +457,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.79044515" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4987775" weight="0.38002172" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4987775" weight="0.5179153" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5012225" side_tool="true" weight="0.32899022" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -471,41 +479,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sources/app/public/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-658" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/templates/api_event/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/templates/content_5.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/config/packages/twig.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="51" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Command/AddDescriptionEventCommand.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1143" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Command/SentEmailAsyncCommand.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-786" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/Post.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="9" selection-start-line="9" selection-end-line="13" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/EventParticipantRepository.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -601,16 +574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Services/FileUploader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="32" column="34" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
-          <folding>
-            <element signature="e#115#181#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/Place.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="401">
@@ -635,34 +598,10 @@
     <entry file="file://$PROJECT_DIR$/sources/app/public/storage/attachments/hgj">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/config/services.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="44" column="31" selection-start-line="44" selection-start-column="31" selection-end-line="44" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/PlaceAttachment.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="966">
           <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/EventController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-385">
-          <caret line="144" column="91" selection-start-line="144" selection-start-column="91" selection-end-line="144" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceAttachmentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="172" column="5" selection-start-line="172" selection-start-column="5" selection-end-line="172" selection-end-column="73" />
-          <folding>
-            <element signature="e#66#97#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -673,23 +612,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="25" selection-start-column="20" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="77" column="24" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="294">
-            <caret line="14" column="6" selection-start-line="14" selection-end-line="14" selection-end-column="8" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -735,16 +657,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/vendor/zircote/swagger-php/Examples/swagger-spec/petstore-simple/api.php">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="97" column="46" selection-start-line="97" selection-start-column="46" selection-end-line="97" selection-end-column="46" />
-          <folding>
-            <element signature="e#66#94#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/assets/vue/router.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -794,10 +706,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/webpack.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="315">
+            <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
@@ -807,6 +722,100 @@
           <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
           <folding>
             <element signature="e#162#181#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/translations/messages.en.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Processors/EventSecondProcessor.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-504" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Message/TestMessage.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Message/CreateEventMessage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-303" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Command/AddDescriptionEventCommand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1206" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3003">
+          <caret line="95" column="43" lean-forward="true" selection-start-line="95" selection-start-column="43" selection-end-line="95" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/EventController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="79" column="25" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceAttachmentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="170" column="33" lean-forward="true" selection-start-line="170" selection-start-column="33" selection-end-line="170" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Services/ContextValidation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="999">
+          <caret line="376" column="1" lean-forward="true" selection-start-line="376" selection-start-column="1" selection-end-line="376" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Services/FileUploader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="12" column="18" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="18" />
+          <folding>
+            <element signature="e#115#181#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Requests/RequestValidator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="15" column="22" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/config/services.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="613">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="99" column="18" lean-forward="true" selection-start-line="99" selection-start-column="18" selection-end-line="99" selection-end-column="18" />
+          <folding>
+            <element signature="e#66#87#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

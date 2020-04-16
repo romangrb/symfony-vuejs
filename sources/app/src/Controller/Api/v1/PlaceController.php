@@ -124,8 +124,9 @@ final class PlaceController extends AbstractController
 
         if (! $place) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
 
-        $place->setName($name);
-        $place->setDescription($description);
+        if ($name) $place->setName($name);
+        if ($description) $place->setDescription($description);
+
         $this->em->persist($place);
         $this->em->flush();
 
