@@ -52,9 +52,9 @@
                             <span>Support</span>
                         </router-link>
                         <div class="dropdown-divider"></div>
-                        <a href="#!" class="dropdown-item">
+                        <a class="dropdown-item">
                             <i class="ni ni-user-run"></i>
-                            <span>Logout</span>
+                            <span @click="logout">Logout</span>
                         </a>
                     </base-dropdown>
                 </ul>
@@ -108,6 +108,7 @@
             </div>
     </nav>
 </template>
+
 <script>
   import NavbarToggleButton from '../../components/NavbarToggleButton'
 
@@ -115,6 +116,11 @@
     name: 'sidebar',
     components: {
       NavbarToggleButton
+    },
+    computed: {
+      isLoggedIn: function() {
+          return this.$store.getters.isLoggedIn;
+      }
     },
     props: {
       logo: {
@@ -139,6 +145,11 @@
       },
       showSidebar() {
         this.$sidebar.displaySidebar(true)
+      },
+      logout: function() {
+        this.$store.dispatch("logout").then(() => {
+        this.$router.push("/login");
+        });
       }
     },
     beforeDestroy() {

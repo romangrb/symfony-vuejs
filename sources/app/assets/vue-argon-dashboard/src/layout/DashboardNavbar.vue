@@ -45,10 +45,10 @@
                             <span>Support</span>
                         </router-link>
                         <div class="dropdown-divider"></div>
-                        <router-link to="/profile" class="dropdown-item">
+                        <a class="dropdown-item">
                             <i class="ni ni-user-run"></i>
-                            <span>Logout</span>
-                        </router-link>
+                            <span @click="logout">Logout</span>
+                        </a>
                     </template>
                 </base-dropdown>
             </li>
@@ -73,6 +73,11 @@
       },
       toggleMenu() {
         this.showMenu = !this.showMenu;
+      },
+      logout: function() {
+          this.$store.dispatch("logout").then(() => {
+          this.$router.push("/login");
+        });
       }
     }
   };

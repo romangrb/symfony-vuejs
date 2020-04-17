@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab3b0ce2-2efe-4f8b-a9d0-0acfa934f504" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/components/SidebarPlugin/SideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/components/SidebarPlugin/SideBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/layout/DashboardNavbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/layout/DashboardNavbar.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +24,25 @@
     </option>
     <expand />
     <select />
+  </component>
+  <component name="DockManager">
+    <window id="14">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/components/SidebarPlugin/SideBar.vue">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="330">
+                    <caret line="148" column="26" selection-start-line="148" selection-start-column="26" selection-end-line="148" selection-end-column="26" />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -54,7 +74,7 @@
         <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/store.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1256">
-              <caret line="83" column="2" lean-forward="true" selection-start-line="83" selection-start-column="2" selection-end-line="83" selection-end-column="2" />
+              <caret line="83" column="2" selection-start-line="83" selection-start-column="2" selection-end-line="83" selection-end-column="2" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -75,14 +95,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="20" column="12" selection-start-line="18" selection-start-column="9" selection-end-line="20" selection-end-column="12" />
+            <state relative-caret-position="363">
+              <caret line="72" column="7" selection-start-line="72" selection-start-column="7" selection-end-line="72" selection-end-column="7" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/layout/DashboardNavbar.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="966">
+              <caret line="76" column="26" selection-start-line="76" selection-start-column="26" selection-end-line="76" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -91,10 +120,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>PaginationNormalizer</find>
-      <find>$paginationFactory</find>
-      <find>event-index</find>
-      <find>$context</find>
       <find>getDescription</find>
       <find>Request</find>
       <find>total</find>
@@ -121,6 +146,10 @@
       <find>authStatus</find>
       <find>auth_success</find>
       <find>isLoggedIn</find>
+      <find>Logout</find>
+      <find>/profile</find>
+      <find>dropdown-item</find>
+      <find>logout</find>
     </findStrings>
     <dirStrings>
       <dir>C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Entity</dir>
@@ -134,8 +163,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PostController.php" />
-        <option value="$PROJECT_DIR$/sources/app/src/Repository/TemplateVariableRepository.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Services/CollectionHelper.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Entity/TemplateVariable.php" />
         <option value="$PROJECT_DIR$/sources/app/public/templates/content_4.html.twig" />
@@ -185,6 +212,8 @@
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/store.js" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/main.js" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js" />
+        <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/layout/DashboardNavbar.vue" />
+        <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/components/SidebarPlugin/SideBar.vue" />
       </list>
     </option>
   </component>
@@ -386,7 +415,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="170622000" />
+    <option name="totallyTimeSpent" value="171797000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -436,23 +465,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/EventController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="102" selection-start-line="102" selection-end-line="102" />
-          <folding>
-            <element signature="e#66#87#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Entity/Place.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Transformers/PaginationTransformer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="581">
@@ -779,7 +791,7 @@
     <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/store.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1256">
-          <caret line="83" column="2" lean-forward="true" selection-start-line="83" selection-start-column="2" selection-end-line="83" selection-end-column="2" />
+          <caret line="83" column="2" selection-start-line="83" selection-start-column="2" selection-end-line="83" selection-end-column="2" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -788,11 +800,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="20" column="12" selection-start-line="18" selection-start-column="9" selection-end-line="20" selection-end-column="12" />
+        <state relative-caret-position="363">
+          <caret line="72" column="7" selection-start-line="72" selection-start-column="7" selection-end-line="72" selection-end-column="7" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/layout/DashboardNavbar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="966">
+          <caret line="76" column="26" selection-start-line="76" selection-start-column="26" selection-end-line="76" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/components/SidebarPlugin/SideBar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="148" column="26" selection-start-line="148" selection-start-column="26" selection-end-line="148" selection-end-column="26" />
         </state>
       </provider>
     </entry>
