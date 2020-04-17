@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab3b0ce2-2efe-4f8b-a9d0-0acfa934f504" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/assets/scss/argon.scss" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/assets/scss/argon.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/layout/AuthLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/layout/AuthLayout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,8 +53,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/store.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+            <state relative-caret-position="1256">
+              <caret line="83" column="2" lean-forward="true" selection-start-line="83" selection-start-column="2" selection-end-line="83" selection-end-column="2" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -71,7 +62,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="459">
@@ -84,11 +75,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1434">
-              <caret line="78" column="60" selection-start-line="78" selection-start-column="60" selection-end-line="78" selection-end-column="60" />
+            <state relative-caret-position="279">
+              <caret line="20" column="12" selection-start-line="18" selection-start-column="9" selection-end-line="20" selection-end-column="12" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -191,9 +182,9 @@
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Login.vue" />
         <option value="$PROJECT_DIR$/sources/app/public/build/app.js" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/App.vue" />
-        <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/store.js" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/main.js" />
+        <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js" />
       </list>
     </option>
   </component>
@@ -395,7 +386,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="169723000" />
+    <option name="totallyTimeSpent" value="170622000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -410,7 +401,7 @@
     <frame x="450" y="-1058" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1888753" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1888753" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -423,7 +414,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.79044515" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4987775" weight="0.36916396" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4987775" weight="0.660152" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5012225" side_tool="true" weight="0.32899022" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -767,30 +758,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/store.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/assets/vue/components/auth/Login.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
           <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1434">
-          <caret line="78" column="60" selection-start-line="78" selection-start-column="60" selection-end-line="78" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -801,6 +772,26 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#602#623#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/store.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1256">
+          <caret line="83" column="2" lean-forward="true" selection-start-line="83" selection-start-column="2" selection-end-line="83" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="20" column="12" selection-start-line="18" selection-start-column="9" selection-end-line="20" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
