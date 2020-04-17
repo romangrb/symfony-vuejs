@@ -20,11 +20,22 @@ import App from './App.vue'
 import router from './router'
 import './registerServiceWorker'
 import ArgonDashboard from './plugins/argon-dashboard'
+import store from "./store"
+import Axios from 'axios'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-Vue.use(ArgonDashboard)
+Vue.prototype.$http = Axios;
+
+const token = localStorage.getItem('token');
+if (token) {
+  Vue.prototype.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+  Vue.prototype.$http.defaults.headers.common['Accept'] = 'application/json';
+}
+
+Vue.use(ArgonDashboard);
 new Vue({
   router,
+  store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
