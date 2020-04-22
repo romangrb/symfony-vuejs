@@ -19,7 +19,7 @@ security:
                         password: 'superadminpw'
                         roles: ['ROLE_SUPER_ADMIN']
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_provider.username_email
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
@@ -27,11 +27,13 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/logout, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
 
         - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/auth/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/auth/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
 
     firewalls:
@@ -40,28 +42,33 @@ security:
             security: false
 
         api_login:
-            pattern:  ^/api/auth/login
+            pattern:  ^/api/v1/auth/login
             stateless: true
             anonymous: true
             json_login:
                 provider: chain_provider
-                check_path:               /api/auth/login
+                check_path:               /api/v1/auth/login
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
             provider: chain_provider
 
         api_register:
-            pattern:  ^/api/auth/register
+            pattern:  ^/api/v1/auth/register
+            stateless: true
+            anonymous: true
+
+        api_logout:
+            pattern:  ^/api/v1/auth/logout
             stateless: true
             anonymous: true
 
         api_doc:
-            pattern:  ^/api/doc
+            pattern:  ^/api/v1/doc
             stateless: true
             anonymous: true
 
         api:
-            pattern: ^/api
+            pattern: ^/api/v1
             stateless: true
             anonymous: false
             provider: chain_provider

@@ -1,5 +1,9 @@
 api_auth_login:
-  path: /api/auth/login
+  path: /api/v1/auth/login
+  methods:  [POST]
+
+api_auth_logout:
+  path: /api/v1/auth/logout
   methods:  [POST]
 
 api_v1:

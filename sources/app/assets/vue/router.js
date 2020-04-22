@@ -8,7 +8,7 @@ import Login from './components/auth/Login.vue'
 import Register from './components/auth/Register.vue'
 import Resource from './components/resources/Resources.vue'
 
-Vue.use(Router)
+Vue.use(Router);
 
 let router = new Router({
   mode: 'history',
@@ -50,17 +50,17 @@ let router = new Router({
       component: About,
     }
   ]
-})
+});
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (store.getters.isLoggedIn) {
-      next()
-      return
+      next();
+      return;
     }
-    next('/login')
+    next('/login');
   } else {
-    next()
+    next();
   }
 })
 
