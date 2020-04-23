@@ -22,6 +22,7 @@ class PlaceNormalizer implements NormalizerInterface
             'id' => $object->getId(),
             'name' => $object->getName(),
             'description' => $object->getDescription(),
+            'updated_at' => $object->getUpdatedAt(),
         ];
 
         return $data;

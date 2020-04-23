@@ -25,6 +25,14 @@ const router = new Router({
           component: () => import(/* webpackChunkName: "demo" */ './views/Dashboard.vue')
         },
         {
+          path: '/locations',
+          name: 'locations',
+          meta: {
+            requiresAuth: true
+          },
+          component: () => import('./views/Locations.vue')
+        },
+        {
           path: '/icons',
           name: 'icons',
           component: () => import(/* webpackChunkName: "demo" */ './views/Icons.vue')
