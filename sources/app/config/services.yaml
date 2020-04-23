@@ -33,6 +33,16 @@ services:
             $targetDirectory: '%kernel.project_dir%/public/storage/attachments'
             $targetPublicDirectoryPath: 'storage/attachments'
 
+    acme_api.event.jwt_created_listener:
+        class: App\EventListener\JWTCreatedListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+
+    acme_api.event.authentication_success_listener:
+        class: App\EventListener\AuthenticationSuccessListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+
 # FOS user config
 fos_user:
     db_driver:      orm # other valid values are 'mongodb', 'couchdb' and 'propel'
