@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ab3b0ce2-2efe-4f8b-a9d0-0acfa934f504" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/layout/DashboardLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/layout/DashboardLayout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PlaceNormalizer.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PlaceNormalizer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Tables/LocationsTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Tables/LocationsTable.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,11 +73,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Tables/LocationsTable.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+            <state relative-caret-position="521">
+              <caret line="120" column="12" lean-forward="true" selection-start-line="120" selection-start-column="12" selection-end-line="120" selection-end-column="12" />
               <folding>
                 <element signature="n#style#0;n#td#1;n#template#1;n#base-table#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/components/BasePagination.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="397">
+              <caret line="120" column="39" selection-start-line="120" selection-start-column="8" selection-end-line="120" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -118,11 +122,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>jwt/private.pem</find>
-      <find>fos_user_security_login</find>
-      <find>JWT_PASSPHRASE</find>
-      <find>fos_oauth_server</find>
-      <find>fos_oauth_</find>
       <find>getToken</find>
       <find>fos_user</find>
       <find>resetting</find>
@@ -148,6 +147,11 @@
       <find>busy</find>
       <find>v-if</find>
       <find>is_processing</find>
+      <find>page_count</find>
+      <find>pagination</find>
+      <find>input</find>
+      <find>value</find>
+      <find>pageChange</find>
     </findStrings>
     <dirStrings>
       <dir>C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Entity</dir>
@@ -162,7 +166,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/sources/app/src/Requests/RenderPlaceContentTemplateRequestValidator.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Requests/UpdatePlaceRequestValidator.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Requests/AttachPlaceContentTemplateRequestValidator.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Requests/DettachPlaceContentTemplateRequestValidator.php" />
@@ -212,6 +215,7 @@
         <option value="$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PlaceNormalizer.php" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/public/index.html" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/main.js" />
+        <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/components/BasePagination.vue" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Tables/LocationsTable.vue" />
       </list>
     </option>
@@ -347,6 +351,13 @@
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="Tables" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
+              <item name="sources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -431,7 +442,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="198675000" />
+    <option name="totallyTimeSpent" value="205655000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -459,7 +470,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.79044515" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4987775" weight="0.5518732" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4987775" weight="0.55157435" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5012225" side_tool="true" weight="0.32899022" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -481,9 +492,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/assets/scss/custom/_forms.scss">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/assets/scss/custom/_custom-forms.scss">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -826,10 +834,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/components/BasePagination.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="120" column="39" selection-start-line="120" selection-start-column="8" selection-end-line="120" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Tables/LocationsTable.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+        <state relative-caret-position="521">
+          <caret line="120" column="12" lean-forward="true" selection-start-line="120" selection-start-column="12" selection-end-line="120" selection-end-column="12" />
           <folding>
             <element signature="n#style#0;n#td#1;n#template#1;n#base-table#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>

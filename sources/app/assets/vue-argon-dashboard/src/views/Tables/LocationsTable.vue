@@ -38,7 +38,7 @@
 
         <template slot-scope="{row}">
           <td>
-            {{1}}
+            {{row.id}}
           </td>
           <th scope="row">
             {{row.name}}
@@ -53,9 +53,13 @@
       </base-table>
     </div>
 
-    <div class="card-footer d-flex justify-content-end"
-         :class="type === 'dark' ? 'bg-transparent': ''">
-      <base-pagination total="30"></base-pagination>
+    <div class="card-footer d-flex justify-content-end" :class="type === 'dark' ? 'bg-transparent': ''">
+      <base-pagination
+              total="20"
+              :per-page="pagination.per_page"
+              v-model="pagination.page"
+      >
+      </base-pagination>
     </div>
   </div>
 </template>
@@ -83,15 +87,23 @@
         is_processing: true,
         is_full_page: false,
         loader:'Dots',
+        pagination: {
+          total: 0,
+          per_page: 0,
+          page: 1
+        }
+      }
+    },
+    watch: {
+      "pagination.page" : function(next_number, prev_number) {
+        console.log(this.pagination.page);
+        this.loadPlaces(next_number);
       }
     },
     created() {
       this.loadPlaces();
     },
     methods: {
-      pageChange(page = 1){
-        this.loadPlaces(page);
-      },
       onCancel() {
         this.is_processing = false;
         this.$router.push('Dashboard');
@@ -103,8 +115,9 @@
         this.$http.get(`api/v1/places?page=${page}`)
           .then(({data}) => {
             this.tableData = data.items;
-            this.pages = data.total;
-            this.page = this.links.current;
+            this.pagination.total = 20;
+            this.pagination.per_page =  10;
+            this.pagination.page = data.links.current;
           })
           .catch((e) => {
             console.warn(`Exception: ${e}`);
