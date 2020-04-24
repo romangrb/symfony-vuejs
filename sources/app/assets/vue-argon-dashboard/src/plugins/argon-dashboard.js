@@ -1,5 +1,8 @@
 import "../assets/vendor/nucleo/css/nucleo.css";
 import "../assets/scss/argon.scss";
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/js/all.js'
+
 import globalComponents from "./globalComponents";
 import globalDirectives from "./globalDirectives";
 import SidebarPlugin from "../components/SidebarPlugin/index"

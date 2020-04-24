@@ -30,10 +30,16 @@
                   :data="tableData">
 
         <template slot="columns">
-          <th>#</th>
-          <th>Name</th>
+          <th v-on:click="orderBy('id')">#
+              <i class="fas fa-sort-alpha-down"></i>
+          </th>
+          <th v-on:click="orderBy('name')">
+            Name <i class="fas fa-sort-alpha-down"></i>
+          </th>
           <th>Description</th>
-          <th>Last Update</th>
+          <th v-on:click="orderBy('date')">
+            Last Update <i class="fas fa-sort-alpha-down"></i>
+          </th>
         </template>
 
         <template slot-scope="{row}">
@@ -111,6 +117,9 @@
       this.loadPlaces();
     },
     methods: {
+      orderBy(type) {
+        console.log(type);
+      },
       onCancel() {
         this.is_processing = false;
         this.$router.push('Dashboard');
