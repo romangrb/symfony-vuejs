@@ -47,7 +47,7 @@
             {{row.description}}
           </td>
           <td>
-            {{row.updated_at.date}}
+            {{row.updated_at | formatDate}}
           </td>
         </template>
       </base-table>
@@ -69,6 +69,8 @@
   import Loading from 'vue-loading-overlay';
   // Import stylesheet
   import 'vue-loading-overlay/dist/vue-loading.css';
+
+  import moment from 'moment';
 
   export default {
     name: 'locations-table',
@@ -92,6 +94,12 @@
           per_page: 0,
           page: 1
         }
+      }
+    },
+    filters: {
+      formatDate: function (value) {
+        if (! value) return '';
+        return moment(String(value)).format('DD/MM/YY hh:mm');
       }
     },
     watch: {

@@ -9,6 +9,7 @@
 namespace App\Serializer\Normalizer;
 
 use App\Entity\Place;
+use Carbon\Carbon;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class PlaceNormalizer implements NormalizerInterface
@@ -22,7 +23,7 @@ class PlaceNormalizer implements NormalizerInterface
             'id' => $object->getId(),
             'name' => $object->getName(),
             'description' => $object->getDescription(),
-            'updated_at' => $object->getUpdatedAt(),
+            'updated_at' => $object->getUpdatedAt()->format("Y-m-d\TH:i:s.000\Z"),
         ];
 
         return $data;
