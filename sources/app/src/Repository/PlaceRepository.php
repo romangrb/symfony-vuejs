@@ -31,7 +31,21 @@ class PlaceRepository extends ServiceEntityRepository
     {
         $name = $request->get('name');
         $description = $request->get('description');
-        $order = $request->get('order') ? 'ASC' : 'DESC';
+
+        $order_type = $request->get('order_type') ? 'DESC' : 'ASC';
+        $order_by = $request->get('order_by');
+
+        switch ($order_by){
+            case 'name':
+                $order_by_val = 'p.name';
+                break;
+            case 'updated_at':
+                $order_by_val = 'p.updated_at';
+                break;
+            default:
+                $order_by_val = 'p.id';
+                break;
+        }
 
         $val = $name ?? $description;
 
@@ -46,7 +60,7 @@ class PlaceRepository extends ServiceEntityRepository
         ;
 
         return $qb
-            ->orderBy('p.id', $order)
+            ->orderBy($order_by_val, $order_type)
             ;
     }
 }

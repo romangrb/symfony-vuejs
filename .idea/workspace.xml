@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab3b0ce2-2efe-4f8b-a9d0-0acfa934f504" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Tables/LocationsTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Tables/LocationsTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PaginationNormalizer.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PaginationNormalizer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Services/Pagination/PaginatedCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Services/Pagination/PaginatedCollection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Services/Pagination/PaginationFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Services/Pagination/PaginationFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="136" column="59" selection-start-line="136" selection-start-column="59" selection-end-line="136" selection-end-column="59" />
+            <state relative-caret-position="212">
+              <caret line="131" column="45" selection-start-line="131" selection-start-column="33" selection-end-line="131" selection-end-column="59" />
               <folding>
                 <element signature="e#66#87#0#PHP" expanded="true" />
               </folding>
@@ -42,41 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PaginationNormalizer.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
-              <folding>
-                <element signature="e#155#203#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Services/Pagination/PaginationFactory.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="55" column="54" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Services/Pagination/PaginatedCollection.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="67" column="30" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+            <state relative-caret-position="180">
+              <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -93,10 +59,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Tables/LocationsTable.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="880">
+            <state relative-caret-position="1573">
               <caret line="97" column="46" selection-start-line="97" selection-start-column="46" selection-end-line="97" selection-end-column="46" />
               <folding>
                 <element signature="n#style#0;n#td#1;n#template#1;n#base-table#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -168,7 +134,6 @@
         <option value="$PROJECT_DIR$/sources/app/public/storage/templates/content_4.html.twig" />
         <option value="$PROJECT_DIR$/sources/app/src/Services/FileUploader.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceAttachmentController.php" />
-        <option value="$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Controller/IndexController.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/sources/app/package.json" />
@@ -204,6 +169,7 @@
         <option value="$PROJECT_DIR$/sources/app/src/Services/Pagination/PaginationFactory.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PaginationNormalizer.php" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Tables/LocationsTable.vue" />
+        <option value="$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php" />
       </list>
     </option>
   </component>
@@ -456,7 +422,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="209264000" />
+    <option name="totallyTimeSpent" value="209882000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -471,7 +437,7 @@
     <frame x="450" y="-1058" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18154034" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18154034" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -805,27 +771,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Services/Pagination/PaginatedCollection.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="67" column="30" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Services/Pagination/PaginationFactory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="55" column="54" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/vendor/symfony/serializer/Serializer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
@@ -847,13 +792,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
+    <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Tables/LocationsTable.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="136" column="59" selection-start-line="136" selection-start-column="59" selection-end-line="136" selection-end-column="59" />
+        <state relative-caret-position="1573">
+          <caret line="97" column="46" selection-start-line="97" selection-start-column="46" selection-end-line="97" selection-end-column="46" />
           <folding>
-            <element signature="e#66#87#0#PHP" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#template#1;n#base-table#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Services/Pagination/PaginatedCollection.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="67" column="30" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Services/Pagination/PaginationFactory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="55" column="54" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -867,13 +826,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Tables/LocationsTable.vue">
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="880">
-          <caret line="97" column="46" selection-start-line="97" selection-start-column="46" selection-end-line="97" selection-end-column="46" />
+        <state relative-caret-position="212">
+          <caret line="131" column="45" selection-start-line="131" selection-start-column="33" selection-end-line="131" selection-end-column="59" />
           <folding>
-            <element signature="n#style#0;n#td#1;n#template#1;n#base-table#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#66#87#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
         </state>
       </provider>
     </entry>
