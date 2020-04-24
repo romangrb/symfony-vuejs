@@ -30,15 +30,15 @@
                   :data="tableData">
 
         <template slot="columns">
-          <th v-on:click="orderBy('id')">#
-              <i class="fas fa-sort-alpha-down"></i>
+          <th @click="orderBy('id')">
+            <tr><fa :prefix="iconPrefix" :icon="orderClass.id" /> # </tr>
           </th>
-          <th v-on:click="orderBy('name')">
-            Name <i class="fas fa-sort-alpha-down"></i>
+          <th @click="orderBy('name')">
+            <tr><fa :prefix="iconPrefix" :icon="orderClass.name" /> Name </tr>
           </th>
           <th>Description</th>
-          <th v-on:click="orderBy('date')">
-            Last Update <i class="fas fa-sort-alpha-down"></i>
+          <th @click="orderBy('updated_at')">
+            <tr><fa :prefix="iconPrefix" :icon="orderClass.updated_at" /> Last Update </tr>
           </th>
         </template>
 
@@ -78,6 +78,8 @@
 
   import moment from 'moment';
 
+  const fa_order = 'sort-alpha-';
+
   export default {
     name: 'locations-table',
     components: {
@@ -99,8 +101,20 @@
           total: '0',
           per_page: 0,
           page: 1
+        },
+        order_by: 0,
+        order_type: 'id',
+        orderClass: {
+          'id':'sort-alpha-down',
+          'name':'sort-alpha-down',
+          'updated_at':'sort-alpha-down'
         }
       }
+    },
+    computed: {
+      iconPrefix() {
+        return 'fas';
+      },
     },
     filters: {
       formatDate: function (value) {
@@ -109,8 +123,9 @@
       }
     },
     watch: {
-      "pagination.page" : function(next_number) {
-        this.loadPlaces(next_number);
+      "pagination.page" : function(page) {
+        this.pagination.page = page;
+        this.loadPlaces();
       }
     },
     created() {
@@ -118,17 +133,34 @@
     },
     methods: {
       orderBy(type) {
-        console.log(type);
+
+        if (this.order_type === type) {
+          this.order_by = this.order_by ? 0 : 1;
+        } else {
+          this.order_type = type;
+          this.order_by = 0;
+        }
+        this.resetOrderByIcons();
+        this.orderClass[type] = fa_order + (this.order_by ? 'up' : 'down');
+
+        this.loadPlaces();
       },
       onCancel() {
         this.is_processing = false;
         this.$router.push('Dashboard');
       },
-      loadPlaces(page = 1){
+      resetOrderByIcons() {
+        let fa_class = fa_order + 'down';
+
+        for (let key in this.orderClass){
+          this.orderClass[key] = fa_class;
+        }
+      },
+      loadPlaces(){
 
         this.is_processing = true;
 
-        this.$http.get(`api/v1/places?page=${page}`)
+        this.$http.get(`api/v1/places?page=${this.pagination.page}&order_by=${this.order_by}&order_type=${this.order_type}`)
           .then(({data}) => {
             this.tableData = data.items;
             this.pagination.total = data.total.toString();

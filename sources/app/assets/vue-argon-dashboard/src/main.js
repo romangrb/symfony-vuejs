@@ -17,11 +17,29 @@
 */
 import Vue from 'vue';
 import App from './App.vue';
+import { library, config, dom } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import router from './router';
 import './registerServiceWorker';
 import ArgonDashboard from './plugins/argon-dashboard';
 import store from "./store";
 import Axios from 'axios';
+
+library.add(fas);
+/**
+ * Setting this config so that Vue-tables-2 will be able to replace sort icons with chevrons
+ * https://fontawesome.com/how-to-use/with-the-api/setup/configuration
+ */
+// config.autoReplaceSvg = 'nest';
+
+/**
+ * Allows DOM to change <i> tags to SVG for more features like layering
+ * https://fontawesome.com/how-to-use/on-the-web/styling/layering
+ */
+// dom.watch();
+
+Vue.component('fa', FontAwesomeIcon);
 
 Vue.config.productionTip = false;
 
