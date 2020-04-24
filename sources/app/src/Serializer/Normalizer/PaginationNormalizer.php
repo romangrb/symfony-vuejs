@@ -22,6 +22,7 @@ class PaginationNormalizer implements NormalizerInterface
             'items' => $object->getItems(),
             'total' => $object->getTotal(),
             'count' => $object->getCount(),
+            'per_page' => $object->getPerPage(),
             'links' => $object->getLinks()
         ];
     }

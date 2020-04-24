@@ -55,7 +55,7 @@
 
     <div class="card-footer d-flex justify-content-end" :class="type === 'dark' ? 'bg-transparent': ''">
       <base-pagination
-              total="20"
+              :total="pagination.total"
               :per-page="pagination.per_page"
               v-model="pagination.page"
       >
@@ -88,15 +88,14 @@
         is_full_page: false,
         loader:'Dots',
         pagination: {
-          total: 0,
+          total: '0',
           per_page: 0,
           page: 1
         }
       }
     },
     watch: {
-      "pagination.page" : function(next_number, prev_number) {
-        console.log(this.pagination.page);
+      "pagination.page" : function(next_number) {
         this.loadPlaces(next_number);
       }
     },
@@ -115,8 +114,8 @@
         this.$http.get(`api/v1/places?page=${page}`)
           .then(({data}) => {
             this.tableData = data.items;
-            this.pagination.total = 20;
-            this.pagination.per_page =  10;
+            this.pagination.total = data.total.toString();
+            this.pagination.per_page =  data.per_page;
             this.pagination.page = data.links.current;
           })
           .catch((e) => {

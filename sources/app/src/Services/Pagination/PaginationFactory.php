@@ -36,25 +36,26 @@ class PaginationFactory
      * Create collection
      * @param QueryBuilder $qb
      * @param Request $request
-     * @param int $max_page
      * @param $route
      * @param array $routeParams
+     * @param int $per_page
      * @return PaginatedCollection
      */
-    public function createCollection(QueryBuilder $qb, Request $request, $route, array $routeParams = array(), int $max_page = self::MAX_PER_PAGE): PaginatedCollection
+    public function createCollection(QueryBuilder $qb, Request $request, $route, array $routeParams = array(), int $per_page = self::MAX_PER_PAGE): PaginatedCollection
     {
         $page = (int) $request->query->get('page', 1);
         $adapter = new DoctrineORMAdapter($qb);
         $pagerfanta = new Pagerfanta($adapter);
-        $pagerfanta->setMaxPerPage($max_page);
+        $pagerfanta->setMaxPerPage($per_page);
         $pagerfanta->setCurrentPage($page);
 
-        $programmers = [];
+        $items = [];
         foreach ($pagerfanta->getCurrentPageResults() as $result) {
-            $programmers[] = $result;
+            $items[] = $result;
         }
-        $paginatedCollection = new PaginatedCollection($programmers, $pagerfanta->getNbResults());
+        $paginatedCollection = new PaginatedCollection($items, $pagerfanta->getNbResults(), $per_page);
 
+        $paginatedCollection->removeLink('total');
         $paginatedCollection->addLink('current', $page);
         $paginatedCollection->addLink('first', 1);
         $paginatedCollection->addLink('last', $pagerfanta->getNbPages());

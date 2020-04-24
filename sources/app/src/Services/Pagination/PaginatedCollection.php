@@ -15,6 +15,9 @@ class PaginatedCollection
     /** @var $total */
     private $total;
 
+    /** @var $per_page */
+    private $per_page;
+
     /** @var $count */
     private $count;
 
@@ -23,12 +26,15 @@ class PaginatedCollection
 
     /**
      * Initiate class
+     *
      * @param array $items
      * @param $totalItems
+     * @param $per_page
      */
-    public function __construct(array $items, $totalItems)
+    public function __construct(array $items, $totalItems, $per_page)
     {
         $this->items = $items;
+        $this->per_page = $per_page;
         $this->total = $totalItems;
         $this->count = count($items);
     }
@@ -42,6 +48,37 @@ class PaginatedCollection
     public function addLink($ref, $url): void
     {
         $this->_links[$ref] = $url;
+    }
+
+    /**
+     * Remove link prop
+     *
+     * @param $ref
+     */
+    public function removeLink($ref): void
+    {
+        unset($this->_links[$ref]);
+    }
+
+    /**
+     * Set per_page
+     *
+     * @return int
+     */
+    public function getPerPage(): int
+    {
+        return (int) $this->per_page;
+    }
+
+    /**
+     * Set per_page
+     *
+     * @param int $per_page
+     * @return int
+     */
+    public function setPerPage(int $per_page): int
+    {
+        return $this->per_page = $per_page;
     }
 
     /**
@@ -66,13 +103,24 @@ class PaginatedCollection
     }
 
     /**
+     * Set Total items count
+     *
+     * @param $total
+     * @return void
+     */
+    public function setTotal(int $total = 0): void
+    {
+        $this->total = $total;
+    }
+
+    /**
      * Get Integer
      *
      * @return int
      */
     public function getTotal(): int
     {
-        return (int) $this->items;
+        return (int) $this->total;
     }
 
     /**
