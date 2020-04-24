@@ -51,6 +51,7 @@ class User extends BaseUser
         $attr = [
             'id' => $this->getId(),
             'username' => $this->getUsername(),
+            'email' => $this->getEmail()
         ];
 
         return $attr;
