@@ -4,25 +4,37 @@
     <div class="card-header border-0"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row align-items-center">
-        <div class="col-sm-5">
-            <h3 :class="type === 'dark' ? 'text-white': ''">
+        <div class="col-sm-6" style="margin-bottom:40px">
+            <h2 :class="type === 'dark' ? 'text-white': ''">
               {{title}}
               <span v-model="searchForm" v-on:click="searchForm.show_filter =! searchForm.show_filter">
                 <fa prefix="fa" icon="filter" />
               </span>
-            </h3>
+            </h2>
         </div>
-        <div class="col-sm-7">
-          <transition name="fade">
-            <div v-if="searchForm.show_filter">
-              <select>
-                <option disabled value="">Search by</option>
-                <option>Name</option>
-                <option>Description</option>
-              </select>
-              <base-input @input="searchInputChange" placeholder="search"></base-input>
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-6">
+              <transition name="fade">
+                <div class="form-group" v-if="searchForm.show_filter">
+                  <select v-model="searchForm.search_type" class="form-control">
+                    <option disabled value="">Search by</option>
+                    <option>Name</option>
+                    <option>Description</option>
+                  </select>
+                </div>
+              </transition>
             </div>
-          </transition>
+            <div class="col-sm-6">
+              <transition name="fade">
+                <div v-if="searchForm.show_filter">
+                  <div class="input-group mb-3">
+                    <input @input="searchInputChange" v-model="searchForm.search_value" placeholder="Search" type="text" class="form-control" aria-label="Sizing example input">
+                  </div>
+                </div>
+              </transition>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -128,7 +140,7 @@
         searchForm: {
           search_type:'Name',
           search_value:'',
-          show_filter: true,
+          show_filter: false,
         }
       }
     },
@@ -144,24 +156,29 @@
       }
     },
     watch: {
-      "pagination.page" : function(page) {
+      "pagination.page": function (page) {
         this.pagination.page = page;
         this.loadPlaces();
       },
-      "searchForm.show_filter" : function () {
+      "searchForm.show_filter": function () {
         this.searchForm.search_type = '';
+
+        if (! this.searchForm.search_value) return;
         this.searchForm.search_value = '';
-        // this.loadPlaces();
+        this.loadPlaces();
+      },
+      "searchForm.search_type": function () {
+        this.loadPlaces();
       },
     },
     created() {
       this.loadPlaces();
+      this.searchInputChange = _.debounce(this.consoleShow, 2000);
     },
     methods: {
-      searchInputChange: _.debounce((val) => {
-        console.log(val);
-        // this.loadPlaces();
-      }, 2000),
+      consoleShow() {
+        this.loadPlaces();
+      },
 
       orderBy(type) {
         if (this.order_type === type) {
