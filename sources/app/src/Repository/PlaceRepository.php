@@ -29,11 +29,19 @@ class PlaceRepository extends ServiceEntityRepository
      */
     public function getPlacesWithSearchBuilder(Request $request): QueryBuilder
     {
-        $name = $request->get('name');
-        $description = $request->get('description');
-
         $order_by = (bool) $request->get('order_by') ? 'DESC' : 'ASC';
         $order_type = $request->get('order_type');
+        $search_type = $request->get('search_type');
+        $search_value = $request->get('search_value');
+
+        switch ($search_type){
+            case 'Description':
+                $search_by_type = 'p.description';
+                break;
+            default:
+                $search_by_type = 'p.name';
+                break;
+        }
 
         switch ($order_type){
             case 'name':
@@ -47,17 +55,8 @@ class PlaceRepository extends ServiceEntityRepository
                 break;
         }
 
-        $val = $name ?? $description;
-
         $qb = $this->createQueryBuilder('p');
-
-        $qb->where(
-            $qb->expr()->like('p.name', ':value')
-        )->orWhere(
-            $qb->expr()->like('p.description', ':value')
-        )
-        ->setParameter('value',"%$val%")
-        ;
+        $qb->where($qb->expr()->like($search_by_type, ':value'))->setParameter('value',"%$search_value%");
 
         return $qb
             ->orderBy($order_by_val, $order_by)
