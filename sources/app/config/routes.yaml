@@ -1,11 +1,12 @@
-api_auth_login:
-  path: /api/v1/auth/login
+register:
+  path: /api/v1/register
+  controller: App\Controller\Api\v1\AuthController::register
+  methods: POST
+
+api_login:
+  path: /api/v1/login
   methods:  [POST]
 
-api_auth_logout:
-  path: /api/v1/auth/logout
-  methods:  [POST]
-
-api_v1:
-  prefix: /api/v1
-  resource: '../src/Controller/Api/v1'
+test:
+  path: /api/v1/test
+  controller: App\Controller\Api\v1\AuthController::test

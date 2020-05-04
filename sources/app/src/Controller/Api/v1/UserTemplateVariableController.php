@@ -7,7 +7,6 @@ use App\Repository\TemplateVariableRepository;
 use App\Requests\CreateTemplateVariableRequestValidator;
 use App\Requests\UpdateTemplateVariableRequestValidator;
 use Doctrine\ORM\EntityManagerInterface;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Routing\Annotation\Route;
 
 final class UserTemplateVariableController extends AbstractController
 {
@@ -45,7 +45,7 @@ final class UserTemplateVariableController extends AbstractController
     /**
      * Create template variable
      *
-     * @Rest\Post("/template/variable", name="createTemplateVariable")
+     * @Route("/template/variable", name="createTemplateVariable", methods={"POST"})
      * @param Request $request
      * @param Security $security
      * @param CreateTemplateVariableRequestValidator $validatorRequest
@@ -87,7 +87,7 @@ final class UserTemplateVariableController extends AbstractController
     /**
      * Update template variable
      *
-     * @Rest\Patch("/template/variable/{id}", name="updateTemplateVariable")
+     * @Route("/template/variable/{id}", name="updateTemplateVariable", methods={"PATCH"})
      * @param Request $request
      * @param Security $security
      * @param UpdateTemplateVariableRequestValidator $validatorRequest
@@ -135,7 +135,7 @@ final class UserTemplateVariableController extends AbstractController
     /**
      * Get all TemplateVariables
      *
-     * @Rest\Get("/template/variables", name="getTemplateVariables")
+     * @Route("/template/variables", name="getTemplateVariables", methods={"GET"})
      * @param Security $security
      * @return JsonResponse
      */
@@ -152,7 +152,7 @@ final class UserTemplateVariableController extends AbstractController
     /**
      * Delete TemplateVariables
      *
-     * @Rest\Delete("/template/variable/{id}", name="deleteTemplateVariables")
+     * @Route("/template/variable/{id}", name="deleteTemplateVariables", methods={"DELETE"})
      * @param Request $request
      * @param Security $security
      * @return JsonResponse

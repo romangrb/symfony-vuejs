@@ -10,7 +10,6 @@ use App\Requests\DetachPlaceContentTemplateRequestValidator;
 use App\Requests\RenderPlaceContentTemplateRequestValidator;
 use App\Requests\UpdatePlaceRequestValidator;
 use Doctrine\ORM\EntityManagerInterface;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -24,6 +23,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Routing\Annotation\Route;
 
 final class PlaceContentController extends AbstractController
 {
@@ -81,7 +81,7 @@ final class PlaceContentController extends AbstractController
     /**
      * Show place content
      *
-     * @Rest\Get("/place/{id}/template", name="showTemplateContent")
+     * @Route("/place/{id}/template", name="showTemplateContent", methods={"GET"})
      * @param Request $request
      * @param Security $security
      * @param UpdatePlaceRequestValidator $validatorRequest
@@ -127,7 +127,7 @@ final class PlaceContentController extends AbstractController
     /**
      * Render template
      *
-     * @Rest\Post("/place/{id}/template/render", name="renderPlaceContentTemplateFromString")
+     * @Route("/place/{id}/template/render", name="renderPlaceContentTemplateFromString", methods={"POST"})
      * @param Request $request
      * @param Security $security
      * @param RenderPlaceContentTemplateRequestValidator $validatorRequest
@@ -174,7 +174,7 @@ final class PlaceContentController extends AbstractController
     /**
      * Create/Update template content
      *
-     * @Rest\Patch("/place/{id}/content", name="attachPlaceContentTemplate")
+     * @Route("/place/{id}/content", name="attachPlaceContentTemplate", methods={"PATCH"})
      * @param Request $request
      * @param AttachPlaceContentTemplateRequestValidator $validatorRequest
      * @return JsonResponse
@@ -239,7 +239,7 @@ final class PlaceContentController extends AbstractController
     /**
      * Detach template content
      *
-     * @Rest\Delete("/place/{id}/content", name="detachPlaceContentTemplate")
+     * @Route("/place/{id}/content", name="detachPlaceContentTemplate", methods={"DELETE"})
      * @param Request $request
      * @param DetachPlaceContentTemplateRequestValidator $validatorRequest
      * @return JsonResponse

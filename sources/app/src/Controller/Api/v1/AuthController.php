@@ -1,76 +1,113 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: RomanHrb
- * Date: 13.12.2019
- * Time: 21:26
- */
 
 namespace App\Controller\Api\v1;
 
-use FOS\UserBundle\Model\UserManagerInterface;
+use App\Entity\User;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\User;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validation;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-/**
- * @Route("/auth")
- */
 class AuthController extends AbstractController
 {
-    /**
-     * @Route("/register", name="api_auth_register",  methods={"POST"})
-     * @param Request $request
-     * @param UserManagerInterface $userManager
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function register(Request $request, UserManagerInterface $userManager)
-    {
-        $data = json_decode(
-            $request->getContent(),
-            true
-        );
+    public function register(
+        Request $request,
+        JWTTokenManagerInterface $JWTManager,
+        UserPasswordEncoderInterface $encoder,
+        ValidatorInterface $validator
+    ) {
+        $em = $this->getDoctrine()->getManager();
+        $request = $this->transformJsonBody($request);
 
-        $validator = Validation::createValidator();
+        $username = $request->get('username');
+        $password = $request->get('password');
+        $email = $request->get('email');
 
-        $constraint = new Assert\Collection(array(
-            // the keys correspond to the keys in the input array
-            'username' => new Assert\Length(array('min' => 1)),
-            'password' => new Assert\Length(array('min' => 6)),
-            'email' => new Assert\Email(),
-        ));
+        $constraint = new Assert\Collection([
+            'username' => new Assert\NotBlank(),
+            'password' => [
+                new Assert\NotBlank(),
+                new Assert\Length(array('min' => 6))
+            ],
+            'email' => [
+                new Assert\NotBlank(),
+                new Assert\Email()
+            ]
+        ]);
 
-        $violations = $validator->validate($data, $constraint);
-
-        if ($violations->count() > 0) {
-            return new JsonResponse(["error" => (string) $violations], 500);
+        $violations = $validator->validate(compact('username', 'password', 'email'), $constraint);
+        if (count($violations) > 0) {
+            return $this->showViolations($violations);
         }
-
-        $username = $data['username'];
-        $password = $data['password'];
-        $email = $data['email'];
 
         $user = new User();
 
-        $user
-            ->setUsername($username)
-            ->setPlainPassword($password)
-            ->setEmail($email)
-            ->setEnabled(true)
-            ->setRoles(['ROLE_USER'])
-            ->setSuperAdmin(false)
-        ;
+        $user->setPassword($encoder->encodePassword($user, $password));
+        $user->setEmail($email);
+        $user->setUsername($username);
 
-        try {
-            $userManager->updateUser($user, true);
-        } catch (\Exception $e) {
-            return new JsonResponse(["error" => $e->getMessage()], 500);
+        $violations = $validator->validate($user);
+        if (count($violations) > 0) {
+            return $this->showViolations($violations);
         }
 
-        return new JsonResponse(["success" => $user->getUsername(). " has been registered!"], 200);
+        try {
+            $em->persist($user);
+            $em->flush();
+        } catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), 500);
+        }
+
+        return new JsonResponse([
+            "token" => $JWTManager->create($user),
+            "user" => $user->getAttributes()
+        ], 200);
+    }
+
+    /**
+     * @param $violations
+     * @return JsonResponse
+     */
+    protected function showViolations($violations)
+    {
+        $errorMessages = [];
+
+        foreach ($violations as $violation) {
+            $field = trim($violation->getPropertyPath(), '[]');
+            $errorMessages[$field] = $violation->getMessage();
+        }
+
+        return  new JsonResponse($errorMessages, Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /**
+     * @param Request $request
+     * @return Request
+     */
+    protected function transformJsonBody(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        if ($data === null) {
+            return $request;
+        }
+
+        $request->request->replace($data);
+
+        return $request;
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function test(Request $request)
+    {
+        dd($this->getUser());
     }
 }

@@ -11,7 +11,6 @@ use App\Serializer\Normalizer\PlaceNormalizer;
 use App\Services\Pagination\PaginationFactory;
 use App\Transformers\PaginationTransformer;
 use Doctrine\ORM\EntityManagerInterface;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Routing\Annotation\Route;
 
 final class PlaceController extends AbstractController
 {
@@ -49,7 +49,7 @@ final class PlaceController extends AbstractController
     /**
      * Create place
      *
-     * @Rest\Post("/place", name="createPlace")
+     * @Route("/place", name="createPlace", methods={"POST"})
      * @param Request $request
      * @param CreatePlaceRequestValidator $validatorRequest
      * @return JsonResponse
@@ -81,7 +81,7 @@ final class PlaceController extends AbstractController
     /**
      * Update place
      *
-     * @Rest\Patch("/place/{id}", name="updatePlace")
+     * @Route("/place/{id}", name="updatePlace", methods={"PATCH"})
      * @param Request $request
      * @param UpdatePlaceRequestValidator $validatorRequest
      * @return JsonResponse
@@ -121,7 +121,7 @@ final class PlaceController extends AbstractController
     /**
      * Get all places
      *
-     * @Rest\Get("/places", name="all-places")
+     * @Route("/places", name="all-places", methods={"GET"})
      * @param Request $request
      * @param PaginationFactory $paginationFactory
      * @return JsonResponse
@@ -154,7 +154,7 @@ final class PlaceController extends AbstractController
     /**
      * Delete place
      *
-     * @Rest\Delete("/places/{id}", name="deletePlace")
+     * @Route("/places/{id}", name="deletePlace", methods={"DELETE"})
      * @param Request $request
      * @IsGranted("ROLE_FOO")
      * @return JsonResponse

@@ -26,20 +26,23 @@
                         <base-input class="input-group-alternative mb-3"
                                     placeholder="Name"
                                     addon-left-icon="ni ni-hat-3"
-                                    v-model="model.name">
+                                    v-model="model.username"
+                                    v-bind:error="errors.username">
                         </base-input>
 
                         <base-input class="input-group-alternative mb-3"
                                     placeholder="Email"
                                     addon-left-icon="ni ni-email-83"
-                                    v-model="model.email">
+                                    v-model="model.email"
+                                    v-bind:error="errors.email">
                         </base-input>
 
                         <base-input class="input-group-alternative"
                                     placeholder="Password"
                                     type="password"
                                     addon-left-icon="ni ni-lock-circle-open"
-                                    v-model="model.password">
+                                    v-model="model.password"
+                                    v-bind:error="errors.password">
                         </base-input>
 
                         <div class="text-muted font-italic">
@@ -54,7 +57,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <base-button type="primary" class="my-4">Create account</base-button>
+                            <base-button type="primary" class="my-4" @click="register">Create account</base-button>
                         </div>
                     </form>
                 </div>
@@ -80,10 +83,33 @@
     data() {
       return {
         model: {
-          name: '',
+          username: '',
+          email: '',
+          password: ''
+        },
+        errors: {
+          username: '',
           email: '',
           password: ''
         }
+      }
+    },
+    methods: {
+      register: function() {
+        let username = this.model.username;
+        let email = this.model.email;
+        let password = this.model.password;
+
+        let _this = this;
+
+        this.$store
+          .dispatch("register", { username, email, password })
+          .then(() => this.$router.push("/"))
+          .catch(function (err) {
+              Object.keys(_this.errors).forEach(function(key) {
+                  _this.errors[key] = err.response.data[key] || '';
+              });
+          });
       }
     }
   }

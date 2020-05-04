@@ -12,7 +12,6 @@ use App\Requests\ListPlaceAttachmentRequestValidator;
 use App\Requests\ShowPlaceAttachmentRequestValidator;
 use App\Services\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -24,6 +23,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 final class PlaceAttachmentController extends AbstractController
 {
@@ -75,7 +75,7 @@ final class PlaceAttachmentController extends AbstractController
     /**
      * List place files content
      *
-     * @Rest\Get("/place/{id}/attachments", name="listPlaceAttachments")
+     * @Route("/place/{id}/attachments", name="listPlaceAttachments", methods={"GET"})
      * @param Request $request
      * @param ListPlaceAttachmentRequestValidator $validatorRequest
      * @return JsonResponse
@@ -111,7 +111,7 @@ final class PlaceAttachmentController extends AbstractController
     /**
      * Show place files content
      *
-     * @Rest\Get("/place/attachment/{id}", name="showPlaceAttachments")
+     * @Route("/place/attachment/{id}", name="showPlaceAttachments", methods={"GET"})
      * @param Request $request
      * @param ShowPlaceAttachmentRequestValidator $validatorRequest
      * @return JsonResponse
@@ -145,7 +145,7 @@ final class PlaceAttachmentController extends AbstractController
     /**
      * Attach entity for to place
      *
-     * @Rest\Post("/place/{id}/attachment", name="createPlaceAttachment")
+     * @Route("/place/{id}/attachment", name="createPlaceAttachment", methods={"POST"})
      * @param Request $request
      * @param CreatePlaceAttachmentRequestValidator $validatorRequest
      * @param FileUploader $fileUploader
@@ -208,7 +208,7 @@ final class PlaceAttachmentController extends AbstractController
     /**
      * Delete place attachment
      *
-     * @Rest\Delete("/place/attachment/{id}", name="deletePlaceAttachment")
+     * @Route("/place/attachment/{id}", name="deletePlaceAttachment", methods={"DELETE"})
      * @param Request $request
      * @param DeletePlaceAttachmentRequestValidator $validatorRequest
      * @return JsonResponse

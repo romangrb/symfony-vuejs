@@ -4,7 +4,6 @@ namespace App\Controller\Api\v1;
 
 use App\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -13,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @IsGranted("IS_AUTHENTICATED_FULLY")
@@ -38,7 +38,7 @@ final class PostController extends AbstractController
     }
 
     /**
-     * @Rest\Post("/posts", name="createPost")
+     * @Route("/posts", name="createPost", methods={"POST"})
      * @param Request $request
      * @IsGranted("ROLE_FOO")
      * @return JsonResponse
@@ -61,7 +61,7 @@ final class PostController extends AbstractController
     }
 
     /**
-     * @Rest\Put("/post/{id}", name="createPost")
+     * @Route("/post/{id}", name="createPost", methods={"PUT"})
      * @param Request $request
      * @IsGranted("ROLE_FOO")
      * @return JsonResponse
@@ -86,7 +86,7 @@ final class PostController extends AbstractController
     }
 
     /**
-     * @Rest\Get("/posts", name="findAllPosts")
+     * @Route("/posts", name="findAllPosts", methods={"GET"})
      */
     public function findAllAction(): JsonResponse
     {
@@ -97,7 +97,7 @@ final class PostController extends AbstractController
     }
 
     /**
-     * @Rest\Delete("/post/{id}", name="deletePost")
+     * @Route("/post/{id}", name="deletePost", methods={"DELETE"})
      *
      * @param Request $request
      * @IsGranted("ROLE_FOO")
