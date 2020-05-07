@@ -1,14 +1,40 @@
 
 <template>
-
   <div class="card shadow" :class="type === 'dark' ? 'bg-default': ''">
     <div class="card-header border-0"
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row align-items-center">
-        <div class="col">
-          <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">
-            {{title}}
-          </h3>
+        <div class="col-sm-6" style="margin-bottom:40px">
+            <h2 :class="type === 'dark' ? 'text-white': ''">
+              {{title}}
+              <span v-model="searchForm" v-on:click="searchForm.show_filter =! searchForm.show_filter">
+                <fa prefix="fa" icon="filter" />
+              </span>
+            </h2>
+        </div>
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-6">
+              <transition name="fade">
+                <div class="form-group" v-if="searchForm.show_filter">
+                  <select v-model="searchForm.search_type" class="form-control">
+                    <option disabled value="">Search by</option>
+                    <option>Name</option>
+                    <option>Description</option>
+                  </select>
+                </div>
+              </transition>
+            </div>
+            <div class="col-sm-6">
+              <transition name="fade">
+                <div v-if="searchForm.show_filter">
+                  <div class="input-group mb-3">
+                    <input @input="searchInputChange" v-model="searchForm.search_value" placeholder="Search" type="text" class="form-control" aria-label="Sizing example input">
+                  </div>
+                </div>
+              </transition>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -49,7 +75,7 @@
           <th scope="row">
             {{row.name}}
           </th>
-          <td style="width: 90px;">
+          <td>
             {{row.description}}
           </td>
           <td>
@@ -75,6 +101,8 @@
   import Loading from 'vue-loading-overlay';
   // Import stylesheet
   import 'vue-loading-overlay/dist/vue-loading.css';
+
+  import _ from 'lodash';
 
   import moment from 'moment';
 
@@ -108,6 +136,11 @@
           'id':'sort-alpha-down',
           'name':'sort-alpha-down',
           'updated_at':'sort-alpha-down'
+        },
+        searchForm: {
+          search_type:'Name',
+          search_value:'',
+          show_filter: false,
         }
       }
     },
@@ -123,17 +156,31 @@
       }
     },
     watch: {
-      "pagination.page" : function(page) {
+      "pagination.page": function (page) {
         this.pagination.page = page;
         this.loadPlaces();
-      }
+      },
+      "searchForm.show_filter": function () {
+        this.searchForm.search_type = '';
+
+        if (! this.searchForm.search_value) return;
+        this.searchForm.search_value = '';
+        this.loadPlaces();
+      },
+      "searchForm.search_type": function () {
+        this.loadPlaces();
+      },
     },
     created() {
       this.loadPlaces();
+      this.searchInputChange = _.debounce(this.consoleShow, 2000);
     },
     methods: {
-      orderBy(type) {
+      consoleShow() {
+        this.loadPlaces();
+      },
 
+      orderBy(type) {
         if (this.order_type === type) {
           this.order_by = this.order_by ? 0 : 1;
         } else {
@@ -160,7 +207,7 @@
 
         this.is_processing = true;
 
-        this.$http.get(`api/v1/places?page=${this.pagination.page}&order_by=${this.order_by}&order_type=${this.order_type}`)
+        this.$http.get(`api/v1/places?page=${this.pagination.page}&order_by=${this.order_by}&order_type=${this.order_type}&search_type=${this.searchForm.search_type}&search_value=${this.searchForm.search_value}`)
           .then(({data}) => {
             this.tableData = data.items;
             this.pagination.total = data.total.toString();
