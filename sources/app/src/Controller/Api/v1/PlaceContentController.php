@@ -8,6 +8,7 @@ use App\Repository\PlaceRepository;
 use App\Requests\AttachPlaceContentTemplateRequestValidator;
 use App\Requests\DetachPlaceContentTemplateRequestValidator;
 use App\Requests\RenderPlaceContentTemplateRequestValidator;
+use App\Requests\ShowPlaceRequestValidator;
 use App\Requests\UpdatePlaceRequestValidator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -84,13 +85,13 @@ final class PlaceContentController extends AbstractController
      * @Route("/place/{id}/template", name="showTemplateContent", methods={"GET"})
      * @param Request $request
      * @param Security $security
-     * @param UpdatePlaceRequestValidator $validatorRequest
+     * @param ShowPlaceRequestValidator $validatorRequest
      * @return JsonResponse
      */
     public function showTemplateContent(
         Request $request,
         Security $security,
-        UpdatePlaceRequestValidator $validatorRequest): JsonResponse
+        ShowPlaceRequestValidator $validatorRequest): JsonResponse
     {
         $place_id = $request->get('id');
 
@@ -110,7 +111,12 @@ final class PlaceContentController extends AbstractController
 
         if (! $place) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
 
-        $file_path = $place->getPlaceContent()->getFilePath();
+        if ($placeContent = $place->getPlaceContent()) {
+            $file_path = $placeContent->getFilePath();
+        } else {
+            return new JsonResponse('', Response::HTTP_OK, [], true);
+        }
+
         $templateVariablesHash = $security->getUser()->getTemplateVariablesHash();
 
         try {
