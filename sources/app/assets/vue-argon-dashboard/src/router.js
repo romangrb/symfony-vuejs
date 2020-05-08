@@ -60,6 +60,11 @@ const router = new Router({
             requiresAuth: true
           },
           component: () => import(/* webpackChunkName: "demo" */ './views/Tables.vue')
+        },
+        {
+          path: '/page-builder',
+          name: 'Page Builder',
+          component: () => import(/* webpackChunkName: "demo" */ './views/PageBuilder.vue')
         }
       ]
     },
