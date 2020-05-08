@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ab3b0ce2-2efe-4f8b-a9d0-0acfa934f504" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Requests/CreatePlaceRequestValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Requests/CreatePlaceRequestValidator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Requests/UpdatePlaceRequestValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Requests/UpdatePlaceRequestValidator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PlaceNormalizer.php" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PlaceNormalizer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,38 +43,6 @@
         </state>
       </content>
     </window>
-    <window id="3">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/EventNormalizer.php">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="453">
-                    <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
-                    <folding>
-                      <element signature="e#155#176#0#PHP" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PlaceNormalizer.php">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="480">
-                    <caret line="29" column="78" selection-start-line="29" selection-start-column="78" selection-end-line="29" selection-end-column="78" />
-                    <folding>
-                      <element signature="e#155#176#0#PHP" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -94,20 +58,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+            <state relative-caret-position="420">
+              <caret line="73" selection-start-line="73" selection-end-line="73" />
               <folding>
                 <element signature="e#66#87#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="103" column="49" lean-forward="true" selection-start-line="103" selection-start-column="49" selection-end-line="103" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -129,6 +84,18 @@
                 <caret line="24" column="33" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="33" />
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="40" column="30" lean-forward="true" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -181,7 +148,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/sources/app/src/Requests/CreatePlaceAttachmentRequestValidator.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Requests/DeletePlaceAttachmentRequestValidator.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Requests/CreateTemplateVariableRequestValidator.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Requests/UpdateTemplateVariableRequestValidator.php" />
@@ -213,7 +179,6 @@
         <option value="$PROJECT_DIR$/sources/app/config/packages/lexik_jwt_authentication.yaml" />
         <option value="$PROJECT_DIR$/sources/app/config/services.yaml" />
         <option value="$PROJECT_DIR$/sources/app/config/routes.yaml" />
-        <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/layout/DashboardLayout.vue" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Locations.vue" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/public/index.html" />
@@ -226,12 +191,14 @@
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/assets/scss/custom/_custom.scss" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/main.js" />
         <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/views/Tables/LocationsTable.vue" />
-        <option value="$PROJECT_DIR$/sources/app/src/Requests/UpdatePlaceRequestValidator.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Requests/CreatePlaceRequestValidator.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PlaceLocationNormalizer.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PlaceNormalizer.php" />
         <option value="$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php" />
+        <option value="$PROJECT_DIR$/sources/app/src/Requests/ShowPlaceRequestValidator.php" />
+        <option value="$PROJECT_DIR$/sources/app/src/Requests/UpdatePlaceRequestValidator.php" />
+        <option value="$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js" />
       </list>
     </option>
   </component>
@@ -263,6 +230,30 @@
               <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
               <item name="sources" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
+              <item name="sources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
+              <item name="sources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="vue-argon-dashboard" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
+              <item name="sources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="vue-argon-dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
@@ -327,6 +318,14 @@
               <item name="sources" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Requests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="symfony-crud-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony-crud-app" type="462c0819:PsiDirectoryNode" />
+              <item name="sources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Serializer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -359,11 +358,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Requests" />
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Serializer\Normalizer" />
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\assets\vue-argon-dashboard\src\views\Tables" />
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\assets\vue-argon-dashboard\src\views" />
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\src\Controller" />
-      <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\assets\vue-argon-dashboard\src\assets\scss\custom" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\data\vs_new\OSPanel\domains\symfony-crud-app\sources\app\public\storage" />
@@ -424,12 +423,12 @@
       <workItem from="1588184535412" duration="70000" />
       <workItem from="1588184823373" duration="65000" />
       <workItem from="1588874178786" duration="1057000" />
-      <workItem from="1588959255109" duration="5949000" />
+      <workItem from="1588959255109" duration="7377000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="262308000" />
+    <option name="totallyTimeSpent" value="263736000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -457,7 +456,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.79044515" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4987775" weight="0.67146975" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4987775" weight="0.6710098" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5012225" side_tool="true" weight="0.32899022" />
       <window_info anchor="bottom" id="TypeScript" order="12" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -480,26 +479,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PaginationNormalizer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-          <folding>
-            <element signature="e#155#203#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/store.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="831">
-          <caret line="83" column="2" selection-start-line="83" selection-start-column="2" selection-end-line="83" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/App.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
@@ -623,16 +602,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/node_modules/@fortawesome/fontawesome-common-types/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="101472">
@@ -696,13 +665,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="371">
           <caret line="57" column="20" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Requests/UpdatePlaceRequestValidator.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -813,16 +775,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PlaceNormalizer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="29" column="78" selection-start-line="29" selection-start-column="78" selection-end-line="29" selection-end-column="78" />
-          <folding>
-            <element signature="e#155#176#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Repository/PlaceRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -830,20 +782,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Serializer/Normalizer/PlaceNormalizer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="31" column="9" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="31" selection-end-column="9" />
+          <folding>
+            <element signature="e#155#176#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+        <state relative-caret-position="420">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
           <folding>
             <element signature="e#66#87#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Requests/ShowPlaceRequestValidator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="19" column="11" lean-forward="true" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Requests/ShowPlaceContentRequestValidator.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
-          <caret line="103" column="49" lean-forward="true" selection-start-line="103" selection-start-column="49" selection-end-line="103" selection-end-column="49" />
+          <caret line="20" column="11" lean-forward="true" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Controller/Api/v1/PlaceContentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="92" column="20" selection-start-line="92" selection-start-column="20" selection-end-line="92" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/src/Requests/UpdatePlaceRequestValidator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/app/assets/vue-argon-dashboard/src/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="40" column="30" lean-forward="true" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
