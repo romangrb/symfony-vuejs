@@ -86,4 +86,8 @@ export default {
 .dropdown .dropdown-toggle {
   cursor: pointer;
 }
+
+.dropdown-toggle.no-caret::after {
+  display: none;
+}
 </style>

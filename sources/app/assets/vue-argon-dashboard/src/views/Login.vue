@@ -24,9 +24,9 @@
                             @submit.prevent="login">
 
                             <base-input class="input-group-alternative mb-3"
-                                        placeholder="username"
+                                        placeholder="email"
                                         addon-left-icon="ni ni-email-83"
-                                        v-model="model.username">
+                                        v-model="model.email">
                             </base-input>
 
                             <base-input class="input-group-alternative"
@@ -63,7 +63,7 @@
       return {
         errors: [],
         model: {
-          username: '',
+          email: '',
           password: ''
         },
         auth_enabled: false
@@ -71,10 +71,10 @@
     },
     methods: {
       login: function() {
-          let username = this.model.username;
+          let email = this.model.email;
           let password = this.model.password;
           this.$store
-              .dispatch("login", { username, password })
+              .dispatch("login", { email, password })
               .then(() => this.$router.push("/"))
               .catch(err => console.warn(err));
       }

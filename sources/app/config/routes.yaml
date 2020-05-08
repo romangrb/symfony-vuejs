@@ -10,3 +10,7 @@ api_login:
 test:
   path: /api/v1/test
   controller: App\Controller\Api\v1\AuthController::test
+
+api_v1:
+  prefix: /api/v1
+  resource: '../src/Controller/Api/v1'

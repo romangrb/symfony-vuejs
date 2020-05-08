@@ -5,12 +5,12 @@
          :class="type === 'dark' ? 'bg-transparent': ''">
       <div class="row align-items-center">
         <div class="col-sm-6" style="margin-bottom:40px">
-            <h2 :class="type === 'dark' ? 'text-white': ''">
-              {{title}}
-              <span v-model="searchForm" v-on:click="searchForm.show_filter =! searchForm.show_filter">
-                <fa prefix="fa" icon="filter" />
-              </span>
-            </h2>
+          <h2 :class="type === 'dark' ? 'text-white': ''">
+            {{title}}
+            <span v-model="searchForm" v-on:click="searchForm.show_filter =! searchForm.show_filter">
+              <fa prefix="fa" icon="filter" />
+            </span>
+          </h2>
         </div>
         <div class="col-sm-6">
           <div class="row">
@@ -66,6 +66,9 @@
           <th @click="orderBy('updated_at')">
             <tr><fa :prefix="iconPrefix" :icon="orderClass.updated_at" /> Last Update </tr>
           </th>
+          <th>
+            <tr>Actions</tr>
+          </th>
         </template>
 
         <template slot-scope="{row}">
@@ -80,6 +83,12 @@
           </td>
           <td>
             {{row.updated_at | formatDate}}
+          </td>
+          <td>
+            <base-dropdown position="right" icon="fas fa-bars" :hideArrow=true>
+              <a class="dropdown-item" href="#">Edit</a>
+              <a class="dropdown-item" href="#">Page Builder</a>
+            </base-dropdown>
           </td>
         </template>
       </base-table>
