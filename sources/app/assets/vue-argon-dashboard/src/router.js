@@ -30,7 +30,17 @@ const router = new Router({
           meta: {
             requiresAuth: true
           },
-          component: () => import('./views/Locations.vue')
+          component: () => import('./views/Locations.vue'),
+          children: [
+            {
+              path: '/:id/template',
+              name: 'show-template-content',
+              meta: {
+                requiresAuth: true
+              },
+              component: () => import('./views/Locations.vue')
+            }
+          ]
         },
         {
           path: '/icons',
