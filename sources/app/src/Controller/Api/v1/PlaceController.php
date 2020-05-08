@@ -3,10 +3,12 @@
 namespace App\Controller\Api\v1;
 
 use App\Entity\Place;
+use App\Entity\PlaceLocation;
 use App\Repository\PlaceRepository;
 use App\Requests\CreatePlaceRequestValidator;
 use App\Requests\UpdatePlaceRequestValidator;
 use App\Serializer\Normalizer\PaginationNormalizer;
+use App\Serializer\Normalizer\PlaceLocationNormalizer;
 use App\Serializer\Normalizer\PlaceNormalizer;
 use App\Services\Pagination\PaginationFactory;
 use App\Transformers\PaginationTransformer;
@@ -58,10 +60,14 @@ final class PlaceController extends AbstractController
     {
         $name = $request->get('name');
         $description = $request->get('description');
+        $lat = $request->get('lat');
+        $lng = $request->get('lng');
 
         $input = [
             'name' => $name,
             'description' => $description,
+            'lat' => $lat,
+            'lng' => $lng,
         ];
 
         $validatedRequest = $validatorRequest->validate($input);
@@ -71,6 +77,16 @@ final class PlaceController extends AbstractController
         $place = new Place();
         $place->setName($name);
         $place->setDescription($description);
+
+        if ($lat || $lng) {
+            $placeLocation = new PlaceLocation();
+
+            if ($lat) $placeLocation->setLat($lat);
+            if ($lng) $placeLocation->setLng($lng);
+
+            $place->setPlaceLocation($placeLocation);
+        }
+
         $this->em->persist($place);
         $this->em->flush();
         $data = $this->serializer->serialize($place, JsonEncoder::FORMAT);
@@ -92,11 +108,15 @@ final class PlaceController extends AbstractController
         $name = $request->get('name');
         $description = $request->get('description');
         $place_id = $request->get('id');
+        $lat = $request->get('lat');
+        $lng = $request->get('lng');
 
         $input = [
             'name' => $name,
             'description' => $description,
-            'place_id' => $place_id
+            'place_id' => $place_id,
+            'lat' => $lat,
+            'lng' => $lng,
         ];
 
         $validatedRequest = $validatorRequest->validate($input);
@@ -109,6 +129,15 @@ final class PlaceController extends AbstractController
 
         if ($name) $place->setName($name);
         if ($description) $place->setDescription($description);
+
+        if ($lat || $lng) {
+            $placeLocation = new PlaceLocation();
+
+            if ($lat) $placeLocation->setLat($lat);
+            if ($lng) $placeLocation->setLng($lng);
+
+            $place->setPlaceLocation($placeLocation);
+        }
 
         $this->em->persist($place);
         $this->em->flush();
@@ -133,6 +162,9 @@ final class PlaceController extends AbstractController
 
         $serializer = new Serializer([new PlaceNormalizer]);
 
+        $context = [
+            'PlaceLocation' => new PlaceLocationNormalizer(),
+        ];
 
         $pagination_serializer = new Serializer([new PaginationNormalizer]);
 
@@ -145,7 +177,7 @@ final class PlaceController extends AbstractController
             $serializer,
             $pagination_serializer,
             JsonEncoder::FORMAT,
-            []
+            $context
         );
 
         return new JsonResponse($jsonResponse, Response::HTTP_OK);

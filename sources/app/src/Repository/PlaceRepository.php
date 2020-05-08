@@ -56,7 +56,11 @@ class PlaceRepository extends ServiceEntityRepository
         }
 
         $qb = $this->createQueryBuilder('p');
-        $qb->where($qb->expr()->like($search_by_type, ':value'))->setParameter('value',"%$search_value%");
+        $qb->where($qb->expr()->like($search_by_type, ':value'))
+            ->setParameter('value',"%$search_value%")
+            ->select('p, pl')
+            ->leftJoin('p.placeLocation', 'pl')
+        ;
 
         return $qb
             ->orderBy($order_by_val, $order_by)
