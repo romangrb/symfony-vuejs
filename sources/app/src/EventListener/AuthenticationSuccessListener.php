@@ -11,6 +11,9 @@ class AuthenticationSuccessListener {
     public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event)
     {
         $data = $event->getData();
+
+        if (isset($data['token'])) $data['token'] = 'Bearer ' . $data['token'];
+
         $data['user'] = $event->getUser()->getAttributes();
 
         $event->setData($data);
