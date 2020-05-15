@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class PlaceController extends AbstractController
+final class PlaceController extends ApiController
 {
     /** @var EntityManagerInterface */
     private $em;
@@ -58,10 +58,12 @@ final class PlaceController extends AbstractController
      */
     public function createPlace(Request $request, CreatePlaceRequestValidator $validatorRequest): JsonResponse
     {
-        $name = $request->get('name');
-        $description = $request->get('description');
-        $lat = $request->get('lat');
-        $lng = $request->get('lng');
+        $this->transformJsonBody($request);
+
+        $name = $request->request->get('name');
+        $description = $request->request->get('description');
+        $lat = $request->request->get('lat');
+        $lng = $request->request->get('lng');
 
         $input = [
             'name' => $name,
@@ -101,31 +103,36 @@ final class PlaceController extends AbstractController
      * @param Request $request
      * @param UpdatePlaceRequestValidator $validatorRequest
      * @return JsonResponse
-     * @IsGranted("ROLE_FOO")
      */
     public function updatePlace(Request $request, UpdatePlaceRequestValidator $validatorRequest): JsonResponse
     {
-        $name = $request->get('name');
-        $description = $request->get('description');
-        $place_id = $request->get('id');
-        $lat = $request->get('lat');
-        $lng = $request->get('lng');
+        $this->transformJsonBody($request);
+
+        $place_id = $request->attributes->get('id');
+
+        $name = $request->request->get('name');
+        $description = $request->request->get('description');
+        $lat = $request->request->get('lat');
+        $lng = $request->request->get('lng');
 
         $input = [
             'name' => $name,
             'description' => $description,
-            'place_id' => $place_id,
             'lat' => $lat,
             'lng' => $lng,
         ];
 
         $validatedRequest = $validatorRequest->validate($input);
 
-        if ($validatedRequest) return $validatedRequest;
+        if ($validatedRequest) {
+            return $validatedRequest;
+        }
 
         $place = $this->em->getRepository(Place::class)->find($place_id);
 
-        if (! $place) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+        if (! $place) {
+            return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+        }
 
         if ($name) $place->setName($name);
         if ($description) $place->setDescription($description);
@@ -162,9 +169,6 @@ final class PlaceController extends AbstractController
 
         $serializer = new Serializer([new PlaceNormalizer]);
 
-        $context = [
-            'PlaceLocation' => new PlaceLocationNormalizer(),
-        ];
 
         $pagination_serializer = new Serializer([new PaginationNormalizer]);
 
@@ -177,7 +181,7 @@ final class PlaceController extends AbstractController
             $serializer,
             $pagination_serializer,
             JsonEncoder::FORMAT,
-            $context
+            []
         );
 
         return new JsonResponse($jsonResponse, Response::HTTP_OK);
@@ -202,6 +206,26 @@ final class PlaceController extends AbstractController
 
         $this->em->remove($place);
         $this->em->flush();
+
+        return new JsonResponse($data, Response::HTTP_OK, [], true);
+    }
+
+    /**
+     * Get place
+     *
+     * @Route("/place/{id}", name="getPlace", methods={"GET"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function show(Request $request): JsonResponse
+    {
+        $place = $this->em->getRepository(Place::class)->find($request->get('id'));
+
+        if (! $place) {
+            return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+        }
+
+        $data = $this->serializer->serialize($place, JsonEncoder::FORMAT);
 
         return new JsonResponse($data, Response::HTTP_OK, [], true);
     }

@@ -16,7 +16,8 @@ class UpdatePlaceRequestValidator extends AbstractRequestValidator
     public function validate(array $input): ?JsonResponse
     {
         $this->constraints = new Assert\Collection([
-            'place_id' => [new Assert\NotBlank],
+            'name' => [new Assert\Length(['min' => 3, 'max' => 255]), new Assert\NotBlank],
+            'description' => [new Assert\Length(['min' => 0, 'max' => 255])],
             'lat' => [new Assert\Regex('/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/')],
             'lng' => [new Assert\Regex('/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/')]
         ]);

@@ -26,19 +26,32 @@ const router = new Router({
         },
         {
           path: '/locations',
-          name: 'locations',
-          meta: {
-            requiresAuth: true
-          },
-          component: () => import('./views/Locations.vue'),
+          meta: { requiresAuth: true },
+          component: () => import('./views/Locations/index'),
           children: [
             {
-              path: '/:id/template',
-              name: 'show-template-content',
-              meta: {
-                requiresAuth: true
-              },
-              component: () => import('./views/Locations.vue')
+              name: 'locations',
+              path: '',
+              meta: { requiresAuth: true},
+              component: () => import('./views/Locations/table')
+            },
+            {
+              path: ':id/edit',
+              name: 'location-edit',
+              meta: { requiresAuth: true },
+              component: () => import('./views/Locations/edit')
+            },
+            {
+              path: 'create',
+              name: 'location-create',
+              meta: { requiresAuth: true },
+              component: () => import('./views/Locations/create')
+            },
+            {
+              path: ':id/builder',
+              name: 'location-builder',
+              meta: { requiresAuth: true },
+              component: () => import('./views/Locations/builder')
             }
           ]
         },

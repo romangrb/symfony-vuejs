@@ -33,6 +33,11 @@ Encore
     //.enableSingleRuntimeChunk()
     .disableSingleRuntimeChunk()
 
+    // define the environment variables
+    .configureDefinePlugin(options => {
+        options['process.env'].API_URL = JSON.stringify(process.env.API_URL);
+    })
+
     /*
      * FEATURE CONFIG
      *
