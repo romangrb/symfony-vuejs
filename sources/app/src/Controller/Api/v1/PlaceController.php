@@ -169,19 +169,18 @@ final class PlaceController extends ApiController
 
         $serializer = new Serializer([new PlaceNormalizer]);
 
+        $context = ['PlaceLocation' => new PlaceLocationNormalizer()];
 
         $pagination_serializer = new Serializer([new PaginationNormalizer]);
 
-        $paginatedCollection = $paginationFactory
-            ->createCollection($qb, $request, 'all-places');
-        ;
+        $paginatedCollection = $paginationFactory->createCollection($qb, $request, 'all-places');
 
         $jsonResponse = PaginationTransformer::normalizeTransform(
             $paginatedCollection,
             $serializer,
             $pagination_serializer,
             JsonEncoder::FORMAT,
-            []
+            $context
         );
 
         return new JsonResponse($jsonResponse, Response::HTTP_OK);
