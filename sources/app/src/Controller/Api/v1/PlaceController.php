@@ -3,12 +3,10 @@
 namespace App\Controller\Api\v1;
 
 use App\Entity\Place;
-use App\Entity\PlaceLocation;
 use App\Repository\PlaceRepository;
 use App\Requests\CreatePlaceRequestValidator;
 use App\Requests\UpdatePlaceRequestValidator;
 use App\Serializer\Normalizer\PaginationNormalizer;
-use App\Serializer\Normalizer\PlaceLocationNormalizer;
 use App\Serializer\Normalizer\PlaceNormalizer;
 use App\Services\Pagination\PaginationFactory;
 use App\Transformers\PaginationTransformer;
@@ -62,14 +60,10 @@ final class PlaceController extends ApiController
 
         $name = $request->request->get('name');
         $description = $request->request->get('description');
-        $lat = $request->request->get('lat');
-        $lng = $request->request->get('lng');
 
         $input = [
             'name' => $name,
             'description' => $description,
-            'lat' => $lat,
-            'lng' => $lng,
         ];
 
         $validatedRequest = $validatorRequest->validate($input);
@@ -79,16 +73,6 @@ final class PlaceController extends ApiController
         $place = new Place();
         $place->setName($name);
         $place->setDescription($description);
-
-        if ($lat || $lng) {
-            $placeLocation = new PlaceLocation();
-
-            if ($lat) $placeLocation->setLat($lat);
-            if ($lng) $placeLocation->setLng($lng);
-
-            $place->setPlaceLocation($placeLocation);
-        }
-
         $this->em->persist($place);
         $this->em->flush();
         $data = $this->serializer->serialize($place, JsonEncoder::FORMAT);
@@ -108,18 +92,13 @@ final class PlaceController extends ApiController
     {
         $this->transformJsonBody($request);
 
-        $place_id = $request->attributes->get('id');
-
         $name = $request->request->get('name');
         $description = $request->request->get('description');
-        $lat = $request->request->get('lat');
-        $lng = $request->request->get('lng');
+        $place_id = $request->get('id');
 
         $input = [
             'name' => $name,
-            'description' => $description,
-            'lat' => $lat,
-            'lng' => $lng,
+            'description' => $description
         ];
 
         $validatedRequest = $validatorRequest->validate($input);
@@ -136,15 +115,6 @@ final class PlaceController extends ApiController
 
         if ($name) $place->setName($name);
         if ($description) $place->setDescription($description);
-
-        if ($lat || $lng) {
-            $placeLocation = new PlaceLocation();
-
-            if ($lat) $placeLocation->setLat($lat);
-            if ($lng) $placeLocation->setLng($lng);
-
-            $place->setPlaceLocation($placeLocation);
-        }
 
         $this->em->persist($place);
         $this->em->flush();
@@ -169,18 +139,19 @@ final class PlaceController extends ApiController
 
         $serializer = new Serializer([new PlaceNormalizer]);
 
-        $context = ['PlaceLocation' => new PlaceLocationNormalizer()];
 
         $pagination_serializer = new Serializer([new PaginationNormalizer]);
 
-        $paginatedCollection = $paginationFactory->createCollection($qb, $request, 'all-places');
+        $paginatedCollection = $paginationFactory
+            ->createCollection($qb, $request, 'all-places');
+        ;
 
         $jsonResponse = PaginationTransformer::normalizeTransform(
             $paginatedCollection,
             $serializer,
             $pagination_serializer,
             JsonEncoder::FORMAT,
-            $context
+            []
         );
 
         return new JsonResponse($jsonResponse, Response::HTTP_OK);
@@ -227,5 +198,57 @@ final class PlaceController extends ApiController
         $data = $this->serializer->serialize($place, JsonEncoder::FORMAT);
 
         return new JsonResponse($data, Response::HTTP_OK, [], true);
+    }
+
+    /**
+     * Render template
+     *
+     * @Route("/place/{id}/template", methods={"POST"})
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function updateTemplate(Request $request, int $id): JsonResponse
+    {
+        $this->transformJsonBody($request);
+
+        $place = $this->em->getRepository(Place::class)->find($id);
+
+        if (!$place) {
+            return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+        }
+
+        $place
+            ->setCSS($request->request->get('gjs-css'))
+            ->setHTML($request->request->get('gjs-html'));
+
+        $this->em->persist($place);
+        $this->em->flush();
+
+        return new JsonResponse('', Response::HTTP_OK, [], true);
+    }
+
+    /**
+     * Render template
+     *
+     * @Route("/place/{id}/template", methods={"GET"})
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function getTemplate(Request $request, int $id): JsonResponse
+    {
+        $place = $this->em->getRepository(Place::class)->find($id);
+
+        if (!$place) {
+            return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+        }
+
+        $data = [
+            'gjs-css' => $place->getCSS(),
+            'gjs-html' => $place->getHTML(),
+        ];
+
+        return new JsonResponse(json_encode($data), Response::HTTP_OK, [], true);
     }
 }

@@ -8,7 +8,6 @@ use App\Repository\PlaceRepository;
 use App\Requests\AttachPlaceContentTemplateRequestValidator;
 use App\Requests\DetachPlaceContentTemplateRequestValidator;
 use App\Requests\RenderPlaceContentTemplateRequestValidator;
-use App\Requests\ShowPlaceRequestValidator;
 use App\Requests\UpdatePlaceRequestValidator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -79,103 +78,98 @@ final class PlaceContentController extends AbstractController
         $this->logger = $logger;
     }
 
-    /**
-     * Show place content
-     *
-     * @Route("/place/{id}/template", name="showTemplateContent", methods={"GET"})
-     * @param Request $request
-     * @param Security $security
-     * @param ShowPlaceRequestValidator $validatorRequest
-     * @return JsonResponse
-     */
-    public function showTemplateContent(
-        Request $request,
-        Security $security,
-        ShowPlaceRequestValidator $validatorRequest): JsonResponse
-    {
-        $place_id = $request->get('id');
+//    /**
+//     * Show place content
+//     *
+//     * @Route("/place/{id}/template", name="showTemplateContent", methods={"GET"})
+//     * @param Request $request
+//     * @param Security $security
+//     * @param UpdatePlaceRequestValidator $validatorRequest
+//     * @return JsonResponse
+//     */
+//    public function showTemplateContent(
+//        Request $request,
+//        Security $security,
+//        UpdatePlaceRequestValidator $validatorRequest): JsonResponse
+//    {
+//        $place_id = $request->get('id');
+//
+//        $input = ['place_id' => $place_id];
+//
+//        $validatedRequest = $validatorRequest->validate($input);
+//
+//        if ($validatedRequest) return $validatedRequest;
+//
+//        try {
+//            $place = $this->place_repository->find($place_id);
+//        } catch (\Exception $e) {
+//            $message = ErrorExceptionTransformer::transform($e);
+//            $this->logger->error(print_r($message, true));
+//            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+//        }
+//
+//        if (! $place) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+//
+//        $file_path = $place->getPlaceContent()->getFilePath();
+//        $templateVariablesHash = $security->getUser()->getTemplateVariablesHash();
+//
+//        try {
+//            $htmlContents = $this->twig->render($file_path, $templateVariablesHash);
+//        } catch (\Twig\Error\Error $e) {
+//            $message = ErrorExceptionTransformer::transform($e);
+//            $this->logger->error(print_r($message, true));
+//            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+//        }
+//
+//        return new JsonResponse($htmlContents, Response::HTTP_OK, [], true);
+//    }
 
-        $input = ['place_id' => $place_id];
-
-        $validatedRequest = $validatorRequest->validate($input);
-
-        if ($validatedRequest) return $validatedRequest;
-
-        try {
-            $place = $this->place_repository->find($place_id);
-        } catch (\Exception $e) {
-            $message = ErrorExceptionTransformer::transform($e);
-            $this->logger->error(print_r($message, true));
-            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
-        }
-
-        if (! $place) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
-
-        if ($placeContent = $place->getPlaceContent()) {
-            $file_path = $placeContent->getFilePath();
-        } else {
-            return new JsonResponse('', Response::HTTP_OK, [], true);
-        }
-
-        $templateVariablesHash = $security->getUser()->getTemplateVariablesHash();
-
-        try {
-            $htmlContents = $this->twig->render($file_path, $templateVariablesHash);
-        } catch (\Twig\Error\Error $e) {
-            $message = ErrorExceptionTransformer::transform($e);
-            $this->logger->error(print_r($message, true));
-            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
-        }
-
-        return new JsonResponse($htmlContents, Response::HTTP_OK, [], true);
-    }
-
-    /**
-     * Render template
-     *
-     * @Route("/place/{id}/template/render", name="renderPlaceContentTemplateFromString", methods={"POST"})
-     * @param Request $request
-     * @param Security $security
-     * @param RenderPlaceContentTemplateRequestValidator $validatorRequest
-     * @return JsonResponse
-     */
-    public function renderPlaceContentTemplateFromString(
-        Request $request,
-        Security $security,
-        RenderPlaceContentTemplateRequestValidator $validatorRequest): JsonResponse
-    {
-        $place_id = $request->get('id');
-        $content = $request->get('content');
-
-        $input = [
-            'place_id'=> $place_id,
-            'content' => $content
-        ];
-
-        $validatedRequest = $validatorRequest->validate($input);
-
-        if ($validatedRequest) return $validatedRequest;
-
-        $templateVariablesHash = $security->getUser()->getTemplateVariablesHash();
-
-        try {
-            $template = $this->twig->createTemplate($content);
-        } catch (\Exception $e) {
-            $message = ErrorExceptionTransformer::transform($e);
-            $this->logger->error(print_r($message, true));
-            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
-        }
-
-        try {
-            $result = $template->render($templateVariablesHash);
-        } catch (\Twig\Error\Error $e) {
-            $message = ErrorExceptionTransformer::transform($e);
-            $this->logger->error(print_r($message, true));
-            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
-        }
-
-        return new JsonResponse($result, Response::HTTP_OK, [], true);
-    }
+//    /**
+//     * Render template
+//     *
+//     * @Route("/place/{id}/template/render", name="renderPlaceContentTemplateFromString", methods={"POST"})
+//     * @param Request $request
+//     * @param Security $security
+//     * @param RenderPlaceContentTemplateRequestValidator $validatorRequest
+//     * @return JsonResponse
+//     */
+//    public function renderPlaceContentTemplateFromString(
+//        Request $request,
+//        Security $security,
+//        RenderPlaceContentTemplateRequestValidator $validatorRequest): JsonResponse
+//    {
+//        $place_id = $request->get('id');
+//        $content = $request->get('content');
+//
+//        $input = [
+//            'place_id'=> $place_id,
+//            'content' => $content
+//        ];
+//
+//        $validatedRequest = $validatorRequest->validate($input);
+//
+//        if ($validatedRequest) return $validatedRequest;
+//
+//        $templateVariablesHash = $security->getUser()->getTemplateVariablesHash();
+//
+//        try {
+//            $template = $this->twig->createTemplate($content);
+//        } catch (\Exception $e) {
+//            $message = ErrorExceptionTransformer::transform($e);
+//            $this->logger->error(print_r($message, true));
+//            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+//        }
+//
+//        try {
+//            $result = $template->render($templateVariablesHash);
+//        } catch (\Twig\Error\Error $e) {
+//            $message = ErrorExceptionTransformer::transform($e);
+//            $this->logger->error(print_r($message, true));
+//            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+//        }
+//
+//        return new JsonResponse($result, Response::HTTP_OK, [], true);
+//    }
 
     /**
      * Create/Update template content
