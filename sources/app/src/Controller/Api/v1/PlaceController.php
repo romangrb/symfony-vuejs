@@ -60,10 +60,14 @@ final class PlaceController extends ApiController
 
         $name = $request->request->get('name');
         $description = $request->request->get('description');
+        $lat = $request->request->get('lat');
+        $lng = $request->request->get('lng');
 
         $input = [
             'name' => $name,
             'description' => $description,
+            'lat' => $lat,
+            'lng' => $lng,
         ];
 
         $validatedRequest = $validatorRequest->validate($input);
@@ -73,6 +77,16 @@ final class PlaceController extends ApiController
         $place = new Place();
         $place->setName($name);
         $place->setDescription($description);
+
+        if ($lat || $lng) {
+            $placeLocation = new PlaceLocation();
+
+            if ($lat) $placeLocation->setLat($lat);
+            if ($lng) $placeLocation->setLng($lng);
+
+            $place->setPlaceLocation($placeLocation);
+        }
+
         $this->em->persist($place);
         $this->em->flush();
         $data = $this->serializer->serialize($place, JsonEncoder::FORMAT);
@@ -86,19 +100,23 @@ final class PlaceController extends ApiController
      * @Route("/place/{id}", name="updatePlace", methods={"PATCH"})
      * @param Request $request
      * @param UpdatePlaceRequestValidator $validatorRequest
+     * @param int $id
      * @return JsonResponse
      */
-    public function updatePlace(Request $request, UpdatePlaceRequestValidator $validatorRequest): JsonResponse
+    public function updatePlace(Request $request, UpdatePlaceRequestValidator $validatorRequest, int $id): JsonResponse
     {
         $this->transformJsonBody($request);
 
         $name = $request->request->get('name');
         $description = $request->request->get('description');
-        $place_id = $request->get('id');
+        $lat = $request->request->get('lat');
+        $lng = $request->request->get('lng');
 
         $input = [
             'name' => $name,
-            'description' => $description
+            'description' => $description,
+            'lat' => $lat,
+            'lng' => $lng,
         ];
 
         $validatedRequest = $validatorRequest->validate($input);
@@ -107,7 +125,7 @@ final class PlaceController extends ApiController
             return $validatedRequest;
         }
 
-        $place = $this->em->getRepository(Place::class)->find($place_id);
+        $place = $this->em->getRepository(Place::class)->find($id);
 
         if (! $place) {
             return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
@@ -115,6 +133,15 @@ final class PlaceController extends ApiController
 
         if ($name) $place->setName($name);
         if ($description) $place->setDescription($description);
+
+        if ($lat || $lng) {
+            $placeLocation = new PlaceLocation();
+
+            if ($lat) $placeLocation->setLat($lat);
+            if ($lng) $placeLocation->setLng($lng);
+
+            $place->setPlaceLocation($placeLocation);
+        }
 
         $this->em->persist($place);
         $this->em->flush();
@@ -198,57 +225,5 @@ final class PlaceController extends ApiController
         $data = $this->serializer->serialize($place, JsonEncoder::FORMAT);
 
         return new JsonResponse($data, Response::HTTP_OK, [], true);
-    }
-
-    /**
-     * Render template
-     *
-     * @Route("/place/{id}/template", methods={"POST"})
-     * @param Request $request
-     * @param int $id
-     * @return JsonResponse
-     */
-    public function updateTemplate(Request $request, int $id): JsonResponse
-    {
-        $this->transformJsonBody($request);
-
-        $place = $this->em->getRepository(Place::class)->find($id);
-
-        if (!$place) {
-            return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
-        }
-
-        $place
-            ->setCSS($request->request->get('gjs-css'))
-            ->setHTML($request->request->get('gjs-html'));
-
-        $this->em->persist($place);
-        $this->em->flush();
-
-        return new JsonResponse('', Response::HTTP_OK, [], true);
-    }
-
-    /**
-     * Render template
-     *
-     * @Route("/place/{id}/template", methods={"GET"})
-     * @param Request $request
-     * @param int $id
-     * @return JsonResponse
-     */
-    public function getTemplate(Request $request, int $id): JsonResponse
-    {
-        $place = $this->em->getRepository(Place::class)->find($id);
-
-        if (!$place) {
-            return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
-        }
-
-        $data = [
-            'gjs-css' => $place->getCSS(),
-            'gjs-html' => $place->getHTML(),
-        ];
-
-        return new JsonResponse(json_encode($data), Response::HTTP_OK, [], true);
     }
 }

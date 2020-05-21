@@ -93,6 +93,7 @@
             <base-dropdown position="right" icon="fas fa-bars" :hideArrow=true>
               <router-link :to="{ name: 'location-edit', params: { id: row.id }}" class="dropdown-item">Edit</router-link>
               <router-link :to="{ name: 'location-builder', params: { id: row.id }}" class="dropdown-item">Page Builder</router-link>
+              <router-link :to="{ name: 'location-outside', params: { id: row.id }}" class="dropdown-item">View</router-link>
             </base-dropdown>
           </td>
         </template>

@@ -47,12 +47,6 @@ const router = new Router({
               meta: { requiresAuth: true },
               component: () => import('./views/Locations/create')
             },
-            {
-              path: ':id/builder',
-              name: 'location-builder',
-              meta: { requiresAuth: true },
-              component: () => import('./views/Locations/builder')
-            }
           ]
         },
         {
@@ -107,6 +101,18 @@ const router = new Router({
           component: () => import(/* webpackChunkName: "demo" */ './views/Register.vue')
         }
       ]
+    },
+    {
+      path: '/place/:id',
+      name: 'location-outside',
+      meta: { requiresAuth: false },
+      component: () => import('./views/Locations/outside')
+    },
+    {
+      path: '/locations/:id/builder',
+      name: 'location-builder',
+      meta: { requiresAuth: true },
+      component: () => import('./views/Locations/builder')
     }
   ]
 });

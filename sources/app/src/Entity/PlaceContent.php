@@ -34,7 +34,7 @@ class PlaceContent
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $file_path;
+    private $fileName;
 
     /**
      * @ORM\Column(type="boolean")
@@ -77,14 +77,14 @@ class PlaceContent
         return $this;
     }
 
-    public function getFilePath(): ?string
+    public function getFileName(): ?string
     {
-        return $this->file_path;
+        return $this->fileName;
     }
 
-    public function setFilePath(string $file_path): self
+    public function setFileName(string $fileName): self
     {
-        $this->file_path = $file_path;
+        $this->fileName = $fileName;
 
         return $this;
     }

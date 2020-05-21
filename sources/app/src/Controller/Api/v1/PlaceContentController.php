@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api\v1;
 
+use App\Entity\Place;
 use App\Entity\PlaceContent;
 use App\Repository\PlaceContentRepository;
 use App\Repository\PlaceRepository;
@@ -25,7 +26,7 @@ use Twig\Environment;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class PlaceContentController extends AbstractController
+final class PlaceContentController extends ApiController
 {
     /** @var EntityManagerInterface */
     private $em;
@@ -78,98 +79,92 @@ final class PlaceContentController extends AbstractController
         $this->logger = $logger;
     }
 
-//    /**
-//     * Show place content
-//     *
-//     * @Route("/place/{id}/template", name="showTemplateContent", methods={"GET"})
-//     * @param Request $request
-//     * @param Security $security
-//     * @param UpdatePlaceRequestValidator $validatorRequest
-//     * @return JsonResponse
-//     */
-//    public function showTemplateContent(
-//        Request $request,
-//        Security $security,
-//        UpdatePlaceRequestValidator $validatorRequest): JsonResponse
-//    {
-//        $place_id = $request->get('id');
-//
-//        $input = ['place_id' => $place_id];
-//
-//        $validatedRequest = $validatorRequest->validate($input);
-//
-//        if ($validatedRequest) return $validatedRequest;
-//
-//        try {
-//            $place = $this->place_repository->find($place_id);
-//        } catch (\Exception $e) {
-//            $message = ErrorExceptionTransformer::transform($e);
-//            $this->logger->error(print_r($message, true));
-//            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
-//        }
-//
-//        if (! $place) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
-//
-//        $file_path = $place->getPlaceContent()->getFilePath();
-//        $templateVariablesHash = $security->getUser()->getTemplateVariablesHash();
-//
-//        try {
-//            $htmlContents = $this->twig->render($file_path, $templateVariablesHash);
-//        } catch (\Twig\Error\Error $e) {
-//            $message = ErrorExceptionTransformer::transform($e);
-//            $this->logger->error(print_r($message, true));
-//            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
-//        }
-//
-//        return new JsonResponse($htmlContents, Response::HTTP_OK, [], true);
-//    }
+    /**
+     * Update template
+     *
+     * @Route("/place/{id}/template", methods={"GET"})
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function getTemplate(int $id): JsonResponse
+    {
+        $place = $this->em->getRepository(Place::class)->find($id);
 
-//    /**
-//     * Render template
-//     *
-//     * @Route("/place/{id}/template/render", name="renderPlaceContentTemplateFromString", methods={"POST"})
-//     * @param Request $request
-//     * @param Security $security
-//     * @param RenderPlaceContentTemplateRequestValidator $validatorRequest
-//     * @return JsonResponse
-//     */
-//    public function renderPlaceContentTemplateFromString(
-//        Request $request,
-//        Security $security,
-//        RenderPlaceContentTemplateRequestValidator $validatorRequest): JsonResponse
-//    {
-//        $place_id = $request->get('id');
-//        $content = $request->get('content');
-//
-//        $input = [
-//            'place_id'=> $place_id,
-//            'content' => $content
-//        ];
-//
-//        $validatedRequest = $validatorRequest->validate($input);
-//
-//        if ($validatedRequest) return $validatedRequest;
-//
-//        $templateVariablesHash = $security->getUser()->getTemplateVariablesHash();
-//
-//        try {
-//            $template = $this->twig->createTemplate($content);
-//        } catch (\Exception $e) {
-//            $message = ErrorExceptionTransformer::transform($e);
-//            $this->logger->error(print_r($message, true));
-//            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
-//        }
-//
-//        try {
-//            $result = $template->render($templateVariablesHash);
-//        } catch (\Twig\Error\Error $e) {
-//            $message = ErrorExceptionTransformer::transform($e);
-//            $this->logger->error(print_r($message, true));
-//            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
-//        }
-//
-//        return new JsonResponse($result, Response::HTTP_OK, [], true);
-//    }
+        if (! $place) {
+            return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+        }
+
+        $data = [
+            'gjs-css' => '',
+            'gjs-html' => ''
+        ];
+
+        try {
+            $filesystem = new Filesystem();
+            $path = $this->getParameter('kernel.project_dir') . "/var/places/$id/";
+            $placeContent = $place->getPlaceContent();
+
+            if ($placeContent
+                && $placeContent->getFileName()
+                && $filesystem->exists("$path/" . $placeContent->getFileName())
+            ) {
+                $data['gjs-html'] = file_get_contents($path . $placeContent->getFileName());
+            }
+        } catch (\Exception $exception) {
+            return new JsonResponse(json_encode($data), Response::HTTP_OK, [], true);
+        }
+
+        return new JsonResponse(json_encode($data), Response::HTTP_OK, [], true);
+    }
+
+    /**
+     * Update template
+     *
+     * @Route("/place/{id}/template", methods={"POST"})
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function updateTemplate(Request $request, int $id): JsonResponse
+    {
+        $this->transformJsonBody($request);
+
+        $place = $this->em->getRepository(Place::class)->find($id);
+
+        if (! $place) {
+            return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+        }
+
+        $placeContent = $place->getPlaceContent();
+
+        if (! $placeContent) {
+            $placeContent = new PlaceContent();
+        }
+
+        if (! $placeContent->getFileName()) {
+            $placeContent->setFileName(md5(random_bytes(32)) . '.html');
+        }
+
+        try {
+            $name = $placeContent->getFileName();
+            $root = $this->getParameter('kernel.project_dir');
+            $path = "var/places/$id/$name";
+
+            $filesystem = new Filesystem();
+            $filesystem->dumpFile("$root/$path", $request->request->get('html'));
+
+            $placeContent->setIsPublished(false);
+            $place->setPlaceContent($placeContent);
+
+            $this->em->persist($place);
+            $this->em->flush();
+        } catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
+        }
+
+        return new JsonResponse('', Response::HTTP_OK, [], true);
+    }
 
     /**
      * Create/Update template content

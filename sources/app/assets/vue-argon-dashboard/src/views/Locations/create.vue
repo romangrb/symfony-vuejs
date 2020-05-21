@@ -26,20 +26,6 @@
                     placeholder="Description"
                     label="Description"
                     v-model="model.description"></textarea>
-
-          <base-input class="mb-3"
-                      placeholder="Latitude"
-                      v-model="model.lat"
-                      label="Latitude"
-                      v-bind:error="errors.lat">
-          </base-input>
-
-          <base-input class="mb-3"
-                      placeholder="Longitude"
-                      v-model="model.lng"
-                      label="Latitude"
-                      v-bind:error="errors.lng">
-          </base-input>
         </div>
 
         <div class="d-flex justify-content-between">
@@ -67,15 +53,11 @@
         loader:'Dots',
         model: {
           name: '',
-          description: '',
-          lat: '',
-          lng: ''
+          description: ''
         },
         errors: {
           name: '',
-          description: '',
-          lat: '',
-          lng: ''
+          description: ''
         }
       }
     },

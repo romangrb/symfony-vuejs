@@ -33,16 +33,6 @@ class Place
     private $description;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $html;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $css;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\PlaceAttachment", mappedBy="place", cascade={"persist", "remove"})
      */
     private $placeAttachment;
@@ -77,44 +67,14 @@ class Place
     /**
      * @return string|null
      */
-    public function getHTML(): ?string
+    public function getDescription(): ?string
     {
-        return $this->html;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getCSS(): ?string
-    {
-        return $this->css;
+        return $this->description;
     }
 
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @param string|null $html
-     * @return $this
-     */
-    public function setHTML(?string $html): self
-    {
-        $this->html = $html;
-
-        return $this;
-    }
-
-    /**
-     * @param string|null $css
-     * @return $this
-     */
-    public function setCSS(?string $css): self
-    {
-        $this->css = $css;
 
         return $this;
     }
