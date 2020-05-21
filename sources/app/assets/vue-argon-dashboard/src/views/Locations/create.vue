@@ -28,6 +28,20 @@
                     v-model="model.description"></textarea>
         </div>
 
+        <base-input class="mb-3"
+                    placeholder="Latitude"
+                    v-model="model.lat"
+                    label="Latitude"
+                    v-bind:error="errors.lat">
+        </base-input>
+
+        <base-input class="mb-3"
+                    placeholder="Longitude"
+                    v-model="model.lng"
+                    label="Latitude"
+                    v-bind:error="errors.lng">
+        </base-input>
+
         <div class="d-flex justify-content-between">
           <base-button type="primary" @click="cancel" class="my-4">Cancel</base-button>
           <base-button type="success" @click="create" class="my-4">Create</base-button>
@@ -53,10 +67,14 @@
         loader:'Dots',
         model: {
           name: '',
+          lat: '',
+          lng: '',
           description: ''
         },
         errors: {
           name: '',
+          lat: '',
+          lng: '',
           description: ''
         }
       }
