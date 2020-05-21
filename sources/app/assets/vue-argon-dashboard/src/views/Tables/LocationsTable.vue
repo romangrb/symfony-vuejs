@@ -79,7 +79,7 @@
             {{row.name}}
           </th>
           <td>
-            {{row.description}}
+            {{row.description | truncate(70, '...')}}
           </td>
           <td>
             {{row.updated_at | formatDate}}
@@ -162,7 +162,10 @@
       formatDate: function (value) {
         if (! value) return '';
         return moment(String(value)).format('DD/MM/YY hh:mm');
-      }
+      },
+      truncate: function (text, length, suffix) {
+        return text.substring(0, length) + suffix;
+      },
     },
     watch: {
       "pagination.page": function (page) {
