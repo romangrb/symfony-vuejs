@@ -14,3 +14,7 @@ test:
 api_v1:
   prefix: /api/v1
   resource: '../src/Controller/Api/v1'
+
+public:
+  prefix: /
+  resource: '../src/Controller/Web'

@@ -47,4 +47,29 @@ class PlaceContentRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    /**
+     * Get place from location
+     *
+     * @param float $lat
+     * @param float $lng
+     * @return PlaceContent
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getPlaceContentByLocation(float $lat, float $lng): PlaceContent
+    {
+        $qb = $this->createQueryBuilder('pc');
+
+        return $qb->select('pc')
+            ->join('pc.place', 'p')
+            ->join('p.placeLocation', 'pl')
+            ->where('pl.lat = :lat')
+            ->andWhere('pl.lng = :lng')
+            ->setParameter('lat', $lat)
+            ->setParameter('lng', $lng)
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult();
+    }
 }

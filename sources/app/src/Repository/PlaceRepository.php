@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Place;
+use App\Entity\PlaceContent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
