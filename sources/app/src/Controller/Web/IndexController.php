@@ -49,11 +49,7 @@ final class IndexController extends AbstractController
      * @Route("/place/@{lat},{lng}", name="getPlaceByLocations", methods={"GET"})
      * @param Request $request
      * @param ShowPlaceByLocationRequestValidator $validatorRequest
-     * http://prntscr.com/slqlqo
      * TODO make response html
-     * TODO fix route path to http://app.localhost/place/@49.517501,23.207269
-     * TODO make other routes
-     *
      * @param LoggerInterface $logger
      * @return Response
      */
