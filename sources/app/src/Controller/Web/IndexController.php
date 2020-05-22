@@ -46,7 +46,7 @@ final class IndexController extends AbstractController
     /**
      * Get place by location attr
      *
-     * @Route("/p/@{lat},{lng}", name="getPlaceByLocations", methods={"GET"})
+     * @Route("/place/@{lat},{lng}", name="getPlaceByLocations", methods={"GET"})
      * @param Request $request
      * @param ShowPlaceByLocationRequestValidator $validatorRequest
      * http://prntscr.com/slqlqo
@@ -70,7 +70,7 @@ final class IndexController extends AbstractController
         $validatedRequest = $validatorRequest->validate($input);
 
         if ($validatedRequest) {
-            return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+            return new Response('',Response::HTTP_NOT_FOUND);
         }
 
         $placeContent = $this->em->getRepository(PlaceContent::class)->getPlaceContentByLocation($lat, $lng);
