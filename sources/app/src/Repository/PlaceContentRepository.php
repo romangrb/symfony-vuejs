@@ -54,10 +54,10 @@ class PlaceContentRepository extends ServiceEntityRepository
      *
      * @param float $lat
      * @param float $lng
-     * @return PlaceContent
+     * @return PlaceContent|null
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getPlaceContentByLocation(float $lat, float $lng): PlaceContent
+    public function getPlaceContentByLocation(float $lat, float $lng): ?PlaceContent
     {
         $qb = $this->createQueryBuilder('pc');
 

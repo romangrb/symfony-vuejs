@@ -87,8 +87,7 @@ final class IndexController extends AbstractController
 
             $file_name = $placeContent->getFileName();
 
-            if ($file_name
-                && $filesystem->exists("$path/" . $file_name)
+            if ($file_name && $filesystem->exists("$path/" . $file_name)
             ) {
                 $data['gjs-html'] = file_get_contents($path . $file_name);
             }
