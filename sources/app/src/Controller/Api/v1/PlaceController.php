@@ -3,6 +3,7 @@
 namespace App\Controller\Api\v1;
 
 use App\Entity\Place;
+use App\Entity\PlaceLocation;
 use App\Repository\PlaceRepository;
 use App\Requests\CreatePlaceRequestValidator;
 use App\Requests\UpdatePlaceRequestValidator;
@@ -60,8 +61,8 @@ final class PlaceController extends ApiController
 
         $name = $request->request->get('name');
         $description = $request->request->get('description');
-        $lat = $request->request->get('lat');
-        $lng = $request->request->get('lng');
+        $lat = (float) $request->request->get('lat');
+        $lng = (float) $request->request->get('lng');
 
         $input = [
             'name' => $name,
@@ -109,8 +110,8 @@ final class PlaceController extends ApiController
 
         $name = $request->request->get('name');
         $description = $request->request->get('description');
-        $lat = $request->request->get('lat');
-        $lng = $request->request->get('lng');
+        $lat = (float) $request->request->get('lat');
+        $lng = (float) $request->request->get('lng');
 
         $input = [
             'name' => $name,
