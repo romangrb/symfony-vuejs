@@ -8,6 +8,7 @@ use App\Repository\PlaceRepository;
 use App\Requests\CreatePlaceRequestValidator;
 use App\Requests\UpdatePlaceRequestValidator;
 use App\Serializer\Normalizer\PaginationNormalizer;
+use App\Serializer\Normalizer\PlaceLocationNormalizer;
 use App\Serializer\Normalizer\PlaceNormalizer;
 use App\Services\Pagination\PaginationFactory;
 use App\Transformers\PaginationTransformer;
@@ -60,14 +61,11 @@ final class PlaceController extends ApiController
 
         $name = $request->request->get('name');
         $description = $request->request->get('description');
-        $lat = (float) $request->request->get('lat');
-        $lng = (float) $request->request->get('lng');
+        $locations = $request->request->get('locations');
 
         $input = [
             'name' => $name,
-            'description' => $description,
-            'lat' => $lat,
-            'lng' => $lng,
+            'description' => $description
         ];
 
         $validatedRequest = $validatorRequest->validate($input);
@@ -78,18 +76,19 @@ final class PlaceController extends ApiController
         $place->setName($name);
         $place->setDescription($description);
 
-        if ($lat || $lng) {
+        if (! empty($locations)) {
             $placeLocation = new PlaceLocation();
-
-            if ($lat) $placeLocation->setLat($lat);
-            if ($lng) $placeLocation->setLng($lng);
-
-            $place->setPlaceLocation($placeLocation);
+//            TODO multiple location one-to-many instead one-to-one
         }
 
         $this->em->persist($place);
         $this->em->flush();
-        $data = $this->serializer->serialize($place, JsonEncoder::FORMAT);
+
+        $context = [
+            'PlaceLocation' => new PlaceLocationNormalizer,
+        ];
+
+        $data = $this->serializer->serialize($place, JsonEncoder::FORMAT, $context);
 
         return new JsonResponse($data, Response::HTTP_CREATED, [], true);
     }
@@ -109,14 +108,11 @@ final class PlaceController extends ApiController
 
         $name = $request->request->get('name');
         $description = $request->request->get('description');
-        $lat = (float) $request->request->get('lat');
-        $lng = (float) $request->request->get('lng');
+        $locations = $request->request->get('locations');
 
         $input = [
             'name' => $name,
-            'description' => $description,
-            'lat' => $lat,
-            'lng' => $lng,
+            'description' => $description
         ];
 
         $validatedRequest = $validatorRequest->validate($input);
@@ -134,19 +130,19 @@ final class PlaceController extends ApiController
         if ($name) $place->setName($name);
         if ($description) $place->setDescription($description);
 
-        if ($lat || $lng) {
+        if ($locations) {
             $placeLocation = new PlaceLocation();
-
-            if ($lat) $placeLocation->setLat($lat);
-            if ($lng) $placeLocation->setLng($lng);
-
-            $place->setPlaceLocation($placeLocation);
+//            TODO multiple location one-to-many instead one-to-one
         }
 
         $this->em->persist($place);
         $this->em->flush();
 
-        $data = $this->serializer->serialize($place, JsonEncoder::FORMAT);
+        $context = [
+            'PlaceLocation' => new PlaceLocationNormalizer,
+        ];
+
+        $data = $this->serializer->serialize($place, JsonEncoder::FORMAT, $context);
 
         return new JsonResponse($data, Response::HTTP_CREATED, [], true);
     }
@@ -221,7 +217,11 @@ final class PlaceController extends ApiController
             return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
         }
 
-        $data = $this->serializer->serialize($place, JsonEncoder::FORMAT);
+        $context = [
+            'PlaceLocation' => new PlaceLocationNormalizer,
+        ];
+
+        $data = $this->serializer->serialize($place, JsonEncoder::FORMAT, $context);
 
         return new JsonResponse($data, Response::HTTP_OK, [], true);
     }

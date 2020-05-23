@@ -33,14 +33,14 @@
                   :center="center"
                   :zoom="12"
                   style="width:100%;  height: 400px;"
-                  @click="onMapClick"
+                  @click="addMaker"
           >
-            <gmap-marker
-                    :key="index"
-                    v-for="(m, index) in markers"
-                    :position="m.position"
-                    @click="center=m.position"
-            ></gmap-marker>
+          <gmap-marker
+                  :key="index"
+                  v-for="(m, index) in markers"
+                  :position="m.position"
+                  @click="center=m.position"
+          ></gmap-marker>
           </gmap-map>
         </div>
 
@@ -58,6 +58,8 @@
   import loading from 'vue-loading-overlay';
   import 'vue-loading-overlay/dist/vue-loading.css';
 
+  const MAX_MAKERS = 20;
+
   export default {
     name: "GoogleMap",
     components: {
@@ -65,7 +67,7 @@
     },
     data() {
       return {
-        center: {lat: 45.508, lng: -73.587},
+        center: {lat: 0, lng: 0},
         markers: [],
         places: [],
         currentPlace: null,
@@ -74,11 +76,13 @@
         loader:'Dots',
         model: {
           name: '',
-          description: ''
+          description: '',
+          locations: []
         },
         errors: {
           name: '',
-          description: ''
+          description: '',
+          locations: []
         }
       }
     },
@@ -86,17 +90,27 @@
       http.get('place/' + this.$route.params.id).then((data) => {
         this.model.name = data.name;
         this.model.description = data.description;
-        this.center.lat = 45.508;
-        this.center.lng = -73.587;
-        // this.center.lat = parseFloat(data.lat);
-        // this.center.lng = parseFloat(data.lng);
+        if (data['place_location'].length !== 0) {
+          let first_el = data['place_location'][0];
+          this.center.lat = first_el.lat;
+          this.center.lng = first_el.lng;
+
+        //  toDo add to locations to makers array to show on the map
+        //  toDo save location array add validations
+        //  toDo remove makers fn
+        }
         this.is_processing = false;
-        console.log(data.lat);
-      }),
+      });
       this.geolocate();
     },
     methods: {
-      onMapClick(e) {
+      addMaker(e) {
+
+        if (this.markers.length > MAX_MAKERS ) {
+          console.warn(`max maker limit ${MAX_MAKERS}`);
+          return;
+        }
+
         this.markers.push({
           id: 1 + Math.max(0, ...this.markers.map(n => n.id)),
           position: e.latLng,
@@ -105,15 +119,15 @@
       onMarkerClick(e) {
         this.$refs.map.panTo(e.latLng);
       },
-      geolocate: function () {
-        navigator.geolocation.getCurrentPosition(position => {
-          this.center = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-        });
-      },
       save: function() {
+        this.model.locations = this.markers.map(item => {
+          let position = item['position'];
+            return {
+              'lat': position.lat(),
+              'lng': position.lng()
+            };
+        });
+
         this.is_processing = true;
 
         let _this = this;
