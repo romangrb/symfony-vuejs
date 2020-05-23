@@ -35,7 +35,7 @@ class Place
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\PlaceAttachment", mappedBy="place", cascade={"persist", "remove"})
      */
-    private $placeAttachment;
+    private $attachments;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\PlaceContent", mappedBy="place", cascade={"persist", "remove"})
@@ -49,7 +49,7 @@ class Place
 
     public function __construct()
     {
-        $this->placeAttachment = new ArrayCollection();
+        $this->attachments = new ArrayCollection();
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
@@ -89,25 +89,25 @@ class Place
     /**
      * @return Collection|PlaceAttachment[]
      */
-    public function getPlaceAttachment(): ?Collection
+    public function getAttachments(): ?Collection
     {
-        return $this->placeAttachment;
+        return $this->attachments;
     }
 
-    public function addPlaceAttachment(PlaceAttachment $placeAttachment): self
+    public function addAttachment(PlaceAttachment $placeAttachment): self
     {
-        if (! $this->placeAttachment->contains($placeAttachment)) {
-            $this->placeAttachment[] = $placeAttachment;
+        if (! $this->attachments->contains($placeAttachment)) {
+            $this->attachments[] = $placeAttachment;
             $placeAttachment->setPlace($this);
         }
 
         return $this;
     }
 
-    public function removePlaceAttachment(PlaceAttachment $placeAttachment): self
+    public function removeAttachment(PlaceAttachment $placeAttachment): self
     {
-        if ($this->placeAttachment->contains($placeAttachment)) {
-            $this->placeAttachment->removeElement($placeAttachment);
+        if ($this->attachments->contains($placeAttachment)) {
+            $this->attachments->removeElement($placeAttachment);
             // set the owning side to null (unless already changed)
             if ($placeAttachment->getPlace() === $this) {
                 $placeAttachment->setPlace(null);
