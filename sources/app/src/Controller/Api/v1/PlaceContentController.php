@@ -83,10 +83,11 @@ final class PlaceContentController extends ApiController
      * Update template
      *
      * @Route("/place/{id}/template", methods={"GET"})
+     * @param Request $request
      * @param int $id
      * @return JsonResponse
      */
-    public function getTemplate(int $id): JsonResponse
+    public function getTemplate(Request $request, int $id): JsonResponse
     {
         $place = $this->em->getRepository(Place::class)->find($id);
 
@@ -96,8 +97,13 @@ final class PlaceContentController extends ApiController
 
         $data = [
             'gjs-css' => '',
-            'gjs-html' => ''
+            'gjs-html' => '',
+            'assets' => []
         ];
+
+        foreach ($place->getAttachments() as $attachment) {
+            $data['assets'][] = $request->getUriForPath('/' . $attachment->getFilePath());
+        }
 
         try {
             $filesystem = new Filesystem();

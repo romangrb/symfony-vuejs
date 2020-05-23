@@ -15,6 +15,7 @@
         },
         mounted() {
             let urlPath = 'place/' + this.$route.params.id + '/template';
+            let assetUrlPath = 'place/' + this.$route.params.id + '/attachment';
             let _this = this;
 
             let editor = grapesjs.init({
@@ -32,6 +33,14 @@
                     urlLoad: process.env.API_URL + urlPath,
                     contentTypeJson: true
                 },
+                assetManager: {
+                    uploadName: 'attachment',
+                    headers: {
+                        'Authorization' : localStorage.getItem('token')
+                    },
+                    multiUpload: false,
+                    upload: process.env.API_URL + assetUrlPath
+                }
             });
 
             // Add save button

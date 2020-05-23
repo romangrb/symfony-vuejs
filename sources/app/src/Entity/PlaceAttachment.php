@@ -18,7 +18,7 @@ class PlaceAttachment
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Place", inversedBy="placeAttachment")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Place", inversedBy="attachments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $place;

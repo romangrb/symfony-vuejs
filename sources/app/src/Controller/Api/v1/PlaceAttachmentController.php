@@ -149,38 +149,39 @@ final class PlaceAttachmentController extends AbstractController
      * @param Request $request
      * @param CreatePlaceAttachmentRequestValidator $validatorRequest
      * @param FileUploader $fileUploader
+     * @param int $id
      * @return JsonResponse
      */
-    public function createPlaceAttachment(Request $request, CreatePlaceAttachmentRequestValidator $validatorRequest, FileUploader $fileUploader): JsonResponse
-    {
-        $place_id = $request->get('id');
-        $attachment_name = $request->get('name');
+    public function createPlaceAttachment(
+        Request $request,
+        CreatePlaceAttachmentRequestValidator $validatorRequest,
+        FileUploader $fileUploader,
+        int $id
+    ): JsonResponse {
         $attachment = $request->files->get('attachment');
 
-        $input = [
-            'place_id' => $place_id,
-            'attachment' => $attachment,
-        ];
+        $validatedRequest = $validatorRequest->validate([
+            'attachment' => $attachment
+        ]);
 
-        if ($attachment_name) {
-            $input['name'] = $attachment_name;
+        if ($validatedRequest) {
+            return $validatedRequest;
         }
 
-        $validatedRequest = $validatorRequest->validate($input);
-
-        if ($validatedRequest) return $validatedRequest;
-
         try {
-            $place = $this->place_repository->find($place_id);
+            $place = $this->place_repository->find($id);
         } catch (\Exception $e) {
             $message = ErrorExceptionTransformer::transform($e);
             $this->logger->error(print_r($message, true));
+
             return new JsonResponse($e->getMessage(), Response::HTTP_NOT_FOUND);
         }
 
-        if (! $place) return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+        if (! $place) {
+            return new JsonResponse('', Response::HTTP_NOT_FOUND, [], true);
+        }
 
-        $file_name = $attachment_name ?? $attachment->getClientOriginalName();
+        $file_name = $attachment->getClientOriginalName();
 
         try {
             $file_path = $fileUploader->upload($attachment);
@@ -188,6 +189,7 @@ final class PlaceAttachmentController extends AbstractController
             $exceptionData = ErrorExceptionTransformer::transform($e);
             $translated = $this->translator->trans('file_error ' . $e->getMessage());
             $this->logger->info(print_r($exceptionData, true));
+
             return new JsonResponse($translated,
                 Response::HTTP_UNPROCESSABLE_ENTITY);
         }
@@ -200,9 +202,11 @@ final class PlaceAttachmentController extends AbstractController
         $this->em->persist($placeAttachment);
         $this->em->flush();
 
-        $data = $this->serializer->serialize($placeAttachment, JsonEncoder::FORMAT);
+        $data = [
+            'data' => [$request->getUriForPath("/$file_path")]
+        ];
 
-        return new JsonResponse($data, Response::HTTP_CREATED, [], true);
+        return new JsonResponse(json_encode($data), Response::HTTP_CREATED, [], true);
     }
 
     /**

@@ -16,7 +16,6 @@ class CreatePlaceAttachmentRequestValidator extends AbstractRequestValidator
     public function validate(array $input): ?JsonResponse
     {
         $validation_params = [
-            'place_id' => [new Assert\NotBlank],
             'attachment' => [new Assert\NotBlank, new Assert\File([
                 'maxSize' => '10M',
                 'mimeTypes' => [
@@ -27,10 +26,6 @@ class CreatePlaceAttachmentRequestValidator extends AbstractRequestValidator
                 'mimeTypesMessage' => 'Please upload a valid image format gif, jpg, jpeg',
             ])],
         ];
-
-        if (isset($input['name'])) {
-            $validation_params['name'] = [new Assert\Length(['min' => 1, 'max' => 50]), new Assert\NotBlank];
-        }
 
         $this->constraints = new Assert\Collection($validation_params);
 
