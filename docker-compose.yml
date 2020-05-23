@@ -32,6 +32,8 @@ services:
       ENQUEUE_DSN:  "mysql://$MYSQL_USER:$MYSQL_PASSWORD@mysql:3306/$MYSQL_DATABASE"
       DATABASE_URL: "mysql://$MYSQL_USER:$MYSQL_PASSWORD@mysql:3306/$MYSQL_DATABASE"
       API_URL: "$API_URL"
+      GOOGLE_MAP_API_KEY: "$GOOGLE_MAP_API_KEY"
+
     volumes:
       - ./sources/app:/var/www/html:rw
 

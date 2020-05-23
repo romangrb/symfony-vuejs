@@ -28,19 +28,21 @@
                     v-model="model.description"></textarea>
         </div>
 
-        <base-input class="mb-3"
-                    placeholder="Latitude"
-                    v-model="model.lat"
-                    label="Latitude"
-                    v-bind:error="errors.lat">
-        </base-input>
-
-        <base-input class="mb-3"
-                    placeholder="Longitude"
-                    v-model="model.lng"
-                    label="Latitude"
-                    v-bind:error="errors.lng">
-        </base-input>
+        <div>
+          <gmap-map
+                  :center="center"
+                  :zoom="12"
+                  style="width:100%;  height: 400px;"
+                  @click="onMapClick"
+          >
+            <gmap-marker
+                    :key="index"
+                    v-for="(m, index) in markers"
+                    :position="m.position"
+                    @click="center=m.position"
+            ></gmap-marker>
+          </gmap-map>
+        </div>
 
         <div class="d-flex justify-content-between">
           <base-button type="primary" @click="cancel" class="my-4">Cancel</base-button>
@@ -57,24 +59,25 @@
   import 'vue-loading-overlay/dist/vue-loading.css';
 
   export default {
+    name: "GoogleMap",
     components: {
       loading
     },
     data() {
       return {
+        center: {lat: 45.508, lng: -73.587},
+        markers: [],
+        places: [],
+        currentPlace: null,
         is_processing: true,
         is_full_page: false,
         loader:'Dots',
         model: {
           name: '',
-          lat: '',
-          lng: '',
           description: ''
         },
         errors: {
           name: '',
-          lat: '',
-          lng: '',
           description: ''
         }
       }
@@ -83,10 +86,33 @@
       http.get('place/' + this.$route.params.id).then((data) => {
         this.model.name = data.name;
         this.model.description = data.description;
+        this.center.lat = 45.508;
+        this.center.lng = -73.587;
+        // this.center.lat = parseFloat(data.lat);
+        // this.center.lng = parseFloat(data.lng);
         this.is_processing = false;
-      })
+        console.log(data.lat);
+      }),
+      this.geolocate();
     },
     methods: {
+      onMapClick(e) {
+        this.markers.push({
+          id: 1 + Math.max(0, ...this.markers.map(n => n.id)),
+          position: e.latLng,
+        });
+      },
+      onMarkerClick(e) {
+        this.$refs.map.panTo(e.latLng);
+      },
+      geolocate: function () {
+        navigator.geolocation.getCurrentPosition(position => {
+          this.center = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+        });
+      },
       save: function() {
         this.is_processing = true;
 

@@ -36,6 +36,7 @@ Encore
     // define the environment variables
     .configureDefinePlugin(options => {
         options['process.env'].API_URL = JSON.stringify(process.env.API_URL);
+        options['process.env'].GOOGLE_MAP_API_KEY = JSON.stringify(process.env.GOOGLE_MAP_API_KEY);
     })
 
     /*
